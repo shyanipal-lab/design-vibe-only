@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Anton&family=Archivo+Black&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-druk: "Archivo Black", "Anton", sans-serif;
+  
+  --color-brand-primary: #037DD6; /* MetaMask blue */
+  --color-brand-secondary: #F6851B; /* MetaMask orange */
+  --color-miro-yellow: #FFD02F;
+  --color-miro-blue: #0500FF;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-zinc-900 selection:bg-brand-primary/20;
+  }
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20;
+}
+
+.miro-grid {
+  background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+  background-size: 24px 24px;
+}
