@@ -1,116 +1,140 @@
 import { motion } from "motion/react";
-import { MousePointer2, StickyNote, MessageSquare, Image as ImageIcon, Type, Sparkles, ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { MousePointer2, Sparkles, ArrowRight } from "lucide-react";
 
 export default function Hero() {
-  const constraintsRef = useRef(null);
-
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
-      {/* Miro-style Canvas Background - Simplified */}
-      <div 
-        ref={constraintsRef}
-        className="absolute inset-0 miro-grid pointer-events-none opacity-40"
-      />
+    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0 miro-grid opacity-[0.1] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           {/* Left Side: Text Content */}
           <div className="text-left">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100/80 backdrop-blur-sm border border-zinc-200 mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-50 border border-zinc-100 mb-10"
             >
-              <Sparkles className="w-4 h-4 text-brand-secondary" />
-              <span className="text-xs font-bold uppercase tracking-widest text-zinc-600">Product Designer @ Portfolio</span>
+              <Sparkles className="w-3 h-3 text-brand-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">Product Designer @ Portfolio</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-druk text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] mb-8"
+              className="font-display text-7xl md:text-8xl lg:text-[110px] font-black uppercase tracking-tighter leading-[0.85] mb-10"
             >
-              Design <span className="text-brand-primary">vibe</span> <br />
-              only <span className="text-brand-secondary">coder</span>
+              Design <span className="text-brand-primary italic">vibe</span> <br />
+              only <span className="text-zinc-200">coder</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-zinc-500 max-w-lg mb-10 leading-relaxed font-medium"
+              className="text-lg md:text-xl text-zinc-400 max-w-md mb-12 leading-relaxed font-medium"
             >
-              Transforming complex problems into playful, high-impact digital 
-              products. Inspired by MetaMask, built like Miro.
+              Crafting digital experiences that bridge the gap between 
+              aesthetics and functionality. Built for the web.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-6"
             >
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-brand-primary text-white px-8 py-4 rounded-full text-lg font-bold shadow-2xl shadow-brand-primary/20 flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-zinc-900 text-white px-10 py-5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-xl hover:bg-brand-primary transition-colors flex items-center gap-3"
               >
                 Explore Work
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </motion.button>
+              
+              <div className="flex -space-x-3">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-zinc-100 overflow-hidden">
+                    <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="user" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  </div>
+                ))}
+                <div className="w-10 h-10 rounded-full border-2 border-white bg-brand-primary flex items-center justify-center text-[10px] font-bold text-white">
+                  +12
+                </div>
+              </div>
             </motion.div>
           </div>
 
-          {/* Right Side: Clean Minimal Visual (Miro Toolbar & Interactive Element) */}
+          {/* Right Side: Clean Minimal Visual */}
           <div className="relative hidden lg:block">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="relative aspect-square max-w-md mx-auto"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className="relative aspect-square max-w-lg mx-auto flex items-center justify-center"
             >
-              {/* Floating Toolbar */}
-              <div className="absolute top-0 left-0 glass rounded-2xl p-3 flex flex-col gap-3 shadow-2xl z-20">
-                {[MousePointer2, StickyNote, MessageSquare, ImageIcon, Type].map((Icon, i) => (
-                  <div
-                    key={i}
-                    className={`p-3 rounded-xl ${i === 0 ? "bg-miro-blue text-white shadow-lg shadow-miro-blue/20" : "text-zinc-400"}`}
-                  >
-                    <Icon className="w-6 h-6" />
+              {/* Abstract Floating Elements */}
+              <motion.div
+                animate={{ 
+                  borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "50% 50% 20% 80% / 25% 80% 20% 75%", "30% 70% 70% 30% / 30% 30% 70% 70%"],
+                  rotate: [0, 45, 0]
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                className="w-[400px] h-[400px] bg-zinc-50 border border-zinc-100"
+              />
+              
+              <motion.div
+                animate={{ 
+                  y: [-20, 20, -20],
+                  rotate: [-5, 5, -5]
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute w-64 h-80 bg-white border border-zinc-100 rounded-[40px] shadow-2xl p-8 flex flex-col justify-between"
+              >
+                <div className="flex justify-between items-start">
+                  <div className="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                ))}
-              </div>
-
-              {/* Minimal Abstract Shape */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  animate={{ 
-                    borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 70%", "60% 40% 30% 70% / 50% 60% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 70%"],
-                    rotate: [0, 90, 0]
-                  }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-64 h-64 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 blur-2xl"
-                />
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    rotate: [0, -10, 0]
-                  }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-48 h-48 border-2 border-brand-primary rounded-[32px] flex items-center justify-center relative bg-white shadow-2xl"
-                >
-                  <div className="w-12 h-12 bg-brand-secondary rounded-xl" />
-                  {/* Cursor Mockup */}
-                  <div className="absolute -bottom-4 -right-4 flex items-center gap-2">
-                    <MousePointer2 className="w-6 h-6 text-miro-blue fill-miro-blue" />
-                    <div className="bg-miro-blue text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg">
-                      Shyani
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-zinc-200 rounded-full" />
+                    <div className="w-2 h-2 bg-zinc-200 rounded-full" />
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="h-2 w-24 bg-zinc-100 rounded-full mb-3" />
+                  <div className="h-2 w-16 bg-zinc-50 rounded-full" />
+                </div>
+                
+                <div className="pt-6 border-t border-zinc-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center">
+                      <MousePointer2 className="w-4 h-4 text-brand-primary" />
                     </div>
+                    <div className="h-2 w-20 bg-zinc-100 rounded-full" />
                   </div>
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
+
+              {/* Floating Tags */}
+              <motion.div
+                animate={{ x: [0, 10, 0], y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute top-20 right-10 glass px-4 py-2 rounded-full shadow-xl"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-primary">Interactive</span>
+              </motion.div>
+              
+              <motion.div
+                animate={{ x: [0, -15, 0], y: [0, 15, 0] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                className="absolute bottom-20 left-10 glass px-4 py-2 rounded-full shadow-xl"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Minimal</span>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -118,5 +142,6 @@ export default function Hero() {
     </section>
   );
 }
+
 
 

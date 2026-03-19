@@ -5,8 +5,10 @@
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import Work from "./components/Work";
-import Footer from "./components/Footer";
+import Fun from "./components/Fun";
+import PlaygroundLayer from "./components/PlaygroundLayer";
 import { motion, useScroll, useSpring } from "motion/react";
 
 export default function App() {
@@ -25,16 +27,19 @@ export default function App() {
         style={{ scaleX }}
       />
 
+      <PlaygroundLayer />
+
       <Header />
       
       <main>
         <Hero />
+        <About />
+        <Fun />
         <Work />
       </main>
-
-      <Footer />
     </div>
   );
 }
+
 
 

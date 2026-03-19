@@ -57,8 +57,29 @@ export default function Footer() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            className="flex flex-col gap-10"
           >
-            <SnakeGame />
+            <div className="glass p-10 rounded-[40px] border border-zinc-800/50 bg-zinc-900/50">
+              <h3 className="text-3xl font-display font-bold mb-6">Quick Links</h3>
+              <div className="grid grid-cols-2 gap-6">
+                {["Home", "About", "Fun", "Work", "Contact"].map((link) => (
+                  <a 
+                    key={link} 
+                    href={`#${link.toLowerCase()}`}
+                    className="text-zinc-400 hover:text-brand-primary transition-colors font-bold uppercase tracking-widest text-[10px]"
+                  >
+                    {link}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="glass p-10 rounded-[40px] border border-zinc-800/50 bg-zinc-900/50">
+              <h3 className="text-3xl font-display font-bold mb-6">Location</h3>
+              <p className="text-zinc-400 font-medium leading-relaxed">
+                Based in Asia, working globally. <br />
+                Available for freelance & full-time roles.
+              </p>
+            </div>
           </motion.div>
         </div>
 
