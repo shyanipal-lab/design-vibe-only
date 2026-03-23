@@ -1,10 +1,31 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Lottie from "lottie-react";
+
+// Import Lottie JSONs
+import emailLottie from "../assets/lottie/email.json";
+import linkedinLottie from "../assets/lottie/linkedin.json";
+import resumeLottie from "../assets/lottie/resume.json";
+
+const SOCIAL_ITEMS = [
+  { label: "Email", href: "mailto:pal.shyani1@gmail.com", lottie: emailLottie },
+  { label: "LinkedIn", href: "https://linkedin.com/in/shyani-pal", lottie: linkedinLottie },
+  { label: "Resume", href: "/resume.pdf", lottie: resumeLottie },
+];
+
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/#work" },
+  { label: "Fun", href: "/fun" },
+];
 
 export default function Header() {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -13,24 +34,68 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[80] transition-all duration-500 ${
+    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
       isScrolled ? "py-4" : "py-8"
     }`}>
       <nav className={`max-w-7xl mx-auto flex items-center justify-between px-8 py-4 transition-all duration-500 ${
         isScrolled ? "glass rounded-full shadow-xl border-zinc-100" : "bg-transparent border-transparent"
       }`}>
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3"
-        >
-          <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center">
-            <span className="text-white font-display text-lg">S</span>
-          </div>
-          <span className="font-display text-xl font-bold tracking-tighter uppercase">Shyani</span>
-        </motion.div>
+        <Link to="/">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-3"
+          >
+            <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center">
+              <span className="text-white font-display text-lg">S</span>
+            </div>
+            <span className="font-display text-xl font-bold tracking-tighter uppercase">Shyani</span>
+          </motion.div>
+        </Link>
 
-        <div className="flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((item) => (
+            <Link 
+              key={item.label} 
+              to={item.href}
+              className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                location.pathname === item.href ? "text-brand-primary" : "text-zinc-500 hover:text-brand-primary"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          
+          <div className="w-[1px] h-4 bg-zinc-100" />
+
+          <div className="flex items-center gap-6">
+            {SOCIAL_ITEMS.map((item) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setHoveredSocial(item.label)}
+                onMouseLeave={() => setHoveredSocial(null)}
+                whileHover={{ y: -2 }}
+                className="flex items-center gap-1.5 group"
+              >
+                <div className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+                  <Lottie 
+                    animationData={item.lottie} 
+                    loop={true} 
+                    autoplay={hoveredSocial === item.label}
+                  />
+                </div>
+                <span className="text-[10px] font-mono font-bold text-zinc-400 group-hover:text-brand-primary transition-colors">
+                  {item.label.toLowerCase()}.json
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -40,34 +105,57 @@ export default function Header() {
           >
             Let's Talk
           </motion.button>
+          
+          <button className="md:hidden p-2 text-zinc-900" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
-        </button>
       </nav>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-24 left-6 right-6 glass rounded-2xl p-6 shadow-2xl"
-        >
-          <div className="flex flex-col gap-4">
-            {["Home", "About", "Fun", "Work", "Contact"].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`}
-                className="text-sm font-bold uppercase tracking-widest py-3 border-b border-zinc-100"
-                onClick={() => setIsOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-24 left-6 right-6 glass rounded-2xl p-6 shadow-2xl z-[110]"
+          >
+            <div className="flex flex-col gap-4">
+              {NAV_LINKS.map((item) => (
+                <Link 
+                  key={item.label} 
+                  to={item.href}
+                  className="text-sm font-bold uppercase tracking-widest py-3 border-b border-zinc-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              
+              <div className="py-4">
+                <div className="text-[10px] font-mono font-bold text-brand-primary mb-4">contact.json</div>
+                <div className="flex flex-col gap-4 pl-4 border-l border-zinc-100">
+                  {SOCIAL_ITEMS.map((item) => (
+                    <a 
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-xs font-medium text-zinc-500 hover:text-brand-primary"
+                    >
+                      <div className="w-5 h-5">
+                        <Lottie animationData={item.lottie} loop={true} />
+                      </div>
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

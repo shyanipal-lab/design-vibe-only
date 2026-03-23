@@ -1,6 +1,13 @@
 import { motion, AnimatePresence } from "motion/react";
-import { MousePointer2, StickyNote, MessageSquare, Image as ImageIcon, Type, Plus, X, Home, User, Briefcase, Ghost, Mail } from "lucide-react";
+import { MousePointer2, StickyNote, MessageSquare, Image as ImageIcon, Type, Plus, X, Home, User, Briefcase, Ghost, Mail, Linkedin, FileText, Gamepad2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Lottie from "lottie-react";
+
+// Import Lottie JSONs
+import emailLottie from "../assets/lottie/email.json";
+import linkedinLottie from "../assets/lottie/linkedin.json";
+import resumeLottie from "../assets/lottie/resume.json";
 
 interface Note {
   id: number;
@@ -28,7 +35,6 @@ const HUMOROUS_LABELS = [
   "Design vibe only.",
   "Coder at heart.",
   "Miro who?",
-  "Ben Shih was here.",
   "MetaMask vibes.",
   "Draggable fun!",
   "Sticky situation.",
@@ -37,22 +43,30 @@ const HUMOROUS_LABELS = [
 ];
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home", icon: Home },
-  { label: "About", href: "#about", icon: User },
-  { label: "Fun", href: "#fun", icon: Ghost },
-  { label: "Work", href: "#work", icon: Briefcase },
-  { label: "Contact", href: "#contact", icon: Mail },
+  { label: "Home", href: "/", icon: Home, id: "home" },
+  { label: "About", href: "/#about", icon: User, id: "about" },
+  { label: "Work", href: "/#work", icon: Briefcase, id: "work" },
+  { label: "Games", href: "/fun", icon: Gamepad2, id: "fun" },
+  { label: "Chat", href: "/#contact", icon: MessageSquare, id: "contact" },
+];
+
+const SOCIAL_ITEMS = [
+  { label: "Email", href: "mailto:pal.shyani1@gmail.com", lottie: emailLottie },
+  { label: "LinkedIn", href: "https://linkedin.com/in/shyani-pal", lottie: linkedinLottie },
+  { label: "Resume", href: "/resume.pdf", lottie: resumeLottie },
 ];
 
 export default function PlaygroundLayer() {
+  const location = useLocation();
   const [notes, setNotes] = useState<Note[]>([
-    { id: 1, color: "#FFD02F", text: "Drag me anywhere!", author: "Shyani", x: 100, y: 300 },
-    { id: 2, color: "#9747FF", text: "This site is a canvas.", author: "Design Vibe", x: 800, y: 500 },
+    { id: 1, color: "#FFD02F", text: "Drag me!", author: "Shyani", x: 100, y: 300 },
+    { id: 2, color: "#9747FF", text: "Site is canvas.", author: "Design Vibe", x: 800, y: 500 },
   ]);
   const [activeNote, setActiveNote] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [cursorLabel, setCursorLabel] = useState("Hello!");
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState("home");
   const constraintsRef = useRef(null);
 
   useEffect(() => {
@@ -60,6 +74,13 @@ export default function PlaygroundLayer() {
       setMousePos({ x: e.clientX, y: e.clientY });
       
       const target = e.target as HTMLElement;
+      const isOverNav = target.closest('.nav-sidebar');
+      
+      if (isOverNav) {
+        setCursorLabel("");
+        return;
+      }
+
       if (target.tagName === 'A' || target.tagName === 'BUTTON') {
         setCursorLabel("Click me maybe?");
       } else if (target.tagName === 'IMG') {
@@ -68,7 +89,7 @@ export default function PlaygroundLayer() {
         setCursorLabel("Type here, genius.");
       } else if (target.closest('#work')) {
         setCursorLabel("Nice work, right?");
-      } else if (target.closest('#fun')) {
+      } else if (target.closest('#fun') || location.pathname === '/fun') {
         setCursorLabel("Game time?");
       } else if (target.closest('#contact')) {
         setCursorLabel("Let's talk?");
@@ -83,7 +104,39 @@ export default function PlaygroundLayer() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [location.pathname]);
+
+  // Track active section
+  useEffect(() => {
+    if (location.pathname === '/fun') {
+      setActiveSection('fun');
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ['home', 'about', 'work', 'contact'];
+    
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   const addNote = () => {
     const newNote: Note = {
@@ -106,34 +159,104 @@ export default function PlaygroundLayer() {
       {/* Custom Cursor */}
       <motion.div
         className="fixed top-0 left-0 z-[100] pointer-events-none flex items-center gap-2"
-        animate={{ x: mousePos.x, y: mousePos.y }}
+        animate={{ 
+          x: mousePos.x, 
+          y: mousePos.y
+        }}
         transition={{ type: "spring", damping: 20, stiffness: 250, mass: 0.5 }}
       >
         <MousePointer2 className="w-6 h-6 text-brand-primary fill-brand-primary" />
-        <motion.div 
-          key={cursorLabel}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-brand-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg whitespace-nowrap"
-        >
-          {cursorLabel}
-        </motion.div>
+        <AnimatePresence>
+          {cursorLabel && (
+            <motion.div 
+              key={cursorLabel}
+              initial={{ opacity: 0, y: 10, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.8 }}
+              className="bg-brand-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg whitespace-nowrap"
+            >
+              {cursorLabel}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       <div className="fixed inset-0 pointer-events-none z-[60]" ref={constraintsRef}>
         {/* Navigation Sidebar */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-6 glass rounded-2xl p-2 flex flex-col gap-2 shadow-2xl pointer-events-auto">
-          {NAV_ITEMS.map((item) => (
+        <div className="nav-sidebar absolute top-1/2 -translate-y-1/2 left-6 glass rounded-2xl p-2 flex flex-col gap-2 shadow-2xl pointer-events-auto">
+          {NAV_ITEMS.map((item) => {
+            const isInternal = item.href.startsWith('/') && !item.href.includes('#');
+            const isHash = item.href.includes('#');
+            const isActive = activeSection === item.id;
+            
+            let Component: any = "a";
+            let props: any = { href: item.href };
+
+            if (isInternal) {
+              Component = Link;
+              props = { to: item.href };
+            } else if (isHash && location.pathname === '/') {
+              // If on home page, use simple hash links
+              Component = "a";
+              props = { href: item.href.split('/')[1] || item.href };
+            } else if (isHash) {
+              // If on other pages, use full path with hash
+              Component = Link;
+              props = { to: item.href };
+            }
+
+            return (
+              <motion.div
+                key={item.label}
+                onMouseEnter={() => setHoveredNav(item.label)}
+                onMouseLeave={() => setHoveredNav(null)}
+                whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
+                whileTap={{ scale: 0.9 }}
+                className={`relative p-3 rounded-xl transition-all duration-300 flex items-center justify-center group ${
+                  isActive ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20" : "text-zinc-500 hover:text-brand-primary"
+                }`}
+              >
+                <Component {...props} className="w-full h-full flex items-center justify-center">
+                  <item.icon className={`w-5 h-5 ${isActive ? "text-white" : ""}`} />
+                </Component>
+                <AnimatePresence>
+                  {hoveredNav === item.label && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      className="absolute left-14 bg-zinc-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"
+                    >
+                      {item.label}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+          
+          <div className="w-full h-[1px] bg-zinc-100 my-2" />
+          
+          {/* Social Animated Items */}
+          {SOCIAL_ITEMS.map((item) => (
             <motion.a
               key={item.label}
               href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={() => setHoveredNav(item.label)}
               onMouseLeave={() => setHoveredNav(null)}
               whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
               whileTap={{ scale: 0.9 }}
-              className="relative p-3 rounded-xl text-zinc-500 hover:text-brand-primary transition-colors flex items-center justify-center group"
+              className="relative p-2 rounded-xl text-zinc-500 hover:text-brand-primary transition-colors flex items-center justify-center group"
             >
-              <item.icon className="w-5 h-5" />
+              <div className="w-8 h-8">
+                <Lottie 
+                  animationData={item.lottie} 
+                  loop={true} 
+                  autoplay={hoveredNav === item.label}
+                />
+              </div>
               <AnimatePresence>
                 {hoveredNav === item.label && (
                   <motion.div
@@ -189,28 +312,28 @@ export default function PlaygroundLayer() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               whileDrag={{ scale: 1.1, rotate: 0, zIndex: 100 }}
-              className="absolute p-4 w-48 aspect-square shadow-2xl cursor-grab active:cursor-grabbing pointer-events-auto group"
+              className="absolute p-2 w-14 aspect-square shadow-2xl cursor-grab active:cursor-grabbing pointer-events-auto group"
               style={{ backgroundColor: note.color, zIndex: activeNote === note.id ? 100 : 50 }}
             >
               <button 
                 onClick={() => removeNote(note.id)}
-                className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
               >
-                <X className="w-3 h-3 text-zinc-500" />
+                <X className="w-2 h-2 text-zinc-500" />
               </button>
               
               <div className="flex flex-col h-full justify-between">
                 <textarea
                   defaultValue={note.text}
-                  className="bg-transparent border-none focus:ring-0 p-0 font-display font-medium text-sm leading-tight text-zinc-900 resize-none h-full"
-                  placeholder="Type something..."
+                  className="bg-transparent border-none focus:ring-0 p-0 font-display font-medium text-[8px] leading-tight text-zinc-900 resize-none h-full"
+                  placeholder="..."
                 />
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-[8px] font-bold uppercase tracking-widest text-zinc-900/50">
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[6px] font-bold uppercase tracking-widest text-zinc-900/50">
                     — {note.author}
                   </span>
-                  <div className="w-4 h-4 rounded-full border border-zinc-900/10 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-zinc-900/20 rounded-full" />
+                  <div className="w-2 h-2 rounded-full border border-zinc-900/10 flex items-center justify-center">
+                    <div className="w-1 h-1 bg-zinc-900/20 rounded-full" />
                   </div>
                 </div>
               </div>
@@ -230,35 +353,6 @@ export default function PlaygroundLayer() {
             </motion.div>
           ))}
         </AnimatePresence>
-
-        {/* Floating Decorative Cursors */}
-        <motion.div
-          animate={{ 
-            x: [100, 200, 150, 100],
-            y: [200, 250, 300, 200]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 left-0 flex items-center gap-2 pointer-events-none opacity-40"
-        >
-          <MousePointer2 className="w-5 h-5 text-brand-secondary fill-brand-secondary" />
-          <div className="bg-brand-secondary text-white text-[8px] font-bold px-2 py-1 rounded-full shadow-lg">
-            Ben
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ 
-            x: [window.innerWidth - 200, window.innerWidth - 300, window.innerWidth - 250, window.innerWidth - 200],
-            y: [400, 350, 450, 400]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 left-0 flex items-center gap-2 pointer-events-none opacity-40"
-        >
-          <MousePointer2 className="w-5 h-5 text-miro-blue fill-miro-blue" />
-          <div className="bg-miro-blue text-white text-[8px] font-bold px-2 py-1 rounded-full shadow-lg">
-            Guest
-          </div>
-        </motion.div>
       </div>
     </>
   );
