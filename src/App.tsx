@@ -7,12 +7,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import FunPage from "./pages/FunPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
+import PlaygroundLayer from "./components/PlaygroundLayer";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
-  const basename = import.meta.env.MODE === 'production' ? '/design-vibe-only' : '/';
-
   return (
-    <Router basename={basename}>
+    <Router>
+      <ScrollToTop />
+      <PlaygroundLayer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/fun" element={<FunPage />} />

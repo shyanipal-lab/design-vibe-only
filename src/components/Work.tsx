@@ -28,7 +28,7 @@ export default function Work() {
         <div>
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             Published the <span className="text-brand-primary font-bold">Hoshaksham</span> case study. 
-            A comprehensive look at designing for accessibility and empowerment in healthcare.
+            Transforming the "Awkward" into "Automated" for Indian freelancers.
           </p>
           <div className="flex flex-col md:flex-row gap-10 items-center">
             {/* Mobile Mockup */}
@@ -45,10 +45,9 @@ export default function Work() {
             </div>
             
             <div className="flex-1">
-              <h4 className="text-2xl font-display font-bold mb-4">Accessibility First</h4>
+              <h4 className="text-2xl font-display font-bold mb-4">Automating the Awkward</h4>
               <p className="text-zinc-500 mb-8 leading-relaxed">
-                Focused on creating a seamless experience for users with visual and motor impairments. 
-                The interface prioritizes high contrast, large touch targets, and voice-guided navigation.
+                A deep dive into how we used empathy mapping and UX psychology to help Indian freelancers manage payments without the stress.
               </p>
               <Link 
                 to="/case-study/hoshaksham"
@@ -92,7 +91,7 @@ export default function Work() {
   ];
 
   return (
-    <section id="work" className="pt-20 bg-white overflow-hidden">
+    <section id="work" className="pt-20 bg-white overflow-hidden scroll-mt-32">
       {/* Featured Viewpoint Case Study */}
       <div className="container mx-auto px-6 mb-40">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">

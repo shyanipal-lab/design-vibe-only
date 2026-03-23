@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Gamepad2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Gamepad2, X } from "lucide-react";
 
 const GRID_SIZE = 20;
 const INITIAL_SNAKE = [{ x: 10, y: 10 }];
@@ -17,7 +17,7 @@ export default function SnakeGame() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
-  const gameLoop = useRef<NodeJS.Timeout | null>(null);
+  const gameLoop = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const moveSnake = useCallback(() => {
     if (isGameOver || isPaused) return;

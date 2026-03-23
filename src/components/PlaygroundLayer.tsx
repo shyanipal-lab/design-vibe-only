@@ -3,6 +3,8 @@ import { MousePointer2, StickyNote, MessageSquare, Image as ImageIcon, Type, Plu
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
+import SnakeGame from "./SnakeGame";
+import { BlockGame } from "./ui/block-game";
 
 // Import Lottie JSONs
 import emailLottie from "../assets/lottie/email.json";
@@ -58,6 +60,10 @@ const SOCIAL_ITEMS = [
 
 export default function PlaygroundLayer() {
   const location = useLocation();
+  const isCaseStudy = location.pathname.startsWith('/case-study/');
+
+  if (isCaseStudy) return null;
+
   const [notes, setNotes] = useState<Note[]>([
     { id: 1, color: "#FFD02F", text: "Drag me!", author: "Shyani", x: 100, y: 300 },
     { id: 2, color: "#9747FF", text: "Site is canvas.", author: "Design Vibe", x: 800, y: 500 },
@@ -184,41 +190,79 @@ export default function PlaygroundLayer() {
       <div className="fixed inset-0 pointer-events-none z-[60]" ref={constraintsRef}>
         {/* Navigation Sidebar */}
         <div className="nav-sidebar absolute top-1/2 -translate-y-1/2 left-6 glass rounded-2xl p-2 flex flex-col gap-2 shadow-2xl pointer-events-auto">
-          {NAV_ITEMS.map((item) => {
-            const isInternal = item.href.startsWith('/') && !item.href.includes('#');
-            const isHash = item.href.includes('#');
-            const isActive = activeSection === item.id;
+            {NAV_ITEMS.map((item) => {
+              const isInternal = item.href.startsWith('/') && !item.href.includes('#');
+              const isHash = item.href.includes('#');
+              const isActive = activeSection === item.id;
+              
+              let Component: any = "a";
+              let props: any = { href: item.href };
+
+              if (isInternal) {
+                Component = Link;
+                props = { to: item.href };
+              } else if (isHash && location.pathname === '/') {
+                // If on home page, use simple hash links
+                Component = "a";
+                props = { href: item.href.split('/')[1] || item.href };
+              } else if (isHash) {
+                // If on other pages, use full path with hash
+                Component = Link;
+                props = { to: item.href };
+              }
+
+              return (
+                <motion.div
+                  key={item.label}
+                  onMouseEnter={() => setHoveredNav(item.label)}
+                  onMouseLeave={() => setHoveredNav(null)}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`relative p-3 rounded-xl transition-all duration-300 flex items-center justify-center group ${
+                    isActive ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20" : "text-zinc-500 hover:text-brand-primary"
+                  }`}
+                >
+                  <Component {...props} className="w-full h-full flex items-center justify-center">
+                    <item.icon className={`w-5 h-5 ${isActive ? "text-white" : ""}`} />
+                  </Component>
+                  <AnimatePresence>
+                    {hoveredNav === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        className="absolute left-14 bg-zinc-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"
+                      >
+                        {item.label}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
             
-            let Component: any = "a";
-            let props: any = { href: item.href };
-
-            if (isInternal) {
-              Component = Link;
-              props = { to: item.href };
-            } else if (isHash && location.pathname === '/') {
-              // If on home page, use simple hash links
-              Component = "a";
-              props = { href: item.href.split('/')[1] || item.href };
-            } else if (isHash) {
-              // If on other pages, use full path with hash
-              Component = Link;
-              props = { to: item.href };
-            }
-
-            return (
-              <motion.div
+            <div className="w-full h-[1px] bg-zinc-100 my-2" />
+            
+            {/* Social Animated Items */}
+            {SOCIAL_ITEMS.map((item) => (
+              <motion.a
                 key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 onMouseEnter={() => setHoveredNav(item.label)}
                 onMouseLeave={() => setHoveredNav(null)}
                 whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
                 whileTap={{ scale: 0.9 }}
-                className={`relative p-3 rounded-xl transition-all duration-300 flex items-center justify-center group ${
-                  isActive ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20" : "text-zinc-500 hover:text-brand-primary"
-                }`}
+                className="relative p-2 rounded-xl text-zinc-500 hover:text-brand-primary transition-colors flex items-center justify-center group"
               >
-                <Component {...props} className="w-full h-full flex items-center justify-center">
-                  <item.icon className={`w-5 h-5 ${isActive ? "text-white" : ""}`} />
-                </Component>
+                <div className="w-8 h-8">
+                  <Lottie 
+                    animationData={item.lottie} 
+                    loop={true} 
+                    autoplay={hoveredNav === item.label}
+                  />
+                </div>
                 <AnimatePresence>
                   {hoveredNav === item.label && (
                     <motion.div
@@ -231,73 +275,34 @@ export default function PlaygroundLayer() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
-            );
-          })}
-          
-          <div className="w-full h-[1px] bg-zinc-100 my-2" />
-          
-          {/* Social Animated Items */}
-          {SOCIAL_ITEMS.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={() => setHoveredNav(item.label)}
-              onMouseLeave={() => setHoveredNav(null)}
+              </motion.a>
+            ))}
+            
+            <div className="w-full h-[1px] bg-zinc-100 my-2" />
+            
+            <motion.button
               whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
               whileTap={{ scale: 0.9 }}
-              className="relative p-2 rounded-xl text-zinc-500 hover:text-brand-primary transition-colors flex items-center justify-center group"
+              onClick={addNote}
+              onMouseEnter={() => setHoveredNav("Add Note")}
+              onMouseLeave={() => setHoveredNav(null)}
+              className="relative p-3 rounded-xl bg-brand-primary text-white shadow-lg shadow-brand-primary/20 flex items-center justify-center"
             >
-              <div className="w-8 h-8">
-                <Lottie 
-                  animationData={item.lottie} 
-                  loop={true} 
-                  autoplay={hoveredNav === item.label}
-                />
-              </div>
+              <Plus className="w-5 h-5" />
               <AnimatePresence>
-                {hoveredNav === item.label && (
+                {hoveredNav === "Add Note" && (
                   <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -10 }}
-                    className="absolute left-14 bg-zinc-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"
+                    className="absolute left-14 bg-brand-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"
                   >
-                    {item.label}
+                    Add Sticky
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.a>
-          ))}
-          
-          <div className="w-full h-[1px] bg-zinc-100 my-2" />
-          
-          <motion.button
-            whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
-            whileTap={{ scale: 0.9 }}
-            onClick={addNote}
-            onMouseEnter={() => setHoveredNav("Add Note")}
-            onMouseLeave={() => setHoveredNav(null)}
-            className="relative p-3 rounded-xl bg-brand-primary text-white shadow-lg shadow-brand-primary/20 flex items-center justify-center"
-          >
-            <Plus className="w-5 h-5" />
-            <AnimatePresence>
-              {hoveredNav === "Add Note" && (
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  className="absolute left-14 bg-brand-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"
-                >
-                  Add Sticky
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-        </div>
-
+            </motion.button>
+          </div>
         {/* Global Draggable Notes */}
         <AnimatePresence>
           {notes.map((note) => (

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { Play, RotateCcw, Trophy, Gamepad2, Pause } from "lucide-react"
+import { Play, RotateCcw, Trophy, Gamepad2, Pause, X } from "lucide-react"
 
 // Game constants
 const BOARD_WIDTH = 10
@@ -380,7 +380,7 @@ export const BlockGame = () => {
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto bg-zinc-900 rounded-[32px] p-8 shadow-2xl overflow-hidden border border-zinc-800">
+    <div className="relative w-full max-w-md bg-zinc-900 rounded-[32px] p-8 shadow-2xl overflow-hidden border border-zinc-800">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <Gamepad2 className="w-6 h-6 text-brand-primary" />
@@ -414,5 +414,5 @@ export const BlockGame = () => {
         <p className="text-xs text-zinc-500 font-medium">Use arrow keys to move/rotate · Space to pause</p>
       </div>
     </div>
-  )
+  );
 }

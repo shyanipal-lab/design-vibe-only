@@ -6,7 +6,7 @@ import {
   AnimatePresence,
   useMotionValue,
   useSpring,
-} from "framer-motion";
+} from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const AnimatedTooltip = ({
@@ -45,7 +45,7 @@ export const AnimatedTooltip = ({
       {items.map((item) => (
         <a
           href={item.link || "#fun"}
-          className="-mr-4 relative group"
+          className="-mr-4 relative group cursor-pointer"
           key={item.name}
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}

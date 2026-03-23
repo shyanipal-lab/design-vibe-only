@@ -138,7 +138,7 @@ export default function Fun() {
                   animate={{ opacity: 1, rotateY: 0 }}
                   exit={{ opacity: 0, rotateY: -90 }}
                   transition={{ duration: 0.4 }}
-                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50"
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50 relative group"
                 >
                   <SnakeGame />
                 </motion.div>
@@ -149,7 +149,7 @@ export default function Fun() {
                   animate={{ opacity: 1, rotateY: 0 }}
                   exit={{ opacity: 0, rotateY: -90 }}
                   transition={{ duration: 0.4 }}
-                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden"
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden relative group"
                 >
                   <div className="scale-75 origin-top -mt-10 -mb-20">
                     <BlockGame />
