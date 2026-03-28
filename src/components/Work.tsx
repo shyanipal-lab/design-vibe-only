@@ -4,6 +4,8 @@ import React from "react";
 import { Timeline } from "./ui/timeline";
 import { Link } from "react-router-dom";
 
+import HoshakshamApp from "./HoshakshamApp";
+
 export default function Work() {
   const currentYear = new Date().getFullYear();
 
@@ -34,12 +36,7 @@ export default function Work() {
             <div className="relative w-[280px] h-[580px] bg-zinc-900 rounded-[3rem] p-3 shadow-2xl border-[8px] border-zinc-800 shrink-0">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-zinc-800 rounded-b-2xl z-20" />
               <div className="w-full h-full rounded-[2rem] overflow-hidden bg-zinc-100 relative z-10">
-                <img 
-                  src="https://picsum.photos/seed/hoshaksham-mobile/600/1200" 
-                  alt="Hoshaksham Mobile App" 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
+                <HoshakshamApp />
               </div>
             </div>
             
