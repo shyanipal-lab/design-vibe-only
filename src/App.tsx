@@ -6,7 +6,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import FunPage from "./pages/FunPage";
+import AboutPage from "./pages/AboutPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
+import Demo from "./pages/Demo";
 import PlaygroundLayer from "./components/PlaygroundLayer";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -17,8 +19,10 @@ export default function App() {
       <PlaygroundLayer />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/fun" element={<FunPage />} />
         <Route path="/case-study/:id" element={<CaseStudyPage />} />
+        <Route path="/demo" element={<Demo />} />
       </Routes>
     </Router>
   );

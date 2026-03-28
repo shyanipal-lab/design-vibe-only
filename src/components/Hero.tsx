@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { MousePointer2, Sparkles, ArrowRight, Ghost, Gamepad2, Grid3X3, LayoutGrid } from "lucide-react";
 import { GooeyText } from "./ui/gooey-text-morphing";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
-import { LocationMap } from "@/components/ui/expand-map";
 
 const GAME_ITEMS = [
   {
@@ -61,18 +60,6 @@ export default function Hero() {
               I design enterprise, fintech, and mobility products used at scale. 
               UX strategy + strong craft — currently at Mercedes-Benz R&D, Bengaluru.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.25 }}
-              className="flex justify-center mb-16"
-            >
-              <LocationMap 
-                location="Bengaluru, India" 
-                coordinates="12.9716° N, 77.5946° E" 
-              />
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

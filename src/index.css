@@ -10,6 +10,17 @@
   --color-brand-secondary: #F6851B; /* MetaMask orange */
   --color-miro-yellow: #FFD02F;
   --color-miro-blue: #0500FF;
+
+  @keyframes border-beam {
+    100% {
+      offset-distance: 100%;
+    }
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam var(--duration) infinite linear;
+  animation-delay: var(--delay);
 }
 
 @layer base {

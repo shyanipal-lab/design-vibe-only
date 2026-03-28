@@ -2,6 +2,7 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Work from "../components/Work";
 import Fun from "../components/Fun";
+import Footer from "../components/Footer";
 import { motion, useScroll, useSpring } from "motion/react";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
         <Fun />
         <Work />
       </main>
+      <Footer />
     </div>
   );
 }

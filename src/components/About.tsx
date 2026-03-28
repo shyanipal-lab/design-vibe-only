@@ -2,9 +2,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { User, Sparkles, Heart, Coffee, Code, CheckCircle2, Car } from "lucide-react";
 import { useState } from "react";
 import AboutStories from "./AboutStories";
+import { LocationMap } from "./ui/expand-map";
 
 const ABOUT_IMAGES = [
-  { id: 1, src: "https://picsum.photos/seed/shyani1/600/600", alt: "Mercedes-Benz R&D" },
+  { id: 1, src: "https://storage.googleapis.com/cortex-artifacts/shyani.jpg", alt: "Shyani Pal" },
   { id: 2, src: "https://picsum.photos/seed/shyani2/600/600", alt: "Design Workshop" },
   { id: 3, src: "https://picsum.photos/seed/shyani3/600/600", alt: "Collaboration" },
   { id: 4, src: "https://picsum.photos/seed/shyani4/600/600", alt: "Pixel Perfection" },
@@ -14,7 +15,7 @@ export default function About() {
   const [isGrid, setIsGrid] = useState(false);
 
   return (
-    <section id="about" className="py-40 bg-zinc-50 overflow-hidden">
+    <section id="about" className="py-40 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <motion.div
@@ -45,6 +46,26 @@ export default function About() {
                         referrerPolicy="no-referrer"
                       />
                     </div>
+
+                    {/* Floating Location Map - Only in stack view */}
+                    <motion.div
+                      onClick={(e) => e.stopPropagation()}
+                      animate={{ 
+                        y: [0, -20, 0],
+                        rotate: [-3, 3, -3]
+                      }}
+                      transition={{ 
+                        duration: 8, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="absolute top-4 -left-4 md:top-8 md:-left-12 z-50 scale-[0.75] md:scale-[1] drop-shadow-2xl"
+                    >
+                      <LocationMap 
+                        location="Bengaluru, India" 
+                        coordinates="12.9716° N, 77.5946° E" 
+                      />
+                    </motion.div>
                     
                     {/* Floating Badges */}
                     <motion.div
@@ -95,21 +116,6 @@ export default function About() {
                       </div>
                     </motion.div>
 
-                    <motion.div
-                      animate={{ rotate: [-2, 2, -2], y: [0, -5, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute -bottom-16 -right-16 bg-[#FFD02F] p-6 shadow-2xl z-30 w-40 aspect-square flex flex-col justify-between"
-                      style={{ transform: 'rotate(-5deg)' }}
-                    >
-                      <p className="font-display font-bold text-xs text-zinc-900 leading-tight">
-                        "No, I will not make the logo BIGGER"
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-[8px] font-bold uppercase tracking-widest text-zinc-900/40">— Shyani</span>
-                        <div className="w-2 h-2 rounded-full bg-zinc-900/10" />
-                      </div>
-                    </motion.div>
-
                     <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
                       Click to expand
                     </div>
@@ -120,7 +126,7 @@ export default function About() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full"
+                    className="grid grid-cols-2 grid-rows-3 gap-4 w-full h-full"
                   >
                     {ABOUT_IMAGES.map((img, i) => (
                       <motion.div
@@ -141,6 +147,22 @@ export default function About() {
                         </div>
                       </motion.div>
                     ))}
+                    
+                    {/* Location Map as Grid Item */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="relative rounded-3xl overflow-hidden shadow-xl"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <LocationMap 
+                        location="Bengaluru, India" 
+                        coordinates="12.9716° N, 77.5946° E" 
+                        className="w-full h-full"
+                      />
+                    </motion.div>
+
                     <div className="absolute -top-4 -right-4 bg-zinc-900 text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
                       Click to stack
                     </div>
@@ -179,39 +201,27 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-zinc-500 leading-relaxed mb-12 font-medium whitespace-pre-line"
+              className="text-xl text-zinc-500 leading-relaxed mb-12 font-medium"
             >
-              I help teams make better decisions through design.{"\n"}
-              Product designer, 5+ years across mobility, fintech, and consumer apps. Currently at Mercedes-Benz R&D, Bengaluru.{"\n\n"}
-              Commercially aware and pragmatic. Close to PMs and engineers, push back when needed, care about outcomes over ideas.{"\n\n"}
-              Exploring complex problems to solve.
+              I help teams make better decisions through design. 
+              Product designer with 5+ years of experience across mobility, fintech, and consumer apps. 
+              Currently at Mercedes-Benz R&D, Bengaluru.
             </motion.p>
 
-            <div className="grid grid-cols-2 gap-8">
-              {[
-                { icon: Heart, label: "Empathy First", desc: "User-centric approach" },
-                { icon: Coffee, label: "Coffee Fueled", desc: "Late night coding" },
-                { icon: Code, label: "Clean Code", desc: "Developer friendly" },
-                { icon: Sparkles, label: "Visual Craft", desc: "Pixel perfection" },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex flex-col gap-3"
-                >
-                  <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-primary border border-zinc-100">
-                    <item.icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-zinc-900">{item.label}</p>
-                    <p className="text-xs text-zinc-400 font-medium">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <a 
+                href="/about"
+                className="inline-flex items-center gap-4 bg-zinc-900 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-brand-primary transition-all shadow-xl group"
+              >
+                Full Story & Journey
+                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>

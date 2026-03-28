@@ -33,6 +33,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return location.pathname === "/" && (!location.hash || location.hash === "#home");
+    }
+    if (href.startsWith("/#")) {
+      return location.pathname === "/" && location.hash === href.substring(1);
+    }
+    return location.pathname === href;
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
       isScrolled ? "py-4" : "py-8"
@@ -58,8 +68,8 @@ export default function Header() {
             <Link 
               key={item.label} 
               to={item.href}
-              className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
-                location.pathname === item.href ? "text-brand-primary" : "text-zinc-500 hover:text-brand-primary"
+              className={`text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 ${
+                isActive(item.href) ? "text-brand-primary" : "text-zinc-700 hover:text-brand-primary"
               }`}
             >
               {item.label}
@@ -78,7 +88,7 @@ export default function Header() {
                 onMouseEnter={() => setHoveredSocial(item.label)}
                 onMouseLeave={() => setHoveredSocial(null)}
                 whileHover={{ y: -2 }}
-                className="flex items-center gap-1.5 group"
+                className="flex items-center gap-1.5 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4"
               >
                 <div className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
                   <Lottie 
@@ -87,7 +97,7 @@ export default function Header() {
                     autoplay={hoveredSocial === item.label}
                   />
                 </div>
-                <span className="text-[10px] font-mono font-bold text-zinc-400 group-hover:text-brand-primary transition-colors">
+                <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary transition-colors">
                   {item.label.toLowerCase()}.json
                 </span>
               </motion.a>
@@ -101,7 +111,7 @@ export default function Header() {
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-primary transition-colors shadow-lg"
+            className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-primary transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
           >
             Let's Talk
           </motion.button>
@@ -126,7 +136,7 @@ export default function Header() {
                 <Link 
                   key={item.label} 
                   to={item.href}
-                  className="text-sm font-bold uppercase tracking-widest py-3 border-b border-zinc-100"
+                  className="text-sm font-bold uppercase tracking-widest py-3 border-b border-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
@@ -142,7 +152,7 @@ export default function Header() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs font-medium text-zinc-500 hover:text-brand-primary"
+                      className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
                     >
                       <div className="w-5 h-5">
                         <Lottie animationData={item.lottie} loop={true} />

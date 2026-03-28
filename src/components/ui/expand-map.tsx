@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "motion/react"
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
 
 interface LocationMapProps {
   location?: string
@@ -12,8 +12,8 @@ interface LocationMapProps {
 }
 
 export function LocationMap({
-  location = "Bengaluru, India",
-  coordinates = "12.9716° N, 77.5946° E",
+  location = "NammaBengaluru, INDIA",
+  coordinates = "12.9629° N, 77.5775° E",
   className,
 }: LocationMapProps) {
   const [isHovered, setIsHovered] = useState(false)
@@ -61,15 +61,15 @@ export function LocationMap({
       onClick={handleClick}
     >
       <motion.div
-        className="relative overflow-hidden rounded-2xl bg-background border border-border"
+        className="relative overflow-hidden rounded-2xl bg-white border border-zinc-100 shadow-2xl"
         style={{
           rotateX: springRotateX,
           rotateY: springRotateY,
           transformStyle: "preserve-3d",
         }}
         animate={{
-          width: isExpanded ? 360 : 240,
-          height: isExpanded ? 280 : 140,
+          width: isExpanded ? (className?.includes("w-full") ? "100%" : 360) : (className?.includes("w-full") ? "100%" : 240),
+          height: isExpanded ? (className?.includes("h-full") ? "100%" : 280) : (className?.includes("h-full") ? "100%" : 140),
         }}
         transition={{
           type: "spring",

@@ -25,14 +25,14 @@ export default function Fun() {
   }, []);
 
   return (
-    <section id="fun" className="py-40 bg-zinc-950 text-white overflow-hidden relative">
+    <section id="fun" className="py-40 bg-white text-zinc-900 overflow-hidden relative">
       {/* Invisible anchors for game-specific linking */}
       <div id="fun-snake" className="absolute top-0 left-0" />
       <div id="fun-tetris" className="absolute top-0 left-0" />
       <div id="fun-tictactoe" className="absolute top-0 left-0" />
 
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -56,7 +56,7 @@ export default function Fun() {
             >
               All work <br />
               no <span className="text-brand-primary italic">play</span> <br />
-              is <span className="text-zinc-800">boring</span>.
+              is <span className="text-zinc-300">boring</span>.
             </motion.h2>
 
             <motion.p
@@ -64,7 +64,7 @@ export default function Fun() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-zinc-400 leading-relaxed mb-12 font-medium max-w-md"
+              className="text-xl text-zinc-500 leading-relaxed mb-12 font-medium max-w-md"
             >
               Take a break and play a quick game. Choose between Snake or the classic Block Game. Built with React for a quick mental reset.
             </motion.p>
@@ -76,17 +76,17 @@ export default function Fun() {
                   window.history.pushState(null, "", "#fun-snake");
                 }}
                 className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
-                  activeGame === "snake" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-800 hover:border-zinc-700"
+                  activeGame === "snake" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                  activeGame === "snake" ? "bg-emerald-500/20 text-emerald-500" : "bg-zinc-900 text-zinc-500"
+                  activeGame === "snake" ? "bg-emerald-500/20 text-emerald-500" : "bg-zinc-50 text-zinc-400"
                 }`}>
                   <Ghost className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <p className="text-sm font-bold">Snake Game</p>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">High Score: 42</p>
+                  <p className="text-sm font-bold text-zinc-900">Snake Game</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">High Score: 42</p>
                 </div>
                 {activeGame === "snake" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
               </button>
@@ -97,29 +97,29 @@ export default function Fun() {
                   window.history.pushState(null, "", "#fun-tetris");
                 }}
                 className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
-                  activeGame === "tetris" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-800 hover:border-zinc-700"
+                  activeGame === "tetris" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                  activeGame === "tetris" ? "bg-purple-500/20 text-purple-500" : "bg-zinc-900 text-zinc-500"
+                  activeGame === "tetris" ? "bg-purple-500/20 text-purple-500" : "bg-zinc-50 text-zinc-400"
                 }`}>
                   <LayoutGrid className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <p className="text-sm font-bold">Block Game</p>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Classic Tetris</p>
+                  <p className="text-sm font-bold text-zinc-900">Block Game</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Classic Tetris</p>
                 </div>
                 {activeGame === "tetris" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
               </button>
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center text-brand-primary border border-zinc-800">
+              <div className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center text-brand-primary border border-zinc-100">
                 <Sparkles className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white">Ready to play?</p>
-                <p className="text-xs text-zinc-500 font-medium tracking-widest uppercase">Select a game to start</p>
+                <p className="text-sm font-bold text-zinc-900">Ready to play?</p>
+                <p className="text-xs text-zinc-400 font-medium tracking-widest uppercase">Select a game to start</p>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function Fun() {
                   animate={{ opacity: 1, rotateY: 0 }}
                   exit={{ opacity: 0, rotateY: -90 }}
                   transition={{ duration: 0.4 }}
-                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50 relative group"
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative group"
                 >
                   <SnakeGame />
                 </motion.div>
@@ -149,7 +149,7 @@ export default function Fun() {
                   animate={{ opacity: 1, rotateY: 0 }}
                   exit={{ opacity: 0, rotateY: -90 }}
                   transition={{ duration: 0.4 }}
-                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden relative group"
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 overflow-hidden relative group"
                 >
                   <div className="scale-75 origin-top -mt-10 -mb-20">
                     <BlockGame />
@@ -162,17 +162,17 @@ export default function Fun() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-800/50 bg-zinc-900/50 z-20"
+              className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20"
             >
               <div className="flex items-center gap-3">
                 <div className="flex flex-col gap-1">
                   <div className="flex gap-1 justify-center">
-                    <div className="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-[10px] font-bold">↑</div>
+                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↑</div>
                   </div>
                   <div className="flex gap-1">
-                    <div className="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-[10px] font-bold">←</div>
-                    <div className="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-[10px] font-bold">↓</div>
-                    <div className="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-[10px] font-bold">→</div>
+                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">←</div>
+                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↓</div>
+                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">→</div>
                   </div>
                 </div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Use Arrows</p>
