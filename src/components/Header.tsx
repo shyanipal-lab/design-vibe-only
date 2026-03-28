@@ -12,7 +12,7 @@ import resumeLottie from "../assets/lottie/resume.json";
 const SOCIAL_ITEMS = [
   { label: "Email", href: "mailto:pal.shyani1@gmail.com", lottie: emailLottie },
   { label: "LinkedIn", href: "https://linkedin.com/in/shyani-pal", lottie: linkedinLottie },
-  { label: "Resume", href: "/resume.pdf", lottie: resumeLottie },
+  { label: "Resume", href: "resume.pdf", lottie: resumeLottie },
 ];
 
 const NAV_LINKS = [
@@ -82,7 +82,7 @@ export default function Header() {
             {SOCIAL_ITEMS.map((item) => (
               <motion.a
                 key={item.label}
-                href={item.href}
+                href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href}` : item.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseEnter={() => setHoveredSocial(item.label)}
@@ -95,6 +95,7 @@ export default function Header() {
                     animationData={item.lottie} 
                     loop={true} 
                     autoplay={hoveredSocial === item.label}
+                    style={{ width: '100%', height: '100%' }}
                   />
                 </div>
                 <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary transition-colors">
@@ -149,13 +150,17 @@ export default function Header() {
                   {SOCIAL_ITEMS.map((item) => (
                     <a 
                       key={item.label}
-                      href={item.href}
+                      href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href}` : item.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
                     >
                       <div className="w-5 h-5">
-                        <Lottie animationData={item.lottie} loop={true} />
+                        <Lottie 
+                          animationData={item.lottie} 
+                          loop={true} 
+                          style={{ width: '100%', height: '100%' }}
+                        />
                       </div>
                       {item.label}
                     </a>

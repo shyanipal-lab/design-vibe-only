@@ -144,12 +144,14 @@ function StoryThumbnail({
                 muted
                 playsInline
                 preload="metadata"
+                referrerPolicy="no-referrer"
               />
             ) : (
               <img
                 src={lastStory.src}
                 alt={`${username}'s story`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                referrerPolicy="no-referrer"
               />
             )}
           </div>
@@ -245,6 +247,7 @@ function StoryContent({
           autoPlay
           playsInline
           muted={isMuted}
+          referrerPolicy="no-referrer"
           onCanPlay={(e) => {
             const video = e.currentTarget;
             onVideoReady(video.duration * 1000);
@@ -266,6 +269,7 @@ function StoryContent({
             isInitialLoading ? "opacity-0" : "opacity-100"
           )}
           onLoad={onImageLoad}
+          referrerPolicy="no-referrer"
         />
       )}
     </>
@@ -534,7 +538,7 @@ function StoryViewerModal({
           <div className="flex items-center justify-between px-4 mt-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full overflow-hidden">
-                <img src={avatar} alt={username} className="w-full h-full object-cover" />
+                <img src={avatar} alt={username} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
               <div className="flex flex-col">
                 <span className="text-white text-sm font-medium">{username}</span>

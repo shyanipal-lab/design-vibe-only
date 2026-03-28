@@ -126,6 +126,7 @@ export default function Work() {
                   loop 
                   muted 
                   playsInline
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
               </div>

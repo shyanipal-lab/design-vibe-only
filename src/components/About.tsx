@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { User, Sparkles, Heart, Coffee, Code, CheckCircle2, Car } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import AboutStories from "./AboutStories";
 import { LocationMap } from "./ui/expand-map";
 
@@ -214,13 +215,13 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <a 
-                href="/about"
+              <Link 
+                to="/about"
                 className="inline-flex items-center gap-4 bg-zinc-900 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-brand-primary transition-all shadow-xl group"
               >
                 Full Story & Journey
                 <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>

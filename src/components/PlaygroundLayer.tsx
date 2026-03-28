@@ -119,7 +119,7 @@ export default function PlaygroundLayer() {
           {SOCIAL_ITEMS.map((item) => (
             <motion.a
               key={item.label}
-              href={item.href}
+              href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href.startsWith('/') ? item.href.slice(1) : item.href}` : item.href}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.9)" }}
@@ -127,7 +127,11 @@ export default function PlaygroundLayer() {
               className="w-12 h-12 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center group relative border border-zinc-100"
             >
               <div className="w-8 h-8">
-                <Lottie animationData={item.lottie} loop={true} />
+                <Lottie 
+                  animationData={item.lottie} 
+                  loop={true} 
+                  style={{ width: '100%', height: '100%' }}
+                />
               </div>
               <div className="absolute right-16 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-900 text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-2xl whitespace-nowrap pointer-events-none">
                 {item.label}
