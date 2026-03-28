@@ -1,39 +1,28 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Ghost, Sparkles, LayoutGrid, Gamepad2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import SnakeGame from "./SnakeGame";
 import { BlockGame } from "./ui/block-game";
 import TicTacToe from "./TicTacToe";
 
 export default function Fun() {
   const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
+  const { hash } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === "#fun-snake") {
-        setActiveGame("snake");
-      } else if (hash === "#fun-tetris") {
-        setActiveGame("tetris");
-      } else if (hash === "#fun-tictactoe") {
-        setActiveGame("tictactoe");
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    // Initial check
-    handleHashChange();
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+    if (hash === "#fun-snake") {
+      setActiveGame("snake");
+    } else if (hash === "#fun-tetris") {
+      setActiveGame("tetris");
+    } else if (hash === "#fun-tictactoe") {
+      setActiveGame("tictactoe");
+    }
+  }, [hash]);
 
   return (
     <section id="fun" className="py-40 bg-white text-zinc-900 overflow-hidden relative">
-      {/* Invisible anchors for game-specific linking */}
-      <div id="fun-snake" className="absolute top-0 left-0" />
-      <div id="fun-tetris" className="absolute top-0 left-0" />
-      <div id="fun-tictactoe" className="absolute top-0 left-0" />
-
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
@@ -76,7 +65,7 @@ export default function Fun() {
               <button
                 onClick={() => {
                   setActiveGame("snake");
-                  window.history.pushState(null, "", "#fun-snake");
+                  navigate("#fun-snake");
                 }}
                 className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
                   activeGame === "snake" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
@@ -97,7 +86,7 @@ export default function Fun() {
               <button
                 onClick={() => {
                   setActiveGame("tetris");
-                  window.history.pushState(null, "", "#fun-tetris");
+                  navigate("#fun-tetris");
                 }}
                 className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
                   activeGame === "tetris" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
@@ -118,7 +107,7 @@ export default function Fun() {
               <button
                 onClick={() => {
                   setActiveGame("tictactoe");
-                  window.history.pushState(null, "", "#fun-tictactoe");
+                  navigate("#fun-tictactoe");
                 }}
                 className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
                   activeGame === "tictactoe" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
@@ -154,6 +143,11 @@ export default function Fun() {
             viewport={{ once: true }}
             className="relative"
           >
+            {/* Invisible anchors for game-specific linking - moved here to lead to canvas */}
+            <div id="fun-snake" className="absolute -top-20 left-0" />
+            <div id="fun-tetris" className="absolute -top-20 left-0" />
+            <div id="fun-tictactoe" className="absolute -top-20 left-0" />
+
             <AnimatePresence mode="wait">
               {activeGame === "snake" ? (
                 <motion.div

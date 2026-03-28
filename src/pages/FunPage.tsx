@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, Ghost, Gamepad2, Grid3X3, LayoutGrid } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SnakeGame from "../components/SnakeGame";
 import { BlockGame } from "../components/ui/block-game";
@@ -8,24 +8,18 @@ import TicTacToe from "../components/TicTacToe";
 
 export default function FunPage() {
   const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
+  const { hash } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === "#fun-snake") {
-        setActiveGame("snake");
-      } else if (hash === "#fun-tetris") {
-        setActiveGame("tetris");
-      } else if (hash === "#fun-tictactoe") {
-        setActiveGame("tictactoe");
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    handleHashChange();
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+    if (hash === "#fun-snake") {
+      setActiveGame("snake");
+    } else if (hash === "#fun-tetris") {
+      setActiveGame("tetris");
+    } else if (hash === "#fun-tictactoe") {
+      setActiveGame("tictactoe");
+    }
+  }, [hash]);
 
   const games = [
     { id: "snake", name: "Snake Game", icon: Ghost, status: "Playable", color: "text-emerald-500", hash: "#fun-snake" },
@@ -86,7 +80,7 @@ export default function FunPage() {
                   onClick={() => {
                     if (game.status === "Playable") {
                       setActiveGame(game.id as any);
-                      window.history.pushState(null, "", game.hash);
+                      navigate(game.hash);
                     }
                   }}
                   className={`glass p-6 rounded-2xl border transition-all cursor-pointer flex items-center justify-between group ${
