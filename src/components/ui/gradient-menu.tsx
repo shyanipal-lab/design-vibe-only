@@ -30,13 +30,7 @@ export default function GradientMenu({ items, activeSection }: GradientMenuProps
           let Component: any = "a";
           let props: any = { href };
 
-          if (isInternal) {
-            Component = Link;
-            props = { to: href };
-          } else if (isHash && location.pathname === '/') {
-            Component = "a";
-            props = { href: href.split('/')[1] || href };
-          } else if (isHash) {
+          if (isInternal || isHash) {
             Component = Link;
             props = { to: href };
           }

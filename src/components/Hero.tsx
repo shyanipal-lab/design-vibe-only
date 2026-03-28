@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { MousePointer2, Sparkles, ArrowRight, Ghost, Gamepad2, Grid3X3, LayoutGrid } from "lucide-react";
 import { GooeyText } from "./ui/gooey-text-morphing";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import { Link } from "react-router-dom";
 
 const GAME_ITEMS = [
   {
@@ -10,7 +11,7 @@ const GAME_ITEMS = [
     designation: "Classic Arcade",
     icon: Ghost,
     color: "bg-emerald-500",
-    link: "#fun-snake",
+    link: "/#fun-snake",
   },
   {
     id: 2,
@@ -18,7 +19,7 @@ const GAME_ITEMS = [
     designation: "Impossible AI",
     icon: Grid3X3,
     color: "bg-blue-500",
-    link: "#fun-tictactoe",
+    link: "/#fun-tictactoe",
   },
   {
     id: 3,
@@ -26,7 +27,7 @@ const GAME_ITEMS = [
     designation: "Brick Game",
     icon: LayoutGrid,
     color: "bg-purple-500",
-    link: "#fun-tetris",
+    link: "/#fun-tetris",
   },
 ];
 
@@ -67,7 +68,7 @@ export default function Hero() {
               transition={{ delay: 0.3 }}
               className="flex flex-col md:flex-row items-center justify-center gap-12"
             >
-              <a href="#work">
+              <Link to="/#work">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -76,14 +77,14 @@ export default function Hero() {
                   Explore Work
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
-              </a>
+              </Link>
               
               <div className="flex items-center gap-4">
                 <AnimatedTooltip items={GAME_ITEMS} />
-                <div className="text-left ml-4">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-900">Play Games</p>
+                <Link to="/#fun" className="group/games text-left ml-4 cursor-pointer">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-900 group-hover/games:text-brand-primary transition-colors">Play Games</p>
                   <p className="text-[8px] font-medium text-zinc-400 uppercase tracking-widest">Beat the high score</p>
-                </div>
+                </Link>
               </div>
             </motion.div>
           </div>

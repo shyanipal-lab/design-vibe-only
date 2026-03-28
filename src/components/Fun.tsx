@@ -3,9 +3,10 @@ import { Ghost, Sparkles, LayoutGrid, Gamepad2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import SnakeGame from "./SnakeGame";
 import { BlockGame } from "./ui/block-game";
+import TicTacToe from "./TicTacToe";
 
 export default function Fun() {
-  const [activeGame, setActiveGame] = useState<"snake" | "tetris">("snake");
+  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -14,6 +15,8 @@ export default function Fun() {
         setActiveGame("snake");
       } else if (hash === "#fun-tetris") {
         setActiveGame("tetris");
+      } else if (hash === "#fun-tictactoe") {
+        setActiveGame("tictactoe");
       }
     };
 
@@ -111,6 +114,27 @@ export default function Fun() {
                 </div>
                 {activeGame === "tetris" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
               </button>
+
+              <button
+                onClick={() => {
+                  setActiveGame("tictactoe");
+                  window.history.pushState(null, "", "#fun-tictactoe");
+                }}
+                className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
+                  activeGame === "tictactoe" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
+                }`}
+              >
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  activeGame === "tictactoe" ? "bg-blue-500/20 text-blue-500" : "bg-zinc-50 text-zinc-400"
+                }`}>
+                  <LayoutGrid className="w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-zinc-900">Tic Tac Toe</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Impossible AI</p>
+                </div>
+                {activeGame === "tictactoe" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
+              </button>
             </div>
 
             <div className="flex items-center gap-4">
@@ -142,7 +166,7 @@ export default function Fun() {
                 >
                   <SnakeGame />
                 </motion.div>
-              ) : (
+              ) : activeGame === "tetris" ? (
                 <motion.div
                   key="tetris"
                   initial={{ opacity: 0, rotateY: 90 }}
@@ -154,6 +178,17 @@ export default function Fun() {
                   <div className="scale-75 origin-top -mt-10 -mb-20">
                     <BlockGame />
                   </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="tictactoe"
+                  initial={{ opacity: 0, rotateY: 90 }}
+                  animate={{ opacity: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, rotateY: -90 }}
+                  transition={{ duration: 0.4 }}
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative group"
+                >
+                  <TicTacToe />
                 </motion.div>
               )}
             </AnimatePresence>

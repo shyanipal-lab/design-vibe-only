@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SnakeGame from "../components/SnakeGame";
 import { BlockGame } from "../components/ui/block-game";
+import TicTacToe from "../components/TicTacToe";
 
 export default function FunPage() {
-  const [activeGame, setActiveGame] = useState<"snake" | "tetris">("snake");
+  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -15,6 +16,8 @@ export default function FunPage() {
         setActiveGame("snake");
       } else if (hash === "#fun-tetris") {
         setActiveGame("tetris");
+      } else if (hash === "#fun-tictactoe") {
+        setActiveGame("tictactoe");
       }
     };
 
@@ -27,7 +30,7 @@ export default function FunPage() {
   const games = [
     { id: "snake", name: "Snake Game", icon: Ghost, status: "Playable", color: "text-emerald-500", hash: "#fun-snake" },
     { id: "tetris", name: "Block Game", icon: LayoutGrid, status: "Playable", color: "text-purple-500", hash: "#fun-tetris" },
-    { id: "tictactoe", name: "Tic Tac Toe", icon: Grid3X3, status: "Coming Soon", color: "text-blue-500", hash: "#fun-tictactoe" },
+    { id: "tictactoe", name: "Tic Tac Toe", icon: Grid3X3, status: "Playable", color: "text-blue-500", hash: "#fun-tictactoe" },
   ];
 
   return (
@@ -143,7 +146,7 @@ export default function FunPage() {
                   </div>
                   <SnakeGame />
                 </motion.div>
-              ) : (
+              ) : activeGame === "tetris" ? (
                 <motion.div
                   key="tetris"
                   initial={{ opacity: 0, y: 20 }}
@@ -162,6 +165,24 @@ export default function FunPage() {
                   <div className="scale-75 origin-top -mt-10 -mb-20">
                     <BlockGame />
                   </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="tictactoe"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-500">
+                        <Grid3X3 className="w-4 h-4" />
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-900">Tic Tac Toe</h3>
+                    </div>
+                  </div>
+                  <TicTacToe />
                 </motion.div>
               )}
             </AnimatePresence>

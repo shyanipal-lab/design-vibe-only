@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 export const AnimatedTooltip = ({
@@ -43,8 +44,8 @@ export const AnimatedTooltip = ({
   return (
     <div className={cn("flex items-center gap-2", className)}>
       {items.map((item) => (
-        <a
-          href={item.link || "#fun"}
+        <Link
+          to={item.link || "/#fun"}
           className="-mr-4 relative group cursor-pointer"
           key={item.name}
           onMouseEnter={() => setHoveredIndex(item.id)}
@@ -101,7 +102,7 @@ export const AnimatedTooltip = ({
               <item.icon className="w-6 h-6 text-white" />
             ) : null}
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
