@@ -1,13 +1,14 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Ghost, Sparkles, LayoutGrid, Gamepad2 } from "lucide-react";
+import { Ghost, Sparkles, LayoutGrid, Gamepad2, Wallet, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import SnakeGame from "./SnakeGame";
 import { BlockGame } from "./ui/block-game";
 import TicTacToe from "./TicTacToe";
+import ExpenseTrackerShowcase from "./ExpenseTrackerShowcase";
 
 export default function Fun() {
-  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
+  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe" | "expense-tracker">("snake");
   const { hash } = useLocation();
   const navigate = useNavigate();
 
@@ -18,6 +19,8 @@ export default function Fun() {
       setActiveGame("tetris");
     } else if (hash === "#fun-tictactoe") {
       setActiveGame("tictactoe");
+    } else if (hash === "#fun-expense") {
+      setActiveGame("expense-tracker");
     }
   }, [hash]);
 
@@ -40,26 +43,76 @@ export default function Fun() {
             </motion.div>
 
             <motion.h2
+              key={activeGame === "expense-tracker" ? "app" : "games"}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="font-header text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
             >
-              All work <br />
-              no <span className="text-brand-primary italic">play</span> <br />
-              is <span className="text-zinc-300">boring</span>.
+              {activeGame === "expense-tracker" ? (
+                <>
+                  Split.<br />
+                  Grow.<br />
+                  Win.
+                </>
+              ) : (
+                <>
+                  All work <br />
+                  no <span className="text-brand-primary italic">play</span> <br />
+                  is <span className="text-zinc-300">boring</span>.
+                </>
+              )}
             </motion.h2>
 
-            <motion.p
+            <motion.div
+              key={`desc-${activeGame}`}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-zinc-500 leading-relaxed mb-12 font-medium max-w-md"
+              className="mb-12"
             >
-              Take a break and play a quick game. Choose between Snake or the classic Block Game. Built with React for a quick mental reset.
-            </motion.p>
+              <p className="text-xl text-zinc-500 leading-relaxed font-medium max-w-md">
+                {activeGame === "expense-tracker" 
+                  ? "Split & Grow is a social financial experiment. Compete with friends to see who can save the most, split bills instantly, and watch your collective wealth grow through gamified milestones."
+                  : "Take a break and play a quick game. Choose between Snake, Tetris, or Tic Tac Toe. Built with React for a quick mental reset."
+                }
+              </p>
+              
+              {activeGame === "expense-tracker" && (
+                <div className="mt-8 space-y-8">
+                  <div className="grid grid-cols-1 gap-4">
+                    {[
+                      { title: "Social Splitting", desc: "Instant bill division with friends" },
+                      { title: "The Saving Race", desc: "Competitive leaderboard for spending" },
+                      { title: "Goal Milestones", desc: "Visual tracking for your targets" }
+                    ].map((feat, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-2" />
+                        <div>
+                          <p className="text-sm font-bold text-zinc-900 uppercase tracking-widest">{feat.title}</p>
+                          <p className="text-xs text-zinc-400 font-medium">{feat.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Link 
+                      to="/split-and-grow"
+                      className="inline-flex items-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-[0.2em] hover:bg-brand-primary transition-all shadow-xl shadow-zinc-900/10 hover:shadow-brand-primary/20 group"
+                    >
+                      Launch Full App
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </motion.div>
+                </div>
+              )}
+            </motion.div>
 
             <div className="flex flex-col gap-4 mb-12">
               <button
@@ -124,6 +177,30 @@ export default function Fun() {
                 </div>
                 {activeGame === "tictactoe" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
               </button>
+
+              <button
+                onClick={() => {
+                  setActiveGame("expense-tracker");
+                  navigate("#fun-expense");
+                }}
+                className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
+                  activeGame === "expense-tracker" ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" : "border-zinc-100 hover:border-zinc-200"
+                }`}
+              >
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  activeGame === "expense-tracker" ? "bg-orange-500/20 text-orange-500" : "bg-zinc-50 text-zinc-400"
+                }`}>
+                  <Wallet className="w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-bold text-zinc-900">Split & Grow</p>
+                    <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter">Featured</span>
+                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Gamified Expense Tracker</p>
+                </div>
+                {activeGame === "expense-tracker" && <Gamepad2 className="w-4 h-4 ml-auto text-brand-primary" />}
+              </button>
             </div>
 
             <div className="flex items-center gap-4">
@@ -147,6 +224,7 @@ export default function Fun() {
             <div id="fun-snake" className="absolute -top-20 left-0" />
             <div id="fun-tetris" className="absolute -top-20 left-0" />
             <div id="fun-tictactoe" className="absolute -top-20 left-0" />
+            <div id="fun-expense" className="absolute -top-20 left-0" />
 
             <AnimatePresence mode="wait">
               {activeGame === "snake" ? (
@@ -173,7 +251,7 @@ export default function Fun() {
                     <BlockGame />
                   </div>
                 </motion.div>
-              ) : (
+              ) : activeGame === "tictactoe" ? (
                 <motion.div
                   key="tictactoe"
                   initial={{ opacity: 0, rotateY: 90 }}
@@ -184,29 +262,42 @@ export default function Fun() {
                 >
                   <TicTacToe />
                 </motion.div>
+              ) : (
+                <motion.div
+                  key="expense"
+                  initial={{ opacity: 0, rotateY: 90 }}
+                  animate={{ opacity: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, rotateY: -90 }}
+                  transition={{ duration: 0.4 }}
+                  className="glass p-8 rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative group"
+                >
+                  <ExpenseTrackerShowcase />
+                </motion.div>
               )}
             </AnimatePresence>
             
             {/* Floating Instructions */}
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex flex-col gap-1">
-                  <div className="flex gap-1 justify-center">
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↑</div>
+            {activeGame !== "expense-tracker" && (
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-1">
+                    <div className="flex gap-1 justify-center">
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↑</div>
+                    </div>
+                    <div className="flex gap-1">
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">←</div>
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↓</div>
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">→</div>
+                    </div>
                   </div>
-                  <div className="flex gap-1">
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">←</div>
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↓</div>
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">→</div>
-                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Use Arrows</p>
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Use Arrows</p>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </div>

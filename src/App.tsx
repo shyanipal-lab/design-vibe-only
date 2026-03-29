@@ -9,6 +9,7 @@ import FunPage from "./pages/FunPage";
 import AboutPage from "./pages/AboutPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
 import Demo from "./pages/Demo";
+import SplitAndGrowPage from "./pages/SplitAndGrowPage";
 import PlaygroundLayer from "./components/PlaygroundLayer";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/fun" element={<FunPage />} />
         <Route path="/case-study/:id" element={<CaseStudyPage />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path="/split-and-grow" element={<SplitAndGrowPage />} />
       </Routes>
     </Router>
   );

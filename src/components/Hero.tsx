@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { MousePointer2, Sparkles, ArrowRight, Ghost, Gamepad2, Grid3X3, LayoutGrid } from "lucide-react";
+import { MousePointer2, Sparkles, ArrowRight, Ghost, Gamepad2, Grid3X3, LayoutGrid, Wallet } from "lucide-react";
 import { GooeyText } from "./ui/gooey-text-morphing";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { Link } from "react-router-dom";
@@ -28,6 +28,14 @@ const GAME_ITEMS = [
     icon: LayoutGrid,
     color: "bg-purple-500",
     link: "/#fun-tetris",
+  },
+  {
+    id: 4,
+    name: "Split & Grow",
+    designation: "Gamified Finance",
+    icon: Wallet,
+    color: "bg-orange-500",
+    link: "/#fun-expense",
   },
 ];
 
