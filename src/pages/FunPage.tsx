@@ -1,13 +1,16 @@
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, Ghost, Gamepad2, Grid3X3, LayoutGrid } from "lucide-react";
+import { ArrowLeft, Ghost, Gamepad2, Grid3X3, LayoutGrid, Wallet, Monitor, Smartphone, ArrowRight } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SnakeGame from "../components/SnakeGame";
 import { BlockGame } from "../components/ui/block-game";
 import TicTacToe from "../components/TicTacToe";
+import ExpenseTrackerShowcase from "../components/ExpenseTrackerShowcase";
+import DashboardDesktopShowcase from "../components/DashboardDesktopShowcase";
 
 export default function FunPage() {
-  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe">("snake");
+  const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe" | "expense-tracker">("snake");
+  const [expenseView, setExpenseView] = useState<"mobile" | "desktop">("mobile");
   const { hash } = useLocation();
   const navigate = useNavigate();
 
@@ -18,13 +21,16 @@ export default function FunPage() {
       setActiveGame("tetris");
     } else if (hash === "#fun-tictactoe") {
       setActiveGame("tictactoe");
+    } else if (hash === "#fun-expense") {
+      setActiveGame("expense-tracker");
     }
   }, [hash]);
 
   const games = [
-    { id: "snake", name: "Snake Game", icon: Ghost, status: "Playable", color: "text-emerald-500", hash: "#fun-snake" },
-    { id: "tetris", name: "Block Game", icon: LayoutGrid, status: "Playable", color: "text-purple-500", hash: "#fun-tetris" },
-    { id: "tictactoe", name: "Tic Tac Toe", icon: Grid3X3, status: "Playable", color: "text-blue-500", hash: "#fun-tictactoe" },
+    { id: "snake", name: "Snake Game", icon: Ghost, status: "Playable", color: "text-emerald-500", hash: "#fun-snake", desc: "Classic arcade snake game." },
+    { id: "tetris", name: "Block Game", icon: LayoutGrid, status: "Playable", color: "text-purple-500", hash: "#fun-tetris", desc: "Classic block stacking puzzle." },
+    { id: "tictactoe", name: "Tic Tac Toe", icon: Grid3X3, status: "Playable", color: "text-blue-500", hash: "#fun-tictactoe", desc: "Impossible AI opponent." },
+    { id: "expense-tracker", name: "Split & Grow", icon: Wallet, status: "Featured", color: "text-orange-500", hash: "#fun-expense", desc: "Gamified expense tracker." },
   ];
 
   return (
@@ -78,7 +84,7 @@ export default function FunPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
                   onClick={() => {
-                    if (game.status === "Playable") {
+                    if (game.status === "Playable" || game.status === "Featured") {
                       setActiveGame(game.id as any);
                       navigate(game.hash);
                     }
@@ -87,7 +93,7 @@ export default function FunPage() {
                     activeGame === game.id 
                       ? "border-brand-primary bg-brand-primary/5 shadow-[0_0_20px_rgba(246,133,27,0.1)]" 
                       : "border-zinc-100 hover:border-zinc-200"
-                  } ${game.status !== "Playable" ? "opacity-50 cursor-not-allowed" : ""}`}
+                  } ${(game.status !== "Playable" && game.status !== "Featured") ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center transition-colors ${
@@ -96,11 +102,16 @@ export default function FunPage() {
                       <game.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-zinc-900">{game.name}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-bold text-zinc-900">{game.name}</p>
+                        {game.status === "Featured" && (
+                          <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter">Featured</span>
+                        )}
+                      </div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{game.status}</p>
                     </div>
                   </div>
-                  {game.status === "Playable" && (
+                  {(game.status === "Playable" || game.status === "Featured") && (
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                       activeGame === game.id ? "bg-brand-primary text-white" : "bg-brand-primary/10 text-brand-primary opacity-0 group-hover:opacity-100"
                     }`}>
@@ -160,7 +171,7 @@ export default function FunPage() {
                     <BlockGame />
                   </div>
                 </motion.div>
-              ) : (
+              ) : activeGame === "tictactoe" ? (
                 <motion.div
                   key="tictactoe"
                   initial={{ opacity: 0, y: 20 }}
@@ -178,29 +189,103 @@ export default function FunPage() {
                   </div>
                   <TicTacToe />
                 </motion.div>
+              ) : (
+                <motion.div
+                  key="expense"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="relative group"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500">
+                        <Wallet className="w-4 h-4" />
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-900">Split & Grow</h3>
+                    </div>
+                    
+                    <div className="bg-zinc-50 p-1 rounded-xl border border-zinc-100 flex items-center gap-1">
+                      <button
+                        onClick={() => setExpenseView("mobile")}
+                        className={`p-1.5 rounded-lg transition-all ${
+                          expenseView === "mobile" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
+                        }`}
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => setExpenseView("desktop")}
+                        className={`p-1.5 rounded-lg transition-all ${
+                          expenseView === "desktop" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
+                        }`}
+                      >
+                        <Monitor className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    {expenseView === "mobile" ? (
+                      <motion.div
+                        key="mobile-view"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="flex justify-center"
+                      >
+                        <div className="scale-90 origin-top">
+                          <ExpenseTrackerShowcase />
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="desktop-view"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="w-full"
+                      >
+                        <DashboardDesktopShowcase />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="mt-8 flex justify-center">
+                    <Link 
+                      to="/split-and-grow"
+                      className="inline-flex items-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-[0.2em] hover:bg-brand-primary transition-all shadow-xl shadow-zinc-900/10 hover:shadow-brand-primary/20 group"
+                    >
+                      Launch Full App
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
               )}
             </AnimatePresence>
             
             {/* Floating Instructions */}
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex flex-col gap-1">
-                  <div className="flex gap-1 justify-center">
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↑</div>
+            {activeGame !== "expense-tracker" && (
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -bottom-10 -right-10 glass px-6 py-4 rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-1">
+                    <div className="flex gap-1 justify-center">
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↑</div>
+                    </div>
+                    <div className="flex gap-1">
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">←</div>
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↓</div>
+                      <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">→</div>
+                    </div>
                   </div>
-                  <div className="flex gap-1">
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">←</div>
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">↓</div>
-                    <div className="w-6 h-6 bg-zinc-100 rounded flex items-center justify-center text-[10px] font-bold text-zinc-900">→</div>
-                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Use Arrows</p>
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Use Arrows</p>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </main>
