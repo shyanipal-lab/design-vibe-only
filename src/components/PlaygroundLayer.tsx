@@ -1,15 +1,9 @@
 import { motion } from "motion/react";
-import { MousePointer2, Mail, Linkedin } from "lucide-react";
+import { MousePointer2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Lottie from "lottie-react";
 import { IoHomeOutline, IoPersonOutline, IoBriefcaseOutline, IoGameControllerOutline, IoChatbubbleOutline } from 'react-icons/io5';
 import GradientMenu from "./ui/gradient-menu";
-
-// Import Lottie JSONs
-import emailLottie from "../assets/lottie/email.json";
-import linkedinLottie from "../assets/lottie/linkedin.json";
-import resumeLottie from "../assets/lottie/resume.json";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/#home", icon: <IoHomeOutline />, id: "home", gradientFrom: '#037DD6', gradientTo: '#02c39a' },
@@ -17,12 +11,6 @@ const NAV_ITEMS = [
   { label: "Work", href: "/#work", icon: <IoBriefcaseOutline />, id: "work", gradientFrom: '#F6851B', gradientTo: '#FFD02F' },
   { label: "Games", href: "/fun", icon: <IoGameControllerOutline />, id: "fun", gradientFrom: '#0500FF', gradientTo: '#037DD6' },
   { label: "Chat", href: "/#contact", icon: <IoChatbubbleOutline />, id: "contact", gradientFrom: '#F6851B', gradientTo: '#f434e2' },
-];
-
-const SOCIAL_ITEMS = [
-  { label: "Email", href: "mailto:pal.shyani1@gmail.com", lottie: emailLottie },
-  { label: "LinkedIn", href: "https://linkedin.com/in/shyani-pal", lottie: linkedinLottie },
-  { label: "Resume", href: "/resume.pdf", lottie: resumeLottie },
 ];
 
 export default function PlaygroundLayer() {
@@ -112,33 +100,6 @@ export default function PlaygroundLayer() {
         {/* Top Navigation Bar */}
         <div className="nav-top-bar absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto">
           <GradientMenu items={NAV_ITEMS} activeSection={activeSection} />
-        </div>
-
-        {/* Social Floating Items (Moved to bottom right for better balance) */}
-        <div className="absolute bottom-10 right-10 flex flex-col gap-4 pointer-events-auto">
-          {SOCIAL_ITEMS.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href.startsWith('/') ? item.href.slice(1) : item.href}` : item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.9)" }}
-              whileTap={{ scale: 0.9 }}
-              className="w-12 h-12 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center group relative border border-zinc-100"
-            >
-              <div className="w-8 h-8">
-                <Lottie 
-                  animationData={item.lottie} 
-                  loop={true} 
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </div>
-              <div className="absolute right-16 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-900 text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-2xl whitespace-nowrap pointer-events-none">
-                {item.label}
-                <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-zinc-900 rotate-45" />
-              </div>
-            </motion.a>
-          ))}
         </div>
       </div>
     </>

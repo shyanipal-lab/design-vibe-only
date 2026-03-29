@@ -68,7 +68,7 @@ export default function Work() {
           viewport={{ once: true }}
           className="max-w-3xl"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-[0.9]">
+          <h2 className="font-header text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-[0.9]">
             Design stories that <br />
             <span className="text-brand-primary italic">moved the needle</span>.
           </h2>
@@ -90,7 +90,7 @@ export default function Work() {
               <Sparkles className="w-4 h-4 text-brand-primary" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">Featured Case Study</span>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.9]">
+            <h2 className="font-header text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.9]">
               Fyle — <br />
               <span className="text-brand-primary italic">Bulk Mileage</span> <br />
               <span className="text-zinc-300 text-3xl md:text-5xl lg:text-6xl">Expense Report</span>.

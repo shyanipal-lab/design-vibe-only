@@ -191,7 +191,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-display text-5xl md:text-7xl font-black uppercase tracking-tighter mb-10 leading-[0.9]"
+              className="font-header text-5xl md:text-7xl font-black uppercase tracking-tighter mb-10 leading-[0.9]"
             >
               Designing <span className="text-brand-primary italic">human</span> <br />
               centered <span className="text-zinc-200">products</span>

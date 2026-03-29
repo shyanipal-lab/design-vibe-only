@@ -46,7 +46,7 @@ export default function Hero() {
                 texts={["Design", "vibe", "coder", "only"]}
                 morphTime={1}
                 cooldownTime={0.5}
-                className="font-display font-black uppercase tracking-tighter"
+                className="font-header font-black uppercase tracking-tighter"
                 textClassName="text-7xl md:text-8xl lg:text-[110px] text-center w-full flex justify-center"
               />
             </div>

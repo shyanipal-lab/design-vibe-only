@@ -50,7 +50,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       ref={containerRef}
     >
       <div id="changelog" className="container mx-auto px-6 py-20 scroll-mt-32">
-        <h2 className="text-4xl md:text-7xl mb-6 text-black dark:text-white max-w-4xl font-display font-black uppercase tracking-tighter leading-[0.9]">
+        <h2 className="text-4xl md:text-7xl mb-6 text-black dark:text-white max-w-4xl font-header font-black uppercase tracking-tighter leading-[0.9]">
           Design stories <br />
           <span className="text-brand-primary italic">that moved the needle.</span>
         </h2>
@@ -69,13 +69,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <div className="h-10 absolute left-0 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
               </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-display font-bold text-zinc-300 dark:text-zinc-700 ">
+              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-header font-bold text-zinc-300 dark:text-zinc-700 ">
                 {item.title}
               </h3>
             </div>
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
-              <h3 className="md:hidden block text-2xl mb-4 text-left font-display font-bold text-zinc-300 dark:text-zinc-700">
+              <h3 className="md:hidden block text-2xl mb-4 text-left font-header font-bold text-zinc-300 dark:text-zinc-700">
                 {item.title}
               </h3>
               {item.content}{" "}

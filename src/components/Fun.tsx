@@ -44,7 +44,7 @@ export default function Fun() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-display text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
+              className="font-header text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
             >
               All work <br />
               no <span className="text-brand-primary italic">play</span> <br />
