@@ -86,7 +86,7 @@ export default function PlaygroundLayer() {
     <>
       {/* Custom Cursor */}
       <motion.div
-        className="fixed top-0 left-0 z-[100] pointer-events-none flex items-center gap-2"
+        className="fixed top-0 left-0 z-[110] pointer-events-none flex items-center gap-2"
         animate={{ 
           x: mousePos.x, 
           y: mousePos.y

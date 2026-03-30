@@ -42,30 +42,18 @@ export default function Fun() {
               className="flex items-center gap-3 mb-8"
             >
               <Ghost className="w-4 h-4 text-brand-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">The Playground</span>
             </motion.div>
 
             <motion.h2
-              key={activeGame === "expense-tracker" ? "app" : "games"}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="font-header text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
             >
-              {activeGame === "expense-tracker" ? (
-                <>
-                  Split. <br />
-                  Grow. <br />
-                  <span className="text-brand-primary italic">Win</span>.
-                </>
-              ) : (
-                <>
-                  All work <br />
-                  no <span className="text-brand-primary italic">play</span> <br />
-                  is <span className="text-zinc-300">boring</span>.
-                </>
-              )}
+              All work <br />
+              no <span className="text-brand-primary italic">play</span> <br />
+              is <span className="text-zinc-300">boring</span>.
             </motion.h2>
 
             <motion.div
@@ -76,45 +64,8 @@ export default function Fun() {
               className="mb-12"
             >
               <p className="text-xl text-zinc-500 leading-relaxed font-medium max-w-md">
-                {activeGame === "expense-tracker" 
-                  ? "Split & Grow is a social financial experiment. Compete with friends to see who can save the most, split bills instantly, and watch your collective wealth grow through gamified milestones."
-                  : "Take a break and play a quick game. Choose between Snake, Tetris, or Tic Tac Toe. Built with React for a quick mental reset."
-                }
+                Take a break and play a quick game. Choose between Snake, Tetris, or Tic Tac Toe. Built with React for a quick mental reset.
               </p>
-              
-              {activeGame === "expense-tracker" && (
-                <div className="mt-8 space-y-8">
-                  <div className="grid grid-cols-1 gap-4">
-                    {[
-                      { title: "Social Splitting", desc: "Instant bill division with friends" },
-                      { title: "The Saving Race", desc: "Competitive leaderboard for spending" },
-                      { title: "Goal Milestones", desc: "Visual tracking for your targets" }
-                    ].map((feat, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-2" />
-                        <div>
-                          <p className="text-sm font-bold text-zinc-900 uppercase tracking-widest">{feat.title}</p>
-                          <p className="text-xs text-zinc-400 font-medium">{feat.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <Link 
-                      to="/split-and-grow"
-                      className="inline-flex items-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-[0.2em] hover:bg-brand-primary transition-all shadow-xl shadow-zinc-900/10 hover:shadow-brand-primary/20 group"
-                    >
-                      Launch Full App
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </motion.div>
-                </div>
-              )}
             </motion.div>
 
             <div className="flex flex-col gap-4 mb-12">

@@ -12,12 +12,14 @@ import Demo from "./pages/Demo";
 import SplitAndGrowPage from "./pages/SplitAndGrowPage";
 import PlaygroundLayer from "./components/PlaygroundLayer";
 import ScrollToTop from "./components/ScrollToTop";
+import ShyaniBot from "./components/ShyaniBot";
 
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
       <PlaygroundLayer />
+      <ShyaniBot />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />

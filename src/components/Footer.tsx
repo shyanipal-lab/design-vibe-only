@@ -82,9 +82,12 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-zinc-100 gap-8">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col gap-1 text-center md:text-left">
                 <p className="text-zinc-500 font-medium text-sm">
                   © {currentYear} Shyani. Built with passion & precision.
+                </p>
+                <p className="text-zinc-400 text-[10px] font-medium italic max-w-md">
+                  Built with AI, for a better AI future. Supported by multiple AIs, excessive caffeine, and a highly questionable sleep schedule. ☕️🤖💤
                 </p>
               </div>
               
