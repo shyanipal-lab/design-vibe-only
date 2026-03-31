@@ -98,7 +98,7 @@ export default function SnakeGame() {
           </div>
           <div className="text-right">
             <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">High</p>
-            <p className="font-mono text-brand-secondary font-bold">{highScore}</p>
+            <p className="font-mono text-brand-secondary font-bold font-accent lowercase">{highScore}</p>
           </div>
         </div>
       </div>

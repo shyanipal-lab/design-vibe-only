@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Lottie from "lottie-react";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
 
 // Import Lottie JSONs
 import emailLottie from "../assets/lottie/email.json";
@@ -20,6 +20,28 @@ const NAV_LINKS = [
   { label: "Work", href: "/#work" },
   { label: "Fun", href: "/fun" },
 ];
+
+function SocialLottie({ animationData, isHovered }: { animationData: any; isHovered: boolean }) {
+  const lottieRef = useRef<LottieRefCurrentProps>(null);
+
+  useEffect(() => {
+    if (isHovered) {
+      lottieRef.current?.play();
+    } else {
+      lottieRef.current?.stop();
+    }
+  }, [isHovered]);
+
+  return (
+    <Lottie
+      lottieRef={lottieRef}
+      animationData={animationData}
+      loop={true}
+      autoplay={false}
+      style={{ width: '100%', height: '100%' }}
+    />
+  );
+}
 
 export default function Header() {
   const location = useLocation();
@@ -69,7 +91,7 @@ export default function Header() {
               key={item.label} 
               to={item.href}
               className={`text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 ${
-                isActive(item.href) ? "text-brand-primary" : "text-zinc-700 hover:text-brand-primary"
+                isActive(item.href) ? "text-brand-primary font-accent lowercase" : "text-zinc-700 hover:text-brand-primary"
               }`}
             >
               {item.label}
@@ -91,14 +113,12 @@ export default function Header() {
                 className="flex items-center gap-1.5 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4"
               >
                 <div className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
-                  <Lottie 
+                  <SocialLottie 
                     animationData={item.lottie} 
-                    loop={true} 
-                    autoplay={hoveredSocial === item.label}
-                    style={{ width: '100%', height: '100%' }}
+                    isHovered={hoveredSocial === item.label}
                   />
                 </div>
-                <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary transition-colors">
+                <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary group-hover:font-accent group-hover:lowercase transition-colors">
                   {item.label.toLowerCase()}.json
                 </span>
               </motion.a>
@@ -147,7 +167,7 @@ export default function Header() {
               ))}
               
               <div className="py-4">
-                <div className="text-[10px] font-mono font-bold text-brand-primary mb-4">contact.json</div>
+                <div className="text-[10px] font-mono font-bold text-brand-primary font-accent lowercase mb-4">contact.json</div>
                 <div className="flex flex-col gap-4 pl-4 border-l border-zinc-100">
                   {SOCIAL_ITEMS.map((item) => (
                     <a 
@@ -155,13 +175,12 @@ export default function Header() {
                       href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href}` : item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
+                      className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary hover:font-accent hover:lowercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
                     >
                       <div className="w-5 h-5">
-                        <Lottie 
+                        <SocialLottie 
                           animationData={item.lottie} 
-                          loop={true} 
-                          style={{ width: '100%', height: '100%' }}
+                          isHovered={true}
                         />
                       </div>
                       {item.label}

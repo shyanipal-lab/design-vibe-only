@@ -52,7 +52,7 @@ export default function Fun() {
               className="font-header text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
             >
               All work <br />
-              no <span className="text-brand-primary italic">play</span> <br />
+              no <span className="text-brand-primary font-accent lowercase">play</span> <br />
               is <span className="text-zinc-300">boring</span>.
             </motion.h2>
 
@@ -149,7 +149,7 @@ export default function Fun() {
                 <div className="text-left">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-bold text-zinc-900">Split & Grow</p>
-                    <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter">Featured</span>
+                    <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter font-accent lowercase">Featured</span>
                   </div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Gamified Expense Tracker</p>
                 </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, Share2, Clock, Tag, ChevronRight } from "lucide-react";
+import { ArrowLeft, Share2, Clock, Tag, ChevronRight, Sparkles } from "lucide-react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import CaseStudyNav from "../components/CaseStudyNav";
+import Footer from "../components/Footer";
+import HoshakshamApp from "../components/HoshakshamApp";
 
 interface Section {
   id: string;
@@ -82,7 +84,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
         <section className="py-8 px-10 bg-zinc-900 rounded-[40px] text-white flex items-center gap-6">
           <div className="text-3xl">🌙</div>
           <div>
-            <h5 className="text-sm font-bold uppercase tracking-widest text-brand-primary mb-1">Dark Mode</h5>
+            <h5 className="text-sm font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-1">Dark Mode</h5>
             <p className="text-zinc-400 text-sm">
               The screens shown below are from the dark mode version of the app — currently in design and yet to be launched. The live app currently runs in light mode.
             </p>
@@ -98,7 +100,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             { val: "∞", label: "yoga classes Priya can now actually focus on" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-4xl font-display font-black text-brand-primary mb-2">{stat.val}</p>
+              <p className="text-4xl font-display font-black text-brand-primary font-accent lowercase mb-2">{stat.val}</p>
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-tight max-w-[120px] mx-auto">{stat.label}</p>
             </div>
           ))}
@@ -106,7 +108,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Product */}
         <section id="product" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">The Product</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">The Product</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div>
               <h4 className="text-3xl font-display font-bold mb-6 text-zinc-900">What is Hoshaksham?</h4>
@@ -127,7 +129,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Meet Priya */}
         <section id="priya" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Meet Priya</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Meet Priya</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">Our one user. Our whole north star.</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -138,7 +140,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">What Priya Says</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">What Priya Says</h5>
               <ul className="space-y-4 text-zinc-900 font-medium italic">
                 <li>"I want to focus on my yoga classes, not paperwork."</li>
                 <li>"It's exhausting to track payments manually every month."</li>
@@ -147,7 +149,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               </ul>
             </div>
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">What Priya Does</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">What Priya Does</h5>
               <ul className="space-y-4 text-zinc-600">
                 <li>Uses spreadsheets to track subscriptions but struggles to keep them updated.</li>
                 <li>Manually follows up with students via WhatsApp to ask for payments.</li>
@@ -156,7 +158,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               </ul>
             </div>
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">What Priya Thinks</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">What Priya Thinks</h5>
               <ul className="space-y-4 text-zinc-600">
                 <li>"Am I missing any payments this month?"</li>
                 <li>"I hope I don't offend my students by constantly asking for money."</li>
@@ -165,7 +167,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               </ul>
             </div>
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">What Priya Feels</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">What Priya Feels</h5>
               <ul className="space-y-4 text-zinc-600">
                 <li><span className="font-bold text-zinc-900">Frustrated:</span> She dreads repetitive subscription management.</li>
                 <li><span className="font-bold text-zinc-900">Overwhelmed:</span> Disorganised tracking makes her feel out of control.</li>
@@ -178,7 +180,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Problems */}
         <section id="problems" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">The Problems</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">The Problems</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { icon: "💸", title: "Asking for money — the awkward bit", desc: "Tracking who paid and when meant manually checking a spreadsheet, then messaging students one by one. Uncomfortable and error-prone." },
@@ -197,7 +199,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Research & Core Insight */}
         <section id="research" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Research & Core Insight</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Research & Core Insight</h3>
           <div className="mb-16">
             <h4 className="text-4xl font-display font-bold mb-6 text-zinc-900">Money should only ever feel like it's coming in</h4>
             <p className="text-xl text-zinc-600 leading-relaxed max-w-3xl">
@@ -207,7 +209,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
           </div>
 
           <div className="p-12 bg-zinc-900 rounded-[40px] text-white mb-16">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">The Central Research Finding</h5>
+            <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">The Central Research Finding</h5>
             <p className="text-2xl md:text-3xl font-display font-bold italic leading-tight mb-8">
               "Priya doesn't think of herself as running a business. She thinks of herself as a yoga teacher who occasionally needs to get paid. The moment her tools made her feel like an accountant — she disengaged."
             </p>
@@ -229,7 +231,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                   <div className="text-3xl">{item.icon}</div>
                   <div>
                     <h5 className="text-sm font-bold text-zinc-900">{item.title}</h5>
-                    <p className="text-xs font-bold text-brand-primary uppercase tracking-widest">{item.subtitle}</p>
+                    <p className="text-xs font-bold text-brand-primary font-accent lowercase uppercase tracking-widest">{item.subtitle}</p>
                   </div>
                 </div>
                 <p className="text-zinc-500 leading-relaxed">{item.desc}</p>
@@ -240,7 +242,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Design Metaphor */}
         <section className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">The Design Metaphor</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">The Design Metaphor</h3>
           <div className="p-12 bg-zinc-50 rounded-[40px] border border-zinc-100">
             <h4 className="text-2xl font-display font-bold mb-6 text-zinc-900">A piggy bank that only has a slot for deposits</h4>
             <p className="text-lg text-zinc-600 mb-12">
@@ -275,7 +277,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Inspiration */}
         <section className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Inspiration & Competitive Research</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Inspiration & Competitive Research</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">We didn't copy. We borrowed the best bits.</h4>
             <p className="text-lg text-zinc-600">We studied how the best products handle money, onboarding, and payments — then took only what Priya needed.</p>
@@ -287,7 +289,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               { name: "Groww", title: "Onboarding Experience", took: ["Single-focus screens", "Encouraging microcopy", "Visual progress indicator"], left: ["Investment jargon", "Heavy KYC flows"] },
               { name: "Google Pay", title: "OTP Login & Bank Linking", took: ["OTP-first login", "Bank account linking via IFSC", "Direct transfer confirmation"], left: ["P2P payment flow", "Split bill"] },
             ].map((item) => (
-              <div key={item.name} className="p-12 rounded-[40px] bg-zinc-50 border border-zinc-100">
+              <div key={item.name} className="p-6 md:p-12 rounded-[40px] bg-zinc-50 border border-zinc-100">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
                   <h5 className="text-2xl font-display font-bold text-zinc-900">{item.name} <span className="text-zinc-400 font-normal text-lg ml-2">— {item.title}</span></h5>
                 </div>
@@ -312,16 +314,16 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Design Psychology */}
         <section className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">Design Psychology</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">Design Psychology</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { title: "Hick's Law", subtitle: "Reduce cognitive load", desc: "Fewer choices = faster decisions. The dashboard shows only what’s actionable — the interface guides Priya." },
               { title: "Zeigarnik Effect", subtitle: "Make incomplete tasks visible", desc: "Unpaid invoices surface prominently. Seeing an unfinished task motivates action — a gentle, guilt-free nudge." },
               { title: "Existing Habit", subtitle: "Make it feel like money", desc: "Money stored in the app — not forms, not admin. A familiar mental model that made the whole product feel intuitive." },
             ].map((item) => (
-              <div key={item.title} className="p-10 rounded-[40px] bg-zinc-900 text-white">
+              <div key={item.title} className="p-6 md:p-10 rounded-[40px] bg-zinc-900 text-white">
                 <h5 className="text-xl font-display font-bold mb-2">{item.title}</h5>
-                <p className="text-xs font-bold text-brand-primary uppercase tracking-widest mb-6">{item.subtitle}</p>
+                <p className="text-xs font-bold text-brand-primary font-accent lowercase uppercase tracking-widest mb-6">{item.subtitle}</p>
                 <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -330,7 +332,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Solution */}
         <section id="solution" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">The Solution</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">The Solution</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { icon: "💳", title: "Payment link via WhatsApp", desc: "Send a payment link directly to students through WhatsApp. Payment lands in Priya's bank account." },
@@ -340,7 +342,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               { icon: "🔔", title: "Smart notifications", desc: "Reminders for unpaid invoices surface on the dashboard. Never forget a follow-up again." },
               { icon: "🏦", title: "Direct bank account connection", desc: "Link a bank account once. All payments route directly. No middleman apps, no manual transfers." },
             ].map((item) => (
-              <div key={item.title} className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
+              <div key={item.title} className="p-6 md:p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
                 <div className="text-4xl mb-6">{item.icon}</div>
                 <h4 className="text-lg font-bold mb-3 text-zinc-900">{item.title}</h4>
                 <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
@@ -351,7 +353,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Design Screens */}
         <section id="screens" className="scroll-mt-32 space-y-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Design Screens</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Design Screens</h3>
           
           {/* Sign up flow */}
           <div>
@@ -359,7 +361,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">The sign-up flow — no passwords, no friction</h4>
               <p className="text-lg text-zinc-600 max-w-2xl">Inspired by Google Pay's OTP-first approach and Groww's calm, step-by-step onboarding.</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map(i => (
                 <div key={i} className="aspect-[9/19] rounded-2xl bg-zinc-100 border border-zinc-200 overflow-hidden relative group">
                   <img src={`https://picsum.photos/seed/hoshaksham-signup-${i}/400/850`} alt="Sign up screen" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" referrerPolicy="no-referrer" />
@@ -371,7 +373,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             </div>
             <div className="mt-8 p-8 bg-brand-primary/5 rounded-3xl border border-brand-primary/10">
                <p className="text-sm text-zinc-700 leading-relaxed italic">
-                 <span className="font-bold text-brand-primary not-italic mr-2">💡 Why OTP-only?</span>
+                 <span className="font-bold text-brand-primary font-accent lowercase not-italic mr-2">💡 Why OTP-only?</span>
                  Priya's target users are small service providers — often not tech-savvy. OTP removes the "forgot password" friction entirely. If you have your phone, you're in.
                </p>
             </div>
@@ -383,12 +385,17 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">The dashboard — money arriving, always</h4>
               <p className="text-lg text-zinc-600 max-w-2xl">The moment Priya opens the app, she sees one number: how much she received this month. The dashboard is permanently optimistic.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="aspect-video rounded-[40px] bg-zinc-100 border border-zinc-200 overflow-hidden">
-                <img src="https://picsum.photos/seed/hoshaksham-dash/1200/800" alt="Ho Saksham dashboard overview — dark mode — ₹73,990 received this month" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="aspect-[16/10] rounded-[40px] bg-zinc-50 border border-zinc-200 overflow-hidden flex items-center justify-center p-4 md:p-12">
+                <div className="relative w-[240px] h-[480px] bg-zinc-900 rounded-[3rem] p-2 shadow-2xl border-[6px] border-zinc-800 scale-[0.7] sm:scale-90 md:scale-100">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-zinc-800 rounded-b-2xl z-20" />
+                  <div className="w-full h-full rounded-[2.2rem] overflow-hidden bg-zinc-100 relative z-10">
+                    <HoshakshamApp />
+                  </div>
+                </div>
               </div>
-              <div className="p-10 bg-zinc-900 rounded-[40px] text-white flex flex-col justify-center">
-                <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-6">Why "Received" — not "Balance"?</h5>
+              <div className="p-6 md:p-10 bg-zinc-900 rounded-[40px] text-white flex flex-col justify-center">
+                <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">Why "Received" — not "Balance"?</h5>
                 <p className="text-xl font-display font-bold italic leading-tight mb-6">
                   "Balance implies money can go down. 'Received' only ever goes up. This keeps Priya in an earning mindset."
                 </p>
@@ -400,9 +407,9 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Priya's Story */}
         <section id="story" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">Priya's Story</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">Priya's Story</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
-            <div className="p-12 rounded-[40px] bg-red-50 border border-red-100">
+            <div className="p-6 md:p-12 rounded-[40px] bg-red-50 border border-red-100">
               <h4 className="text-2xl font-display font-bold mb-8 text-red-900 flex items-center gap-3">😰 Before Hoshaksham</h4>
               <ul className="space-y-4 text-red-700 font-medium">
                 <li>• Opens spreadsheet every week to check who's paid</li>
@@ -413,7 +420,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                 <li>• Constantly anxious about missing a payment</li>
               </ul>
             </div>
-            <div className="p-12 rounded-[40px] bg-green-50 border border-green-100">
+            <div className="p-6 md:p-12 rounded-[40px] bg-green-50 border border-green-100">
               <h4 className="text-2xl font-display font-bold mb-8 text-green-900 flex items-center gap-3">🧘 After Hoshaksham</h4>
               <ul className="space-y-4 text-green-700 font-medium">
                 <li>• Opens dashboard — sees everything at a glance</li>
@@ -439,7 +446,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                   <div className="aspect-video rounded-3xl bg-zinc-100 border border-zinc-200 overflow-hidden mb-6">
                     <img src={`https://picsum.photos/seed/story-frame-${i}/800/450`} alt={frame.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" referrerPolicy="no-referrer" />
                   </div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-brand-primary mb-2">Frame 0{i+1}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-2">Frame 0{i+1}</p>
                   <h5 className="text-lg font-bold text-zinc-900 mb-2">{frame.title}</h5>
                   <p className="text-sm text-zinc-500 leading-relaxed">{frame.desc}</p>
                 </div>
@@ -450,7 +457,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Lessons */}
         <section id="lessons" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">Lessons</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">Lessons</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { step: "01", title: "One deep interview beats a hundred shallow surveys", desc: "One user, fully understood. Every decision traced back to something Priya actually said or did. Qualitative depth beats breadth at zero stage." },
@@ -538,7 +545,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             { val: "32", label: "survey responses that validated the direction" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-4xl font-display font-black text-brand-primary mb-2">{stat.val}</p>
+              <p className="text-4xl font-display font-black text-brand-primary font-accent lowercase mb-2">{stat.val}</p>
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-tight max-w-[120px] mx-auto">{stat.label}</p>
             </div>
           ))}
@@ -546,7 +553,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Setup */}
         <section id="setup" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">The Setup</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">The Setup</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div>
               <h4 className="text-3xl font-display font-bold mb-6 text-zinc-900">What even is Fyle?</h4>
@@ -565,7 +572,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Problem */}
         <section id="problem" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">The Problem</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">The Problem</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">The old flow was a patience-testing endurance sport</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -592,13 +599,13 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             <p className="text-2xl md:text-3xl font-display font-bold italic leading-tight text-center">
               "The user had to add one expense at a time, remember how many they'd added, and had no overview — just a screen of multiple input fields."
             </p>
-            <p className="mt-8 text-sm font-bold uppercase tracking-widest text-brand-primary text-center">— Shyani's problem summary, based on 500+ support tickets</p>
+            <p className="mt-8 text-sm font-bold uppercase tracking-widest text-brand-primary font-accent lowercase text-center">— Shyani's problem summary, based on 500+ support tickets</p>
           </div>
         </section>
 
         {/* Our Audience */}
         <section id="audience" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Our Audience</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Our Audience</h3>
           <div className="mb-12">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">The people stuck in this loop</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -614,7 +621,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             ].map((user) => (
               <div key={user.initials} className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 text-center">
                 <div className="w-16 h-16 rounded-full bg-brand-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <span className="text-xl font-bold text-brand-primary">{user.initials}</span>
+                  <span className="text-xl font-bold text-brand-primary font-accent lowercase">{user.initials}</span>
                 </div>
                 <h5 className="text-lg font-bold text-zinc-900 mb-3">{user.name}</h5>
                 <p className="text-sm text-zinc-500 leading-relaxed">{user.desc}</p>
@@ -625,7 +632,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Quantitative Research */}
         <section id="research" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Quantitative Research</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Quantitative Research</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">32 survey responses later...</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -635,7 +642,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="p-12 bg-zinc-900 rounded-[40px] text-white text-center flex flex-col justify-center">
-              <p className="text-6xl font-display font-black text-brand-primary mb-4">93%</p>
+              <p className="text-6xl font-display font-black text-brand-primary font-accent lowercase mb-4">93%</p>
               <p className="text-sm font-bold uppercase tracking-widest text-zinc-400">of users travel every day for work</p>
             </div>
             <div className="p-12 bg-zinc-50 rounded-[40px] border border-zinc-100 text-center flex flex-col justify-center">
@@ -665,7 +672,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* The Transformation */}
         <section id="transformation" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">The Transformation</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">The Transformation</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
             <div className="p-12 rounded-[40px] bg-red-50 border border-red-100">
               <h4 className="text-2xl font-display font-bold mb-8 text-red-900">Before</h4>
@@ -709,7 +716,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Key Design Decisions */}
         <section id="decisions" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">Key Design Decisions</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">Key Design Decisions</h3>
           <div className="space-y-32">
             {[
               { 
@@ -757,7 +764,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Usability Testing */}
         <section id="testing" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Usability Testing</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Usability Testing</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">We broke it so users didn't have to</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -767,12 +774,12 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-4">Issue 1</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-4">Issue 1</h5>
               <p className="text-zinc-900 font-bold mb-2">Date field ambiguity</p>
               <p className="text-zinc-500">Users weren't sure if the date field meant when the expense occurred or when it was reported. Fixed with clearer labelling.</p>
             </div>
             <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-4">Issue 2</h5>
+              <h5 className="text-xs font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-4">Issue 2</h5>
               <p className="text-zinc-900 font-bold mb-2">Constant logic visibility</p>
               <p className="text-zinc-500">Multiple cost centres and vehicle types caused errors — the "constant" logic wasn't visually distinct enough. Fixed by making the scope more explicit.</p>
             </div>
@@ -790,7 +797,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Competitive Analysis */}
         <section id="competitive" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Competitive Analysis</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-8">Competitive Analysis</h3>
           <div className="mb-16">
             <h4 className="text-3xl font-display font-bold mb-4 text-zinc-900">How Fyle stacked up</h4>
             <p className="text-lg text-zinc-600 max-w-2xl">
@@ -816,7 +823,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
         {/* Takeaways */}
         <section id="takeaways" className="scroll-mt-32">
-          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-12">Takeaways</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary font-accent lowercase mb-12">Takeaways</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { step: "01", title: "Listen to the tickets, not just the users", desc: "500 support tickets are 500 user interviews you didn't have to schedule. The solution was in the pattern, not just the complaints." },
@@ -840,96 +847,131 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
 
 export default function CaseStudyPage() {
   const { id } = useParams();
-  const study = CASE_STUDIES[id?.toLowerCase() as keyof typeof CASE_STUDIES];
+  const study = id ? CASE_STUDIES[id.toLowerCase() as keyof typeof CASE_STUDIES] : null;
 
-  if (!study) return <Navigate to="/" />;
+  if (!study) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen font-sans">
+      <CaseStudyNav sections={study.sections} />
+      
       {/* Hero Section */}
-      <header className="relative min-h-[60vh] flex items-center pt-32 pb-20 overflow-hidden">
-        <div className="container mx-auto px-6 text-center">
+      <section className="pt-48 pb-20 px-6 relative overflow-hidden">
+        <div className="container mx-auto max-w-6xl">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-zinc-400 hover:text-brand-primary font-bold uppercase tracking-widest text-[10px] mb-12 transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Work
+          </Link>
+          
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-4xl"
           >
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className="px-4 py-1.5 rounded-full bg-brand-primary text-white text-[10px] font-bold uppercase tracking-widest">
-                {study.category}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                {study.year}
-              </span>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-mono text-brand-primary font-bold text-sm">{study.year}</span>
+              <div className="w-12 h-[1px] bg-zinc-200" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{study.category}</span>
             </div>
             
-            <h1 className="font-display text-6xl md:text-8xl lg:text-[100px] font-black uppercase tracking-tighter mb-10 leading-[0.85] text-zinc-900">
-              {study.title}.
+            <h1 className="font-header text-6xl md:text-9xl font-black uppercase tracking-tighter mb-10 leading-[0.85]">
+              {study.title.split(' — ')[0]} — <br />
+              <span className="text-brand-primary font-accent lowercase">{study.title.split(' — ')[1] || study.subtitle}</span>
             </h1>
-            
-            <p className="text-xl md:text-2xl font-medium text-zinc-500 leading-relaxed max-w-2xl mx-auto mb-16">
-              {study.subtitle}
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative aspect-video rounded-[40px] overflow-hidden shadow-2xl border border-zinc-100"
-            >
-              <img src={study.heroImage} alt={study.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </motion.div>
           </motion.div>
         </div>
-      </header>
+      </section>
 
-      {/* Meta Info */}
-      <div className="border-y border-zinc-100 bg-zinc-50/50">
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3">Role</p>
-              <p className="font-bold text-zinc-900">Lead Product Designer</p>
+      {/* Hero Image */}
+      <section className="px-6 mb-32">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="aspect-[21/9] rounded-[60px] overflow-hidden bg-zinc-100 shadow-2xl"
+          >
+            <img 
+              src={study.heroImage} 
+              alt={study.title} 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Content Layout */}
+      <section className="pb-40 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+            {/* Main Content */}
+            <div className="lg:col-span-8">
+              {study.content}
             </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3">Duration</p>
-              <p className="font-bold text-zinc-900">{study.duration}</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3">Tools</p>
-              <p className="font-bold text-zinc-900">Figma, Protopie, React</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3">Industry</p>
-              <p className="font-bold text-zinc-900">{study.category.split(' / ')[0]}</p>
-            </div>
+
+            {/* Sticky Sidebar */}
+            <aside className="lg:col-span-4 hidden lg:block">
+              <div className="sticky top-40 space-y-12">
+                <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-8">Project Details</h4>
+                  <div className="space-y-8">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Duration</p>
+                      <p className="font-bold text-zinc-900">{study.duration}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Year</p>
+                      <p className="font-bold text-zinc-900">{study.year}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Role</p>
+                      <p className="font-bold text-zinc-900">Lead Product Designer</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Tools</p>
+                      <p className="font-bold text-zinc-900">Figma, Maze, React</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-10 rounded-[40px] bg-zinc-900 text-white">
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">Key Insight</h4>
+                  <p className="text-lg font-display font-bold italic leading-tight">
+                    {id?.toLowerCase() === 'hoshaksham' 
+                      ? "Money should only ever feel like it's coming in."
+                      : "Users were filing mileage expenses one painful entry at a time."}
+                  </p>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-6 py-32">
-        <div className="max-w-4xl mx-auto">
-          {study.content}
-        </div>
-      </main>
+      </section>
 
       {/* Next Project Footer */}
       <footer className="bg-zinc-900 text-white py-40">
         <div className="container mx-auto px-6 text-center">
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 mb-8">Next Project</p>
           <Link 
-            to={`/case-study/${id === 'fyle' ? 'hoshaksham' : 'fyle'}`}
+            to={`/case-study/${id?.toLowerCase() === 'fyle' ? 'hoshaksham' : 'fyle'}`}
             className="group inline-block"
           >
             <h2 className="font-display text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 group-hover:text-brand-primary transition-colors">
-              {id === 'fyle' ? 'Hoshaksham' : 'Fyle'}
+              {id?.toLowerCase() === 'fyle' ? 'Hoshaksham' : 'Fyle'}
               <ChevronRight className="inline-block w-12 h-12 md:w-20 md:h-20 group-hover:translate-x-4 transition-transform" />
             </h2>
           </Link>
         </div>
       </footer>
+
+      <Footer />
     </div>
   );
 }

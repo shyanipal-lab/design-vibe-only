@@ -139,7 +139,7 @@ export default function ShyaniBot() {
                   <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold tracking-tight">Digital Shyani</h3>
+                  <h3 className="text-sm font-accent tracking-tight">Digital Shyani</h3>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Online</span>
@@ -206,7 +206,7 @@ export default function ShyaniBot() {
                     {messages.length > 1 && (
                       <button 
                         onClick={() => setShowFaqs(false)}
-                        className="text-[8px] font-bold uppercase tracking-widest text-brand-primary"
+                        className="text-[8px] font-bold uppercase tracking-widest text-brand-primary font-accent lowercase"
                       >
                         Hide
                       </button>

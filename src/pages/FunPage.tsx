@@ -62,7 +62,7 @@ export default function FunPage() {
               className="font-display text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-[0.8]"
             >
               Level <br />
-              <span className="text-brand-primary italic">Up</span> Your <br />
+              <span className="text-brand-primary font-accent lowercase">Up</span> Your <br />
               <span className="text-zinc-300">Break</span>.
             </motion.h1>
 
@@ -105,7 +105,7 @@ export default function FunPage() {
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-bold text-zinc-900">{game.name}</p>
                         {game.status === "Featured" && (
-                          <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter">Featured</span>
+                          <span className="text-[8px] font-black bg-brand-primary/10 text-brand-primary font-accent lowercase px-1.5 py-0.5 rounded-full uppercase tracking-tighter">Featured</span>
                         )}
                       </div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{game.status}</p>

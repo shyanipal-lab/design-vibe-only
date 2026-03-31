@@ -65,7 +65,7 @@ export default function Hero() {
               transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed font-medium"
             >
-              Building Connectivity @ Mercedes-Benz <br /><br />
+              <span className="font-accent text-brand-primary text-2xl lowercase">Building Connectivity</span> @ Mercedes-Benz <br /><br />
               I design enterprise, fintech, and mobility products used at scale. 
               UX strategy + strong craft — currently at Mercedes-Benz R&D, Bengaluru.
             </motion.p>

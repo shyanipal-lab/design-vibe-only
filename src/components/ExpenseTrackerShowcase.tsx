@@ -130,7 +130,7 @@ export default function ExpenseTrackerShowcase() {
                         <p className="text-sm font-bold text-zinc-900">New MacBook Pro</p>
                         <p className="text-[10px] text-zinc-500 font-medium">Target: $2,400</p>
                       </div>
-                      <div className="bg-white px-2 py-1 rounded-lg text-[10px] font-bold text-brand-primary border border-brand-primary/20">
+                      <div className="bg-white px-2 py-1 rounded-lg text-[10px] font-bold text-brand-primary font-accent lowercase border border-brand-primary/20">
                         75%
                       </div>
                     </div>

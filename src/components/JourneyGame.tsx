@@ -112,7 +112,7 @@ export default function JourneyGame() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-display font-black text-zinc-900 uppercase tracking-tighter leading-none"
           >
-            Career <span className="text-brand-primary italic">Journey</span>
+            Career <span className="text-brand-primary font-accent lowercase">Journey</span>
           </motion.h2>
           <p className="text-zinc-400 text-xs font-bold uppercase tracking-[0.4em] mt-4">Scroll to Explore</p>
         </motion.div>

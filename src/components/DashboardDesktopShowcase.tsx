@@ -102,7 +102,7 @@ export default function DashboardDesktopShowcase() {
               <section>
                 <div className="flex items-center justify-between mb-4">
                   <h5 className="text-[10px] font-bold uppercase tracking-widest">Recent Activity</h5>
-                  <button className="text-[8px] font-bold text-brand-primary uppercase tracking-widest">View All</button>
+                  <button className="text-[8px] font-bold text-brand-primary font-accent lowercase tracking-widest">View All</button>
                 </div>
                 <div className="space-y-2">
                   {transactions.map((t, i) => (

@@ -100,7 +100,7 @@ export default function SplitAndGrow() {
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-sm font-bold uppercase tracking-widest">Recent Activity</h3>
-                <button className="text-[10px] font-bold text-brand-primary uppercase tracking-widest hover:underline">View All</button>
+                <button className="text-[10px] font-bold text-brand-primary font-accent lowercase tracking-widest hover:underline">View All</button>
               </div>
               <div className="space-y-3">
                 {transactions.map((t, i) => (
@@ -112,7 +112,7 @@ export default function SplitAndGrow() {
                     className="bg-white p-4 rounded-2xl border border-zinc-100 flex items-center justify-between hover:border-zinc-200 transition-colors cursor-pointer group"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-zinc-50 rounded-xl flex items-center justify-center text-zinc-400 group-hover:bg-brand-primary/10 group-hover:text-brand-primary transition-colors">
+                      <div className="w-12 h-12 bg-zinc-50 rounded-xl flex items-center justify-center text-zinc-400 group-hover:bg-brand-primary/10 group-hover:text-brand-primary font-accent lowercase transition-colors">
                         {t.icon}
                       </div>
                       <div>

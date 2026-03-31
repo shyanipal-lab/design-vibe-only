@@ -21,7 +21,7 @@ export default function Footer() {
               >
                 <h2 className="font-header text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
                   Let's talk <br />
-                  Building <span className="text-brand-primary italic">something</span> <br />
+                  Building <span className="text-brand-primary font-accent lowercase">something</span> <br />
                   worth getting right?
                 </h2>
                 

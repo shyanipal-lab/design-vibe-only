@@ -52,7 +52,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       <div id="changelog" className="container mx-auto px-6 py-20 scroll-mt-32">
         <h2 className="text-4xl md:text-7xl mb-6 text-black dark:text-white max-w-4xl font-header font-black uppercase tracking-tighter leading-[0.9]">
           Design stories <br />
-          <span className="text-brand-primary italic">that moved the needle.</span>
+          <span className="text-brand-primary font-accent lowercase">that moved the needle.</span>
         </h2>
         <p className="text-zinc-400 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
           Every case study is a business problem first. from messy process to discovery, critical decisions, measurable outcomes or new lessons to learn
