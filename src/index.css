@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Anton&family=Archivo+Black&family=Playwrite+IE:wght@100..400&family=Trispace:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Anton&family=Archivo+Black&family=Playwrite+IE:wght@100..400&family=Trispace:wght@100..800&family=Momo+Trust+Display:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Trispace", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Trispace", "Space Grotesk", sans-serif;
-  --font-header: "Trispace", "Space Grotesk", "Archivo Black", "Anton", sans-serif;
+  --font-sans: "Momo Trust Display", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Momo Trust Display", "Space Grotesk", sans-serif;
+  --font-header: "Momo Trust Display", "Space Grotesk", "Archivo Black", "Anton", sans-serif;
   --font-accent: "Playwrite IE", cursive;
-  --font-mono: "Trispace", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-mono: "Momo Trust Display", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
   --color-brand-primary: #037DD6; /* MetaMask blue */
   --color-brand-secondary: #F6851B; /* MetaMask orange */
@@ -26,9 +26,15 @@
 }
 
 @layer base {
-  body {
+  html, body {
     @apply bg-white text-zinc-900 selection:bg-brand-primary/20;
+    font-family: "Momo Trust Display", "Inter", sans-serif !important;
     cursor: none;
+  }
+  
+  /* Keep the font in blue as it is (Trispace), while updating black and grey text */
+  .text-brand-primary:not(.font-accent) {
+    font-family: "Trispace", sans-serif !important;
   }
   
   a, button, [role="button"], input, textarea {

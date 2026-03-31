@@ -39,9 +39,9 @@ const CASE_STUDIES = [
     category: "Enterprise • Internal Tool",
     role: "Sr. Product Designer",
     impact: "Coming Soon",
-    link: "#",
+    link: "/case-study/mercedes",
     featured: false,
-    placeholder: true,
+    placeholder: false,
     color: "bg-zinc-50"
   }
 ];
