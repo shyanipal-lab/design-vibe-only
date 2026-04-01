@@ -45,7 +45,7 @@ const CASE_STUDIES = [
     impact: "Coming Soon",
     link: "/case-study/mercedes",
     featured: false,
-    placeholder: false,
+    placeholder: true,
     type: "web",
     color: "bg-zinc-50"
   }

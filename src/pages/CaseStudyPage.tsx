@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import HoshakshamApp from "../components/HoshakshamApp";
 import FyleWebApp from "../components/FyleWebApp";
 import FyleReimbursementApp from "../components/FyleReimbursementApp";
-import Features from "../components/Features";
 
 interface Section {
   id: string;
@@ -34,7 +33,16 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
     category: "SaaS · Service Management · 0 → 1",
     duration: "3 Months",
     year: "2024",
-    heroImage: "https://picsum.photos/seed/hoshaksham-story/1920/1080",
+    heroComponent: (
+      <div className="w-full h-full bg-zinc-900 flex items-center justify-center p-12 overflow-hidden">
+        <div className="relative w-[280px] h-[560px] bg-zinc-900 rounded-[3.5rem] p-3 shadow-2xl border-[8px] border-zinc-800">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-zinc-800 rounded-b-2xl z-20" />
+          <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-zinc-100 relative z-10">
+            <HoshakshamApp />
+          </div>
+        </div>
+      </div>
+    ),
     keyInsight: "Money should only ever feel like it's coming in.",
     sections: [
       { id: "story", label: "The Story" },
@@ -188,7 +196,6 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
     sections: [
       { id: "story", label: "The Story" },
       { id: "impact", label: "Impact" },
-      { id: "features", label: "Features" },
     ],
     content: (
       <div className="space-y-24 font-sans">
@@ -304,15 +311,6 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="scroll-mt-32">
-          <div className="mb-16">
-            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Product Features</h3>
-            <h4 className="text-4xl font-black uppercase tracking-tighter mb-6 leading-none">A complete expense ecosystem.</h4>
-          </div>
-          <Features />
-        </section>
-
         {/* Final CTA */}
         <section className="text-center py-20">
           <h4 className="text-2xl font-black uppercase tracking-tighter mb-8">Want the boring version?</h4>
@@ -328,124 +326,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
         </section>
       </div>
     )
-  },
-  mercedes: {
-    title: "Mercedes Benz — Internal Tool",
-    subtitle: "Streamlining complex workflows",
-    category: "Enterprise · Internal Tool · Engineering",
-    duration: "6 Months",
-    year: "2025",
-    heroImage: "https://picsum.photos/seed/mercedes-hero/1920/1080",
-    keyInsight: "Data is useless if it's not actionable in the moment.",
-    sections: [
-      { id: "context", label: "Context" },
-      { id: "problem", label: "The Problem" },
-      { id: "solution", label: "The Solution" },
-      { id: "impact", label: "Impact" },
-    ],
-    content: (
-      <div className="space-y-32 font-sans">
-        {/* Context Section */}
-        <section id="context" className="scroll-mt-32">
-          <div className="max-w-3xl">
-            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Context</h3>
-            <h4 className="text-4xl font-black uppercase tracking-tighter mb-6 leading-none">Powering the engineers behind the star.</h4>
-            <p className="text-xl text-zinc-600 leading-relaxed">
-              Mercedes Benz engineering teams handle massive datasets and complex workflows. We were tasked with redesigning their internal data visualization tool to reduce cognitive load and speed up decision-making.
-            </p>
-          </div>
-        </section>
-
-        {/* Problem Section - Technical Dashboard Style */}
-        <section id="problem" className="scroll-mt-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5">
-              <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">The Problem</h3>
-              <h4 className="text-3xl font-black uppercase tracking-tighter mb-6 leading-none">Data overload & fragmented tools.</h4>
-              <div className="space-y-6">
-                <div className="p-6 border-l-4 border-zinc-900 bg-zinc-50">
-                  <p className="text-sm font-mono text-zinc-400 mb-2">Issue_01</p>
-                  <p className="font-bold text-zinc-900">Engineers spent 40% of their time just finding the right data points across multiple legacy systems.</p>
-                </div>
-                <div className="p-6 border-l-4 border-zinc-900 bg-zinc-50">
-                  <p className="text-sm font-mono text-zinc-400 mb-2">Issue_02</p>
-                  <p className="font-bold text-zinc-900">Visualizations were static and lacked the interactivity needed for deep-dive analysis.</p>
-                </div>
-              </div>
-            </div>
-            <div className="lg:col-span-7">
-              <div className="aspect-video rounded-[40px] bg-zinc-900 p-8 overflow-hidden relative group">
-                <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-                <div className="relative z-10 h-full flex flex-col justify-center items-center text-center">
-                  <div className="w-full max-w-md space-y-4">
-                    <div className="h-2 bg-zinc-800 rounded-full w-3/4 mx-auto"></div>
-                    <div className="h-2 bg-zinc-800 rounded-full w-1/2 mx-auto"></div>
-                    <div className="h-32 border-2 border-dashed border-zinc-700 rounded-2xl mt-8 flex items-center justify-center">
-                      <span className="text-zinc-600 font-mono text-xs">LEGACY_SYSTEM_ERROR: COMPLEXITY_MAX</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Solution Section - Bento Grid Style */}
-        <section id="solution" className="scroll-mt-32">
-          <div className="mb-16">
-            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">The Solution</h3>
-            <h4 className="text-4xl font-black uppercase tracking-tighter mb-6 leading-none">A unified, high-performance workspace.</h4>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 p-10 rounded-[40px] bg-zinc-900 text-white relative overflow-hidden group">
-              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
-              <div className="relative z-10">
-                <div className="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white mb-8">
-                  <Layout className="w-6 h-6" />
-                </div>
-                <h5 className="text-2xl font-black uppercase tracking-tighter mb-4">Modular Dashboard</h5>
-                <p className="text-zinc-400 leading-relaxed max-w-md">Customizable widgets that allow engineers to pin their most critical metrics and data streams. Built for multi-monitor setups.</p>
-              </div>
-            </div>
-            <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-zinc-900 flex items-center justify-center text-white mb-8">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <h5 className="text-xl font-black uppercase tracking-tighter mb-4">Real-time Sync</h5>
-              </div>
-              <p className="text-zinc-500 text-sm leading-relaxed">Direct integration with live testing data, providing sub-second updates.</p>
-            </div>
-            <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-              <h5 className="text-xl font-black uppercase tracking-tighter mb-4">Data Export</h5>
-              <p className="text-zinc-500 text-sm leading-relaxed">One-click export to MATLAB, Excel, and internal simulation tools.</p>
-            </div>
-            <div className="md:col-span-2 aspect-[21/9] rounded-[40px] bg-zinc-100 overflow-hidden border border-zinc-200">
-              <img src="https://picsum.photos/seed/mercedes-solution/1600/700" alt="Mercedes Solution" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" referrerPolicy="no-referrer" />
-            </div>
-          </div>
-        </section>
-
-        {/* Impact Section */}
-        <section id="impact" className="scroll-mt-32">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-y border-zinc-100">
-            {[
-              { val: "35%", label: "faster data retrieval" },
-              { val: "2.4k", label: "active users" },
-              { val: "15+", label: "integrated tools" },
-              { val: "98%", label: "user satisfaction" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-5xl font-black text-brand-primary uppercase tracking-tighter mb-2">{stat.val}</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-tight max-w-[120px] mx-auto">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    )
   }
-
 };
 
 export default function CaseStudyPage() {

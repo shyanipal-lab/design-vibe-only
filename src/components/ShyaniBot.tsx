@@ -32,7 +32,7 @@ export default function ShyaniBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi! I'm Digital Shyani. How can I help you today?",
+      text: "Hi! I'm Digital Shyani ✨. How can I help you today?",
       sender: "bot",
       timestamp: new Date()
     }
@@ -139,7 +139,7 @@ export default function ShyaniBot() {
                   <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-accent tracking-tight">Digital Shyani</h3>
+                  <h3 className="text-sm font-accent tracking-tight">Digital Shyani ✨</h3>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Online</span>
