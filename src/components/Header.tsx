@@ -101,28 +101,35 @@ export default function Header() {
           <div className="w-[1px] h-4 bg-zinc-100" />
 
           <div className="flex items-center gap-6">
-            {SOCIAL_ITEMS.map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                target={item.label === "Email" ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                onMouseEnter={() => setHoveredSocial(item.label)}
-                onMouseLeave={() => setHoveredSocial(null)}
-                whileHover={{ y: -2 }}
-                className="flex items-center gap-1.5 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4"
-              >
-                <div className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
-                  <SocialLottie 
-                    animationData={item.lottie} 
-                    isHovered={hoveredSocial === item.label}
-                  />
-                </div>
-                <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary group-hover:font-accent group-hover:lowercase transition-colors">
-                  {item.label.toLowerCase()}.json
-                </span>
-              </motion.a>
-            ))}
+            {SOCIAL_ITEMS.map((item) => {
+              const isInternal = item.href.startsWith("/");
+              const Component = isInternal ? Link : motion.a;
+              const componentProps = isInternal 
+                ? { to: item.href } 
+                : { href: item.href, target: item.label === "Email" ? undefined : "_blank" };
+
+              return (
+                <Component
+                  key={item.label}
+                  {...(componentProps as any)}
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setHoveredSocial(item.label)}
+                  onMouseLeave={() => setHoveredSocial(null)}
+                  whileHover={{ y: -2 }}
+                  className="flex items-center gap-1.5 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4"
+                >
+                  <div className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+                    <SocialLottie 
+                      animationData={item.lottie} 
+                      isHovered={hoveredSocial === item.label}
+                    />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-zinc-600 group-hover:text-brand-primary group-hover:font-accent group-hover:lowercase transition-colors">
+                    {item.label.toLowerCase()}.json
+                  </span>
+                </Component>
+              );
+            })}
           </div>
         </div>
 
@@ -169,23 +176,31 @@ export default function Header() {
               <div className="py-4">
                 <div className="text-[10px] font-mono font-bold text-brand-primary font-accent lowercase mb-4">contact.json</div>
                 <div className="flex flex-col gap-4 pl-4 border-l border-zinc-100">
-                  {SOCIAL_ITEMS.map((item) => (
-                    <a 
-                      key={item.label}
-                      href={item.href}
-                      target={item.label === "Email" ? undefined : "_blank"}
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary hover:font-accent hover:lowercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
-                    >
-                      <div className="w-5 h-5">
-                        <SocialLottie 
-                          animationData={item.lottie} 
-                          isHovered={true}
-                        />
-                      </div>
-                      {item.label}
-                    </a>
-                  ))}
+                  {SOCIAL_ITEMS.map((item) => {
+                    const isInternal = item.href.startsWith("/");
+                    const Component = isInternal ? Link : "a";
+                    const componentProps = isInternal 
+                      ? { to: item.href } 
+                      : { href: item.href, target: item.label === "Email" ? undefined : "_blank" };
+
+                    return (
+                      <Component 
+                        key={item.label}
+                        {...(componentProps as any)}
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary hover:font-accent hover:lowercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <div className="w-5 h-5">
+                          <SocialLottie 
+                            animationData={item.lottie} 
+                            isHovered={true}
+                          />
+                        </div>
+                        {item.label}
+                      </Component>
+                    );
+                  })}
                 </div>
               </div>
             </div>

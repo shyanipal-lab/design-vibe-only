@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, Download, Mail, Linkedin, Globe, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, Download, Mail, Linkedin, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
@@ -12,7 +12,6 @@ const RESUME_DATA = {
     location: "Bengaluru, India",
     phone: "+917059625550",
     email: "shyanipal06@gmail.com",
-    website: "heyshyani.design",
     linkedin: "linkedin.com/in/shyani",
   },
   about: "Product Designer with 5+ years of experience crafting thoughtful digital experiences across mobile, SaaS, and enterprise platforms. My work blends interaction design, visual craft, and systems thinking to create products that are both intuitive and emotionally engaging. I enjoy turning complex ideas into simple, elegant experiences and collaborating closely with engineers to bring high-quality designs to life.",
@@ -96,7 +95,6 @@ const RESUME_DATA = {
       links: [
         "https://impossible-tic-tac-toe-with-ai.vercel.app/",
         "https://the-snake-game-coral.vercel.app/",
-        "https://heyshyani.design/fun-vibe-coding.html",
       ],
     },
   ],
@@ -169,12 +167,6 @@ export default function ResumePage() {
                   <Mail className="w-4 h-4 text-brand-primary" />
                   <a href={`mailto:${RESUME_DATA.contact.email}`} className="text-sm font-medium hover:text-brand-primary transition-colors">
                     {RESUME_DATA.contact.email}
-                  </a>
-                </div>
-                <div className="flex items-center gap-3 text-zinc-500">
-                  <Globe className="w-4 h-4 text-brand-primary" />
-                  <a href={`https://${RESUME_DATA.contact.website}`} target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-brand-primary transition-colors">
-                    {RESUME_DATA.contact.website}
                   </a>
                 </div>
                 <div className="flex items-center gap-3 text-zinc-500">

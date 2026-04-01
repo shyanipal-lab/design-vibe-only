@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import { Linkedin, Mail, FileText, ArrowRight } from "lucide-react";
 
 export default function Footer() {
@@ -56,15 +57,13 @@ export default function Footer() {
                     </div>
                   </div>
 
-                  <motion.a
-                    whileHover={{ scale: 1.05, backgroundColor: "#f4f4f5" }}
-                    whileTap={{ scale: 0.95 }}
-                    href="/resume"
-                    className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all"
+                  <Link
+                    to="/resume"
+                    className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-zinc-50"
                   >
                     Resume
                     <FileText className="w-4 h-4" />
-                  </motion.a>
+                  </Link>
 
                   <motion.a
                     whileHover={{ scale: 1.05, backgroundColor: "#f4f4f5" }}
