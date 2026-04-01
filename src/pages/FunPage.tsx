@@ -1,16 +1,14 @@
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, Ghost, Gamepad2, Grid3X3, LayoutGrid, Wallet, Monitor, Smartphone, ArrowRight } from "lucide-react";
+import { ArrowLeft, Ghost, Gamepad2, LayoutGrid, Wallet, ArrowRight, Grid3X3 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SnakeGame from "../components/SnakeGame";
 import { BlockGame } from "../components/ui/block-game";
 import TicTacToe from "../components/TicTacToe";
-import ExpenseTrackerShowcase from "../components/ExpenseTrackerShowcase";
 import DashboardDesktopShowcase from "../components/DashboardDesktopShowcase";
 
 export default function FunPage() {
   const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe" | "expense-tracker">("snake");
-  const [expenseView, setExpenseView] = useState<"mobile" | "desktop">("mobile");
   const { hash } = useLocation();
   const navigate = useNavigate();
 
@@ -204,52 +202,17 @@ export default function FunPage() {
                       </div>
                       <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-900">Split & Grow</h3>
                     </div>
-                    
-                    <div className="bg-zinc-50 p-1 rounded-xl border border-zinc-100 flex items-center gap-1">
-                      <button
-                        onClick={() => setExpenseView("mobile")}
-                        className={`p-1.5 rounded-lg transition-all ${
-                          expenseView === "mobile" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
-                        }`}
-                      >
-                        <Smartphone className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={() => setExpenseView("desktop")}
-                        className={`p-1.5 rounded-lg transition-all ${
-                          expenseView === "desktop" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
-                        }`}
-                      >
-                        <Monitor className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
                   </div>
 
-                  <AnimatePresence mode="wait">
-                    {expenseView === "mobile" ? (
-                      <motion.div
-                        key="mobile-view"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="flex justify-center"
-                      >
-                        <div className="scale-90 origin-top">
-                          <ExpenseTrackerShowcase />
-                        </div>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="desktop-view"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="w-full"
-                      >
-                        <DashboardDesktopShowcase />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <motion.div
+                    key="desktop-view"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="w-full"
+                  >
+                    <DashboardDesktopShowcase />
+                  </motion.div>
 
                   <div className="mt-8 flex justify-center">
                     <Link 

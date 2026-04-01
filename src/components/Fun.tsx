@@ -1,17 +1,14 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Ghost, Sparkles, LayoutGrid, Gamepad2, Wallet, ArrowRight } from "lucide-react";
+import { Ghost, Sparkles, LayoutGrid, Gamepad2, Wallet } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SnakeGame from "./SnakeGame";
 import { BlockGame } from "./ui/block-game";
 import TicTacToe from "./TicTacToe";
-import ExpenseTrackerShowcase from "./ExpenseTrackerShowcase";
 import DashboardDesktopShowcase from "./DashboardDesktopShowcase";
-import { Monitor, Smartphone } from "lucide-react";
 
 export default function Fun() {
   const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe" | "expense-tracker">("snake");
-  const [expenseView, setExpenseView] = useState<"mobile" | "desktop">("mobile");
   const { hash } = useLocation();
   const navigate = useNavigate();
 
@@ -225,54 +222,16 @@ export default function Fun() {
                   transition={{ duration: 0.4 }}
                   className="relative group"
                 >
-                  {/* View Toggle */}
-                  <div className="flex justify-center mb-8">
-                    <div className="bg-zinc-50 p-1 rounded-2xl border border-zinc-100 flex items-center gap-1">
-                      <button
-                        onClick={() => setExpenseView("mobile")}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${
-                          expenseView === "mobile" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
-                        }`}
-                      >
-                        <Smartphone className="w-3 h-3" />
-                        Mobile
-                      </button>
-                      <button
-                        onClick={() => setExpenseView("desktop")}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${
-                          expenseView === "desktop" ? "bg-zinc-900 text-white shadow-lg" : "text-zinc-400 hover:text-zinc-900"
-                        }`}
-                      >
-                        <Monitor className="w-3 h-3" />
-                        Desktop
-                      </button>
-                    </div>
-                  </div>
-
-                  <AnimatePresence mode="wait">
-                    {expenseView === "mobile" ? (
-                      <motion.div
-                        key="mobile-view"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ExpenseTrackerShowcase />
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="desktop-view"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full max-w-[800px] -mx-4 lg:-mx-20"
-                      >
-                        <DashboardDesktopShowcase />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <motion.div
+                    key="desktop-view"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full max-w-[800px] -mx-4 lg:-mx-20"
+                  >
+                    <DashboardDesktopShowcase />
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>

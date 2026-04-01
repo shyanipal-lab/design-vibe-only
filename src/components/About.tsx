@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { User, Sparkles, Heart, Coffee, Code, CheckCircle2, Car } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AboutStories from "./AboutStories";
 import { LocationMap } from "./ui/expand-map";
 
 const ABOUT_IMAGES = [
@@ -183,8 +182,6 @@ export default function About() {
               <User className="w-4 h-4 text-brand-primary" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">About Me</span>
             </motion.div>
-
-            <AboutStories />
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

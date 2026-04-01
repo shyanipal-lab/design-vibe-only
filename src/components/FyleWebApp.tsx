@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
+import { useCurrency } from "../lib/currency";
 import { 
   Plus, 
   Search, 
@@ -21,6 +22,8 @@ import {
 } from "lucide-react";
 
 export default function FyleWebApp() {
+  const { currency, isLoading, formatAmount } = useCurrency();
+
   return (
     <div className="w-full h-full bg-[#F8F9FB] flex font-sans text-zinc-900 overflow-hidden border border-zinc-200 rounded-xl shadow-2xl">
       {/* Sidebar */}
@@ -75,6 +78,12 @@ export default function FyleWebApp() {
             </div>
           </div>
           <div className="flex items-center gap-6">
+            <div className="px-3 py-1 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                {isLoading ? "..." : currency}
+              </span>
+            </div>
             <div className="relative">
               <Bell className="w-5 h-5 text-zinc-400 cursor-pointer hover:text-zinc-600 transition-all" />
               <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#FF3366] rounded-full border-2 border-white" />
@@ -90,16 +99,18 @@ export default function FyleWebApp() {
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { label: "Pending Reimbursement", value: "$1,240.50", sub: "12 Entries Pending", color: "bg-[#FF3366]", text: "text-white" },
-              { label: "Approved This Month", value: "$3,450.00", sub: "24 Entries Approved", color: "bg-white", text: "text-zinc-900" },
-              { label: "Total Reimbursed", value: "$12,840.00", sub: "Year to date", color: "bg-white", text: "text-zinc-900" },
+              { label: "Pending Reimbursement", value: 1240.50, sub: "12 Entries Pending", color: "bg-[#FF3366]", text: "text-white" },
+              { label: "Approved This Month", value: 3450.00, sub: "24 Entries Approved", color: "bg-white", text: "text-zinc-900" },
+              { label: "Total Reimbursed", value: 12840.00, sub: "Year to date", color: "bg-white", text: "text-zinc-900" },
             ].map((stat, i) => (
               <div key={i} className={`${stat.color} ${stat.text} p-6 rounded-[32px] shadow-sm border border-zinc-100 relative overflow-hidden group`}>
                 <div className="relative z-10">
                   <p className={`text-[10px] font-bold uppercase tracking-widest ${stat.color === 'bg-white' ? 'text-zinc-400' : 'opacity-80'} mb-2`}>{stat.label}</p>
                   <div className="flex items-end justify-between">
                     <div>
-                      <h3 className="text-3xl font-black tracking-tighter">{stat.value}</h3>
+                      <h3 className="text-3xl font-black tracking-tighter">
+                        {isLoading ? "..." : formatAmount(stat.value)}
+                      </h3>
                       <p className={`text-[10px] font-bold mt-1 ${stat.color === 'bg-white' ? 'text-zinc-500' : 'bg-white/20'} inline-block px-2 py-0.5 rounded-full`}>{stat.sub}</p>
                     </div>
                     <div className={`w-10 h-10 ${stat.color === 'bg-white' ? 'bg-zinc-50' : 'bg-white/20'} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
@@ -147,11 +158,11 @@ export default function FyleWebApp() {
                 </thead>
                 <tbody className="divide-y divide-zinc-100">
                   {[
-                    { date: "Oct 24, 2023", category: "Travel", merchant: "Uber India", amount: "$12.60", status: "Pending" },
-                    { date: "Oct 23, 2023", category: "Food", merchant: "Starbucks", amount: "$8.40", status: "Approved" },
-                    { date: "Oct 22, 2023", category: "Software", merchant: "Adobe Creative Cloud", amount: "$52.99", status: "Approved" },
-                    { date: "Oct 21, 2023", category: "Office", merchant: "Amazon Business", amount: "$124.50", status: "Pending" },
-                    { date: "Oct 20, 2023", category: "Travel", merchant: "Indigo Airlines", amount: "$240.00", status: "Rejected" },
+                    { date: "Oct 24, 2023", category: "Travel", merchant: "Uber India", amount: 12.60, status: "Pending" },
+                    { date: "Oct 23, 2023", category: "Food", merchant: "Starbucks", amount: 8.40, status: "Approved" },
+                    { date: "Oct 22, 2023", category: "Software", merchant: "Adobe Creative Cloud", amount: 52.99, status: "Approved" },
+                    { date: "Oct 21, 2023", category: "Office", merchant: "Amazon Business", amount: 124.50, status: "Pending" },
+                    { date: "Oct 20, 2023", category: "Travel", merchant: "Indigo Airlines", amount: 240.00, status: "Rejected" },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-zinc-50/50 transition-all group">
                       <td className="px-6 py-4">
@@ -169,7 +180,9 @@ export default function FyleWebApp() {
                         <span className="text-sm font-bold tracking-tight text-zinc-900">{row.merchant}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-sm font-black text-zinc-900">{row.amount}</span>
+                        <span className="text-sm font-black text-zinc-900">
+                          {isLoading ? "..." : formatAmount(row.amount)}
+                        </span>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">

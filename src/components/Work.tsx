@@ -1,10 +1,11 @@
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles, Smartphone, Globe, Layout, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, Globe, Layout, Zap } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import HoshakshamApp from "./HoshakshamApp";
 import FyleWebApp from "./FyleWebApp";
 import FyleReimbursementApp from "./FyleReimbursementApp";
+import MercedesApp from "./MercedesApp";
 
 const CASE_STUDIES = [
   {
@@ -32,7 +33,7 @@ const CASE_STUDIES = [
     link: "/case-study/hoshaksham",
     featured: false,
     component: <HoshakshamApp />,
-    type: "mobile",
+    type: "web",
     color: "bg-zinc-50"
   },
   {
@@ -42,10 +43,10 @@ const CASE_STUDIES = [
     subtitle: "Streamlining complex workflows and data visualization for engineering teams.",
     category: "Enterprise • Internal Tool",
     role: "Sr. Product Designer",
-    impact: "Coming Soon",
+    impact: "40% faster handover",
     link: "/case-study/mercedes",
     featured: false,
-    placeholder: true,
+    component: <MercedesApp />,
     type: "web",
     color: "bg-zinc-50"
   }
@@ -105,25 +106,16 @@ export default function Work() {
                     </div>
                   ) : project.component ? (
                     <div className="aspect-[16/10] flex items-center justify-center p-4 md:p-12 bg-zinc-50 overflow-hidden">
-                      {project.type === 'mobile' ? (
-                        <div className="relative w-[280px] h-[560px] bg-zinc-900 rounded-[3.5rem] p-3 shadow-2xl border-[8px] border-zinc-800 scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-zinc-800 rounded-b-2xl z-20" />
-                          <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-zinc-100 relative z-10">
-                            {project.component}
-                          </div>
+                      <div className="w-full h-full bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col scale-90 md:scale-100 origin-center">
+                        <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
+                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
                         </div>
-                      ) : (
-                        <div className="w-full h-full bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col scale-90 md:scale-100 origin-center">
-                          <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
-                            <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
-                          </div>
-                          <div className="flex-1 overflow-hidden">
-                            {project.component}
-                          </div>
+                        <div className="flex-1 overflow-hidden">
+                          {project.component}
                         </div>
-                      )}
+                      </div>
                     </div>
                   ) : (
                     <div className="aspect-[16/10] flex items-center justify-center bg-zinc-50 border-2 border-dashed border-zinc-200">
@@ -167,15 +159,13 @@ export default function Work() {
                     </div>
                   </div>
 
-                  {!project.placeholder && (
-                    <Link 
-                      to={project.link}
-                      className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
-                    >
-                      View Case Study
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                    </Link>
-                  )}
+                  <Link 
+                    to={project.link}
+                    className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
+                  >
+                    View Case Study
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  </Link>
                 </div>
               </div>
             </motion.div>
