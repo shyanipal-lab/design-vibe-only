@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Work from "../components/Work";
+import Features from "../components/Features";
 import Fun from "../components/Fun";
 import Footer from "../components/Footer";
 import { motion, useScroll, useSpring } from "motion/react";
@@ -24,8 +25,9 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <Fun />
         <Work />
+        <Features />
+        <Fun />
       </main>
       <Footer />
     </div>

@@ -5,6 +5,9 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import CaseStudyNav from "../components/CaseStudyNav";
 import Footer from "../components/Footer";
 import HoshakshamApp from "../components/HoshakshamApp";
+import FyleWebApp from "../components/FyleWebApp";
+import FyleReimbursementApp from "../components/FyleReimbursementApp";
+import Features from "../components/Features";
 
 interface Section {
   id: string;
@@ -17,7 +20,8 @@ interface CaseStudy {
   category: string;
   duration: string;
   year: string;
-  heroImage: string;
+  heroImage?: string;
+  heroComponent?: React.ReactNode;
   keyInsight: string;
   sections: Section[];
   content: React.ReactNode;
@@ -93,8 +97,11 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                   <div className="absolute -top-10 -left-10 w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20 animate-bounce">
                     <span className="font-black text-2xl uppercase tracking-tighter -rotate-12 text-zinc-900 text-center">NO SPREAD-SHEETS!</span>
                   </div>
-                  <div className="aspect-video rounded-2xl bg-white border-4 border-zinc-900 overflow-hidden shadow-xl">
-                    <img src="https://picsum.photos/seed/hoshaksham-comic-sol/1200/800" alt="Hoshaksham Solution" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <div className="relative w-full max-w-[280px] mx-auto aspect-[9/18] bg-zinc-900 rounded-[3.5rem] p-3 shadow-2xl border-[8px] border-zinc-800 scale-90 md:scale-100">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-zinc-800 rounded-b-2xl z-20" />
+                    <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-zinc-100 relative z-10">
+                      <HoshakshamApp />
+                    </div>
                   </div>
                   <div className="absolute -bottom-4 -right-4 bg-brand-primary text-white p-4 font-black text-xl uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-3">
                     ZEN MODE!
@@ -165,11 +172,23 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
     category: "Fintech · Expense Management · Case Study",
     duration: "1 Month",
     year: "2020",
-    heroImage: "https://picsum.photos/seed/fyle-hero/1920/1080",
+    heroComponent: (
+      <div className="w-full h-full bg-white flex flex-col">
+        <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
+          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        </div>
+        <div className="flex-1 overflow-hidden">
+          <FyleReimbursementApp />
+        </div>
+      </div>
+    ),
     keyInsight: "Users were filing mileage expenses one painful entry at a time.",
     sections: [
       { id: "story", label: "The Story" },
       { id: "impact", label: "Impact" },
+      { id: "features", label: "Features" },
     ],
     content: (
       <div className="space-y-24 font-sans">
@@ -228,8 +247,15 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                   <div className="absolute -top-10 -left-10 w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20 animate-bounce">
                     <span className="font-black text-3xl uppercase tracking-tighter -rotate-12 text-zinc-900">BAM!</span>
                   </div>
-                  <div className="aspect-video rounded-2xl bg-white border-4 border-zinc-900 overflow-hidden shadow-xl">
-                    <img src="https://picsum.photos/seed/fyle-comic-sol/1200/800" alt="Bulk Entry Solution" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <div className="relative w-full aspect-video bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col">
+                    <div className="h-6 bg-zinc-100 border-b border-zinc-200 flex items-center px-3 gap-1 shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                      <FyleReimbursementApp />
+                    </div>
                   </div>
                   <div className="absolute -bottom-4 -right-4 bg-brand-primary text-white p-4 font-black text-xl uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-3">
                     FIXED!
@@ -276,6 +302,15 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="scroll-mt-32">
+          <div className="mb-16">
+            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-brand-primary mb-8">Product Features</h3>
+            <h4 className="text-4xl font-black uppercase tracking-tighter mb-6 leading-none">A complete expense ecosystem.</h4>
+          </div>
+          <Features />
         </section>
 
         {/* Final CTA */}
@@ -472,14 +507,20 @@ export default function CaseStudyPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="aspect-[21/9] rounded-[60px] overflow-hidden bg-zinc-100 shadow-2xl"
+            className="aspect-[21/9] rounded-[60px] overflow-hidden bg-zinc-100 shadow-2xl relative"
           >
-            <img 
-              src={study.heroImage} 
-              alt={study.title} 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+            {study.heroComponent ? (
+              <div className="w-full h-full">
+                {study.heroComponent}
+              </div>
+            ) : (
+              <img 
+                src={study.heroImage} 
+                alt={study.title} 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            )}
           </motion.div>
         </div>
       </section>

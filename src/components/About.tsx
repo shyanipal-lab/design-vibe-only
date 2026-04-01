@@ -6,10 +6,10 @@ import AboutStories from "./AboutStories";
 import { LocationMap } from "./ui/expand-map";
 
 const ABOUT_IMAGES = [
-  { id: 1, src: "https://storage.googleapis.com/cortex-artifacts/shyani.jpg", alt: "Shyani Pal" },
-  { id: 2, src: "https://picsum.photos/seed/shyani2/600/600", alt: "Design Workshop" },
-  { id: 3, src: "https://picsum.photos/seed/shyani3/600/600", alt: "Collaboration" },
-  { id: 4, src: "https://picsum.photos/seed/shyani4/600/600", alt: "Pixel Perfection" },
+  { id: 1, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4&style=circle", alt: "Shyani Pal - Caricature" },
+  { id: 2, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Design&backgroundColor=c0aede&style=circle", alt: "Design Workshop - Caricature" },
+  { id: 3, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Collab&backgroundColor=d1d4f9&style=circle", alt: "Collaboration - Caricature" },
+  { id: 4, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pixel&backgroundColor=ffd5dc&style=circle", alt: "Pixel Perfection - Caricature" },
 ];
 
 export default function About() {

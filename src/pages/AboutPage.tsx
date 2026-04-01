@@ -46,9 +46,9 @@ export default function AboutPage() {
             >
               <div className="aspect-square rounded-[60px] overflow-hidden bg-zinc-100 border-8 border-white shadow-2xl rotate-3">
                 <img 
-                  src="https://picsum.photos/seed/shyani/800/800" 
-                  alt="Shyani Pal" 
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4&style=circle" 
+                  alt="Shyani Pal - Caricature" 
+                  className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
