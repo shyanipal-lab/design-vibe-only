@@ -181,7 +181,10 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
     duration: "1 Month",
     year: "2020",
     heroComponent: (
-      <div className="w-full h-full bg-white flex flex-col">
+      <div className="w-full h-full bg-white flex flex-col relative">
+        <div className="absolute top-12 left-12 z-20 bg-brand-primary text-white p-6 font-black text-4xl uppercase tracking-tighter shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)] -rotate-3">
+          Easy Reimbursement Claim
+        </div>
         <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
           <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
           <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
@@ -255,6 +258,9 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                     <span className="font-black text-3xl uppercase tracking-tighter -rotate-12 text-zinc-900">BAM!</span>
                   </div>
                   <div className="relative w-full aspect-video bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col">
+                    <div className="absolute top-4 right-4 z-20 bg-zinc-900 text-white px-3 py-1 font-black uppercase tracking-widest text-[8px] shadow-[2px_2px_0px_0px_rgba(242,125,38,1)]">
+                      Easy Reimbursement Claim
+                    </div>
                     <div className="h-6 bg-zinc-100 border-b border-zinc-200 flex items-center px-3 gap-1 shrink-0">
                       <div className="w-2 h-2 rounded-full bg-zinc-300" />
                       <div className="w-2 h-2 rounded-full bg-zinc-300" />

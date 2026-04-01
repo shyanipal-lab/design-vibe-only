@@ -44,7 +44,10 @@ const FYLE_EXPENSES: Customer[] = [
 
 export default function FyleReimbursementApp() {
   return (
-    <div className="w-full h-full bg-zinc-50 p-4 md:p-8">
+    <div className="w-full h-full bg-zinc-50 p-4 md:p-8 relative">
+      <div className="absolute top-4 right-4 z-10 bg-brand-primary text-white px-4 py-1.5 font-black uppercase tracking-widest text-[10px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -rotate-2">
+        Easy Reimbursement Claim
+      </div>
       <CustomersTableCard 
         title="Reimbursements"
         subtitle="Manage and track your expense reports in real-time."
