@@ -10,9 +10,9 @@ import linkedinLottie from "../assets/lottie/linkedin.json";
 import resumeLottie from "../assets/lottie/resume.json";
 
 const SOCIAL_ITEMS = [
-  { label: "Email", href: "mailto:pal.shyani1@gmail.com", lottie: emailLottie },
-  { label: "LinkedIn", href: "https://linkedin.com/in/shyani-pal", lottie: linkedinLottie },
-  { label: "Resume", href: "resume.pdf", lottie: resumeLottie },
+  { label: "Email", href: "mailto:shyanipal06@gmail.com", lottie: emailLottie },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/shyani/", lottie: linkedinLottie },
+  { label: "Resume", href: "/resume", lottie: resumeLottie },
 ];
 
 const NAV_LINKS = [
@@ -104,8 +104,8 @@ export default function Header() {
             {SOCIAL_ITEMS.map((item) => (
               <motion.a
                 key={item.label}
-                href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href}` : item.href}
-                target="_blank"
+                href={item.href}
+                target={item.label === "Email" ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 onMouseEnter={() => setHoveredSocial(item.label)}
                 onMouseLeave={() => setHoveredSocial(null)}
@@ -172,8 +172,8 @@ export default function Header() {
                   {SOCIAL_ITEMS.map((item) => (
                     <a 
                       key={item.label}
-                      href={item.label === "Resume" ? `${import.meta.env.BASE_URL}${item.href}` : item.href}
-                      target="_blank"
+                      href={item.href}
+                      target={item.label === "Email" ? undefined : "_blank"}
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-xs font-medium text-zinc-700 hover:text-brand-primary hover:font-accent hover:lowercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-sm"
                     >

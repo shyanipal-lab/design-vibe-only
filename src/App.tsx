@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import FunPage from "./pages/FunPage";
 import AboutPage from "./pages/AboutPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
+import ResumePage from "./pages/ResumePage";
 import Demo from "./pages/Demo";
 import SplitAndGrowPage from "./pages/SplitAndGrowPage";
 import PlaygroundLayer from "./components/PlaygroundLayer";
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/fun" element={<FunPage />} />
         <Route path="/case-study/:id" element={<CaseStudyPage />} />
+        <Route path="/resume" element={<ResumePage />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/split-and-grow" element={<SplitAndGrowPage />} />
       </Routes>

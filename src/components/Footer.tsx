@@ -35,7 +35,7 @@ export default function Footer() {
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      href="mailto:pal.shyani1@gmail.com"
+                      href="mailto:shyanipal06@gmail.com"
                       className="inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
                     >
                       Say hello
@@ -59,8 +59,7 @@ export default function Footer() {
                   <motion.a
                     whileHover={{ scale: 1.05, backgroundColor: "#f4f4f5" }}
                     whileTap={{ scale: 0.95 }}
-                    href="/resume.pdf"
-                    target="_blank"
+                    href="/resume"
                     className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all"
                   >
                     Resume
@@ -70,7 +69,7 @@ export default function Footer() {
                   <motion.a
                     whileHover={{ scale: 1.05, backgroundColor: "#f4f4f5" }}
                     whileTap={{ scale: 0.95 }}
-                    href="https://linkedin.com/in/shyani-pal"
+                    href="https://www.linkedin.com/in/shyani/"
                     target="_blank"
                     className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all"
                   >

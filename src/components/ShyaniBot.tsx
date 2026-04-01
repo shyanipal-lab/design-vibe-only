@@ -17,7 +17,7 @@ const FAQS = [
   },
   {
     question: "Hire Shyani",
-    answer: "Ready to build something amazing? 🚀 Shyani is always on the lookout for innovative projects and teams. You can drop her a line at pal.shyani1@gmail.com or use the contact form below. Let's turn your vision into reality!"
+    answer: "Ready to build something amazing? 🚀 Shyani is always on the lookout for innovative projects and teams. You can drop her a line at shyanipal06@gmail.com or use the contact form below. Let's turn your vision into reality!"
   },
   {
     question: "How Shyani made this portfolio",
@@ -57,7 +57,7 @@ export default function ShyaniBot() {
         model: "gemini-3-flash-preview",
         contents: userText,
         config: {
-          systemInstruction: "You are 'Digital Shyani', an AI assistant for Shyani Pal's portfolio. You are creative, professional, and friendly. You should answer questions about Shyani's work, skills, and experience. Shyani is a full-stack developer and designer. If asked about hiring, mention pal.shyani1@gmail.com. Keep responses concise and engaging. Use emojis occasionally.",
+          systemInstruction: "You are 'Digital Shyani', an AI assistant for Shyani Pal's portfolio. You are creative, professional, and friendly. You should answer questions about Shyani's work, skills, and experience. Shyani is a full-stack developer and designer. If asked about hiring, mention shyanipal06@gmail.com. Keep responses concise and engaging. Use emojis occasionally.",
         },
       });
 
