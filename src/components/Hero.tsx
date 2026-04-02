@@ -49,13 +49,13 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Text Content */}
           <div className="w-full">
-            <div className="h-[120px] md:h-[160px] lg:h-[200px] flex items-center justify-center mb-10">
+            <div className="h-[100px] md:h-[160px] lg:h-[200px] flex items-center justify-center mb-6 md:mb-10">
               <GooeyText
                 texts={["Design", "vibe", "coder", "only"]}
                 morphTime={1}
                 cooldownTime={0.5}
                 className="font-header font-black uppercase tracking-tighter"
-                textClassName="text-7xl md:text-8xl lg:text-[110px] text-center w-full flex justify-center"
+                textClassName="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] text-center w-full flex justify-center"
               />
             </div>
 
@@ -63,9 +63,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed font-medium"
+              className="text-base md:text-xl text-zinc-400 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed font-medium px-4 md:px-0"
             >
-              <span className="font-accent text-brand-primary text-2xl lowercase">Building Connectivity</span> @ Mercedes-Benz <br /><br />
+              <span className="font-accent text-brand-primary text-xl md:text-2xl lowercase">Building Connectivity</span> @ Mercedes-Benz <br className="hidden md:block" /><br className="hidden md:block" />
               I design enterprise, fintech, and mobility products used at scale. 
               UX strategy + strong craft — currently at Mercedes-Benz R&D, Bengaluru.
             </motion.p>
@@ -74,13 +74,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col md:flex-row items-center justify-center gap-12"
+              className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12"
             >
-              <Link to="/#work">
+              <Link to="/#work" className="w-full md:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-zinc-900 text-white px-10 py-5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-xl hover:bg-brand-primary transition-colors flex items-center gap-3"
+                  className="w-full md:w-auto bg-zinc-900 text-white px-10 py-5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-xl hover:bg-brand-primary transition-colors flex items-center justify-center gap-3"
                 >
                   Explore Work
                   <ArrowRight className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function Hero() {
               
               <div className="flex items-center gap-4">
                 <AnimatedTooltip items={GAME_ITEMS} />
-                <Link to="/#fun" className="group/games text-left ml-4 cursor-pointer">
+                <Link to="/#fun" className="group/games text-left ml-2 md:ml-4 cursor-pointer">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-900 group-hover/games:text-brand-primary transition-colors">Play Games</p>
                   <p className="text-[8px] font-medium text-zinc-400 uppercase tracking-widest">Beat the high score</p>
                 </Link>

@@ -78,7 +78,7 @@ export default function Work() {
         </div>
 
         {/* Work Grid */}
-        <div className="space-y-32">
+        <div className="space-y-20 md:space-y-32">
           {CASE_STUDIES.map((project, i) => (
             <motion.div
               key={project.id}
@@ -86,16 +86,16 @@ export default function Work() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center ${
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center ${
                 i % 2 !== 0 ? "lg:flex-row-reverse" : ""
               }`}
             >
               {/* Visual Side */}
               <div className={`lg:col-span-7 ${i % 2 !== 0 ? "lg:order-2" : ""}`}>
-                <div className={`relative rounded-[60px] overflow-hidden ${project.color} border border-zinc-100 shadow-sm group cursor-pointer`}>
+                <div className={`relative rounded-[40px] md:rounded-[60px] overflow-hidden ${project.color} border border-zinc-100 shadow-sm group cursor-pointer`}>
                   {(project as any).video ? (
-                    <div className="aspect-[16/10] p-4">
-                      <div className="w-full h-full rounded-[40px] overflow-hidden bg-zinc-800">
+                    <div className="aspect-[16/10] p-3 md:p-4">
+                      <div className="w-full h-full rounded-[30px] md:rounded-[40px] overflow-hidden bg-zinc-800">
                         <video 
                           src={(project as any).video} 
                           autoPlay loop muted playsInline 
@@ -105,12 +105,12 @@ export default function Work() {
                       </div>
                     </div>
                   ) : project.component ? (
-                    <div className="aspect-[16/10] flex items-center justify-center p-4 md:p-12 bg-zinc-50 overflow-hidden">
-                      <div className="w-full h-full bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col scale-90 md:scale-100 origin-center">
-                        <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
-                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                    <div className="aspect-[4/3] md:aspect-[16/10] flex items-center justify-center p-3 md:p-12 bg-zinc-50 overflow-hidden">
+                      <div className="w-full h-full bg-white rounded-xl md:rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col scale-[0.85] sm:scale-90 md:scale-100 origin-center">
+                        <div className="h-6 md:h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-3 md:px-4 gap-1 md:gap-1.5 shrink-0">
+                          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
+                          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
+                          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
                         </div>
                         <div className="flex-1 overflow-hidden">
                           {project.component}
@@ -132,36 +132,36 @@ export default function Work() {
 
               {/* Info Side */}
               <div className={`lg:col-span-5 ${i % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="space-y-8">
+                <div className="space-y-6 md:space-y-8">
                   <div className="flex items-center gap-4">
                     <span className="font-mono text-brand-primary font-bold text-sm">{project.year}</span>
                     <div className="w-8 h-[1px] bg-zinc-200" />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{project.category}</span>
                   </div>
 
-                  <h3 className="text-4xl md:text-5xl font-header font-black uppercase tracking-tighter leading-[0.9]">
+                  <h3 className="text-3xl md:text-5xl font-header font-black uppercase tracking-tighter leading-[0.9]">
                     {project.title.split(' — ')[0]} — <br />
                     <span className="text-brand-primary font-accent lowercase">{project.title.split(' — ')[1]}</span>
                   </h3>
 
-                  <p className="text-lg text-zinc-500 leading-relaxed font-medium">
+                  <p className="text-base md:text-lg text-zinc-500 leading-relaxed font-medium">
                     {project.subtitle}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8 pt-8 border-t border-zinc-100">
+                  <div className="grid grid-cols-2 gap-6 md:gap-8 pt-6 md:pt-8 border-t border-zinc-100">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Role</p>
-                      <p className="text-sm font-bold text-zinc-900">{project.role}</p>
+                      <p className="text-xs md:text-sm font-bold text-zinc-900">{project.role}</p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Impact</p>
-                      <p className="text-sm font-bold text-brand-primary">{project.impact}</p>
+                      <p className="text-xs md:text-sm font-bold text-brand-primary">{project.impact}</p>
                     </div>
                   </div>
 
                   <Link 
                     to={project.link}
-                    className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
+                    className="group w-full md:w-auto inline-flex items-center justify-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
                   >
                     View Case Study
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />

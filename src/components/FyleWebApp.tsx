@@ -66,55 +66,58 @@ export default function FyleWebApp() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Header */}
-        <header className="h-20 bg-white border-b border-zinc-200 flex items-center justify-between px-8 shrink-0">
+        <header className="h-16 md:h-20 bg-white border-b border-zinc-200 flex items-center justify-between px-4 md:px-8 shrink-0">
           <div className="flex items-center gap-4 flex-1">
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-md hidden sm:block">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
               <input 
                 type="text" 
                 placeholder="Search expenses, reports..." 
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3366]/20 transition-all"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl py-2 md:py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3366]/20 transition-all"
               />
             </div>
+            <button className="sm:hidden p-2 text-zinc-400">
+              <Search className="w-5 h-5" />
+            </button>
           </div>
-          <div className="flex items-center gap-6">
-            <div className="px-3 py-1 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center gap-2">
+          <div className="flex items-center gap-3 md:gap-6">
+            <div className="px-2 md:px-3 py-1 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center gap-1.5 md:gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+              <span className="text-[8px] md:text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 {isLoading ? "..." : currency}
               </span>
             </div>
             <div className="relative">
-              <Bell className="w-5 h-5 text-zinc-400 cursor-pointer hover:text-zinc-600 transition-all" />
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#FF3366] rounded-full border-2 border-white" />
+              <Bell className="w-4 h-4 md:w-5 md:h-5 text-zinc-400 cursor-pointer hover:text-zinc-600 transition-all" />
+              <div className="absolute -top-1 -right-1 w-1.5 h-1.5 md:w-2 md:h-2 bg-[#FF3366] rounded-full border-2 border-white" />
             </div>
-            <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center overflow-hidden">
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center overflow-hidden">
               <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" className="w-full h-full object-cover" />
             </div>
           </div>
         </header>
 
         {/* Dashboard Content */}
-        <main className="flex-1 overflow-y-auto p-8 space-y-8 scrollbar-hide">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 md:space-y-8 scrollbar-hide">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { label: "Pending Reimbursement", value: 1240.50, sub: "12 Entries Pending", color: "bg-[#FF3366]", text: "text-white" },
               { label: "Approved This Month", value: 3450.00, sub: "24 Entries Approved", color: "bg-white", text: "text-zinc-900" },
               { label: "Total Reimbursed", value: 12840.00, sub: "Year to date", color: "bg-white", text: "text-zinc-900" },
             ].map((stat, i) => (
-              <div key={i} className={`${stat.color} ${stat.text} p-6 rounded-[32px] shadow-sm border border-zinc-100 relative overflow-hidden group`}>
+              <div key={i} className={`${stat.color} ${stat.text} p-5 md:p-6 rounded-[24px] md:rounded-[32px] shadow-sm border border-zinc-100 relative overflow-hidden group ${i === 2 ? 'sm:col-span-2 md:col-span-1' : ''}`}>
                 <div className="relative z-10">
-                  <p className={`text-[10px] font-bold uppercase tracking-widest ${stat.color === 'bg-white' ? 'text-zinc-400' : 'opacity-80'} mb-2`}>{stat.label}</p>
+                  <p className={`text-[9px] md:text-[10px] font-bold uppercase tracking-widest ${stat.color === 'bg-white' ? 'text-zinc-400' : 'opacity-80'} mb-2`}>{stat.label}</p>
                   <div className="flex items-end justify-between">
                     <div>
-                      <h3 className="text-3xl font-black tracking-tighter">
+                      <h3 className="text-2xl md:text-3xl font-black tracking-tighter">
                         {isLoading ? "..." : formatAmount(stat.value)}
                       </h3>
-                      <p className={`text-[10px] font-bold mt-1 ${stat.color === 'bg-white' ? 'text-zinc-500' : 'bg-white/20'} inline-block px-2 py-0.5 rounded-full`}>{stat.sub}</p>
+                      <p className={`text-[8px] md:text-[9px] font-bold mt-1 ${stat.color === 'bg-white' ? 'text-zinc-500' : 'bg-white/20'} inline-block px-2 py-0.5 rounded-full`}>{stat.sub}</p>
                     </div>
-                    <div className={`w-10 h-10 ${stat.color === 'bg-white' ? 'bg-zinc-50' : 'bg-white/20'} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
-                      <ArrowUpRight className="w-5 h-5" />
+                    <div className={`w-8 h-8 md:w-10 md:h-10 ${stat.color === 'bg-white' ? 'bg-zinc-50' : 'bg-white/20'} rounded-lg md:rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
+                      <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                   </div>
                 </div>
@@ -123,29 +126,29 @@ export default function FyleWebApp() {
           </div>
 
           {/* Table Section */}
-          <div className="bg-white rounded-[32px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col">
-            <div className="p-6 border-b border-zinc-100 flex items-center justify-between gap-4 flex-wrap">
-              <div className="flex items-center gap-4">
-                <h4 className="text-lg font-black tracking-tight">Recent Expenses</h4>
+          <div className="bg-white rounded-[24px] md:rounded-[32px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col">
+            <div className="p-4 md:p-6 border-b border-zinc-100 flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex items-center gap-3 md:gap-4">
+                <h4 className="text-base md:text-lg font-black tracking-tight">Recent Expenses</h4>
                 <div className="flex items-center gap-2">
-                  <button className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-100 transition-all">
+                  <button className="flex items-center gap-2 px-2.5 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-[9px] font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-100 transition-all">
                     <Filter className="w-3 h-3" />
-                    Filter
+                    <span className="hidden sm:inline">Filter</span>
                   </button>
-                  <button className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-100 transition-all">
+                  <button className="flex items-center gap-2 px-2.5 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-[9px] font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-100 transition-all">
                     <Download className="w-3 h-3" />
-                    Export
+                    <span className="hidden sm:inline">Export</span>
                   </button>
                 </div>
               </div>
-              <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 text-sm font-bold tracking-tight hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10">
+              <button className="w-full sm:w-auto bg-zinc-900 text-white px-5 py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-tight hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10">
                 <Plus className="w-4 h-4" />
                 Add Expense
               </button>
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+              <table className="w-full text-left border-collapse min-w-[600px]">
                 <thead>
                   <tr className="bg-zinc-50/50">
                     <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-zinc-400">Date</th>

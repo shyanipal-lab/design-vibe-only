@@ -67,21 +67,21 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-      isScrolled ? "py-4" : "py-8"
+      isScrolled ? "py-2 md:py-4" : "py-4 md:py-8"
     }`}>
-      <nav className={`max-w-7xl mx-auto flex items-center justify-between px-8 py-4 transition-all duration-500 ${
-        isScrolled ? "glass rounded-full shadow-xl border-zinc-100" : "bg-transparent border-transparent"
+      <nav className={`max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4 transition-all duration-500 ${
+        isScrolled ? "glass rounded-full shadow-xl border-zinc-100 mx-4 md:mx-auto" : "bg-transparent border-transparent"
       }`}>
         <Link to="/">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2 md:gap-3"
           >
-            <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center">
-              <span className="text-white font-display text-lg">S</span>
+            <div className="w-7 h-7 md:w-8 md:h-8 bg-zinc-900 rounded-lg flex items-center justify-center">
+              <span className="text-white font-display text-base md:text-lg">S</span>
             </div>
-            <span className="font-display text-xl font-bold tracking-tighter uppercase">Shyani</span>
+            <span className="font-display text-lg md:text-xl font-bold tracking-tighter uppercase">Shyani</span>
           </motion.div>
         </Link>
 
@@ -133,21 +133,21 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <Link to="/#contact">
+        <div className="flex items-center gap-2 md:gap-4">
+          <Link to="/#contact" className="hidden sm:block">
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-primary transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+              className="bg-zinc-900 text-white px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-brand-primary transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
             >
               Let's Talk
             </motion.button>
           </Link>
           
-          <button className="md:hidden p-2 text-zinc-900" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button className="md:hidden p-2 text-zinc-900 hover:bg-zinc-100 rounded-full transition-colors" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
           </button>
         </div>
       </nav>

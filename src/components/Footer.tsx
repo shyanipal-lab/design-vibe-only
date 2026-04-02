@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-white text-zinc-900 pt-12 pb-6 relative overflow-hidden rounded-t-[80px] border-t border-zinc-100">
+    <footer id="contact" className="bg-white text-zinc-900 pt-12 pb-6 relative overflow-hidden rounded-t-[40px] md:rounded-t-[80px] border-t border-zinc-100">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-brand-primary/5 rounded-full blur-[160px] pointer-events-none animate-pulse" />
         <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-secondary/5 rounded-full blur-[120px] pointer-events-none" />
@@ -20,24 +20,24 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <h2 className="font-header text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
+                <h2 className="font-header text-4xl sm:text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
                   Let's talk <br />
                   Building <span className="text-brand-primary font-accent lowercase">something</span> <br />
                   worth getting right?
                 </h2>
                 
-                <p className="text-2xl md:text-3xl text-zinc-500 font-medium max-w-2xl mb-10 leading-relaxed">
-                  Looking for <span className="text-zinc-900">Senior Product Designer</span> roles, <br />
+                <p className="text-xl md:text-3xl text-zinc-500 font-medium max-w-2xl mb-10 leading-relaxed">
+                  Looking for <span className="text-zinc-900">Senior Product Designer</span> roles, <br className="hidden md:block" />
                   Meaningful problems preferred.
                 </p>
 
-                <div className="flex flex-wrap gap-4 items-center">
-                  <div className="relative group">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center mb-16">
+                  <div className="relative group flex-1 sm:flex-none">
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       href="mailto:shyanipal06@gmail.com"
-                      className="inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-4 bg-zinc-900 text-white px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
                     >
                       Say hello
                       <Mail className="w-4 h-4" />
@@ -59,7 +59,7 @@ export default function Footer() {
 
                   <Link
                     to="/resume"
-                    className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-zinc-50"
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-zinc-50"
                   >
                     Resume
                     <FileText className="w-4 h-4" />
@@ -70,7 +70,7 @@ export default function Footer() {
                     whileTap={{ scale: 0.95 }}
                     href="https://www.linkedin.com/in/shyani/"
                     target="_blank"
-                    className="inline-flex items-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all"
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-3 border border-zinc-200 text-zinc-900 px-8 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all"
                   >
                     Linkedin
                     <Linkedin className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function Footer() {
                 </p>
               </div>
               
-              <div className="flex gap-8">
+              <div className="flex flex-wrap justify-center gap-6 md:gap-8">
                 <a href="#" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">Privacy Policy</a>
                 <a href="#" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">Terms of Service</a>
               </div>
