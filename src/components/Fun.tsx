@@ -9,8 +9,34 @@ import DashboardDesktopShowcase from "./DashboardDesktopShowcase";
 
 export default function Fun() {
   const [activeGame, setActiveGame] = useState<"snake" | "tetris" | "tictactoe" | "expense-tracker">("snake");
+  const [isGameFocused, setIsGameFocused] = useState(false);
   const { hash } = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsGameFocused(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (isGameFocused) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isGameFocused]);
+
+  useEffect(() => {
+    setIsGameFocused(false);
+  }, [activeGame]);
 
   useEffect(() => {
     if (hash === "#fun-snake") {
@@ -170,85 +196,118 @@ export default function Fun() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative w-full max-w-xl mx-auto"
+            className={`relative w-full max-w-xl mx-auto transition-all duration-500 ${isGameFocused ? 'z-[100]' : 'z-10'}`}
           >
+            {/* Focus Overlay Background */}
+            <AnimatePresence>
+              {isGameFocused && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsGameFocused(false)}
+                  className="fixed inset-0 bg-zinc-950/80 backdrop-blur-md z-[-1] cursor-zoom-out"
+                />
+              )}
+            </AnimatePresence>
+
             {/* Invisible anchors for game-specific linking - moved here to lead to canvas */}
             <div id="fun-snake" className="absolute -top-20 left-0" />
             <div id="fun-tetris" className="absolute -top-20 left-0" />
             <div id="fun-tictactoe" className="absolute -top-20 left-0" />
             <div id="fun-expense" className="absolute -top-20 left-0" />
 
-            <AnimatePresence mode="wait">
-              {activeGame === "snake" ? (
-                <motion.div
-                  key="snake"
-                  initial={{ opacity: 0, rotateY: 90 }}
-                  animate={{ opacity: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, rotateY: -90 }}
-                  transition={{ duration: 0.4 }}
-                  className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative group"
-                >
-                  <div className="scale-[0.8] sm:scale-100 origin-center">
-                    <SnakeGame />
-                  </div>
-                </motion.div>
-              ) : activeGame === "tetris" ? (
-                <motion.div
-                  key="tetris"
-                  initial={{ opacity: 0, rotateY: 90 }}
-                  animate={{ opacity: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, rotateY: -90 }}
-                  transition={{ duration: 0.4 }}
-                  className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 overflow-hidden relative group"
-                >
-                  <div className="scale-[0.6] sm:scale-75 origin-top -mt-10 -mb-20">
-                    <BlockGame />
-                  </div>
-                </motion.div>
-              ) : activeGame === "tictactoe" ? (
-                <motion.div
-                  key="tictactoe"
-                  initial={{ opacity: 0, rotateY: 90 }}
-                  animate={{ opacity: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, rotateY: -90 }}
-                  transition={{ duration: 0.4 }}
-                  className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative group"
-                >
-                  <div className="scale-[0.8] sm:scale-100 origin-center">
-                    <TicTacToe />
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="expense"
-                  initial={{ opacity: 0, rotateY: 90 }}
-                  animate={{ opacity: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, rotateY: -90 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative group"
-                >
+            <div 
+              className={`relative group transition-all duration-500 ${isGameFocused ? 'scale-110 sm:scale-125' : 'hover:scale-[1.02]'}`}
+              onClick={() => !isGameFocused && activeGame !== "expense-tracker" && setIsGameFocused(true)}
+            >
+              <AnimatePresence mode="wait">
+                {activeGame === "snake" ? (
                   <motion.div
-                    key="desktop-view"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
+                    key="snake"
+                    initial={{ opacity: 0, rotateY: 90 }}
+                    animate={{ opacity: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, rotateY: -90 }}
+                    transition={{ duration: 0.4 }}
+                    className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative"
                   >
-                    <div className="scale-[0.7] sm:scale-90 md:scale-100 origin-center">
-                      <DashboardDesktopShowcase />
+                    <div className="scale-[0.8] sm:scale-100 origin-center">
+                      <SnakeGame isFocused={isGameFocused} />
                     </div>
                   </motion.div>
+                ) : activeGame === "tetris" ? (
+                  <motion.div
+                    key="tetris"
+                    initial={{ opacity: 0, rotateY: 90 }}
+                    animate={{ opacity: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, rotateY: -90 }}
+                    transition={{ duration: 0.4 }}
+                    className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 overflow-hidden relative"
+                  >
+                    <div className="scale-[0.6] sm:scale-75 origin-top -mt-10 -mb-20">
+                      <BlockGame isFocused={isGameFocused} />
+                    </div>
+                  </motion.div>
+                ) : activeGame === "tictactoe" ? (
+                  <motion.div
+                    key="tictactoe"
+                    initial={{ opacity: 0, rotateY: 90 }}
+                    animate={{ opacity: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, rotateY: -90 }}
+                    transition={{ duration: 0.4 }}
+                    className="glass p-4 md:p-8 rounded-[32px] md:rounded-[40px] shadow-2xl border border-zinc-100 bg-white/50 relative"
+                  >
+                    <div className="scale-[0.8] sm:scale-100 origin-center">
+                      <TicTacToe isFocused={isGameFocused} />
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="expense"
+                    initial={{ opacity: 0, rotateY: 90 }}
+                    animate={{ opacity: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, rotateY: -90 }}
+                    transition={{ duration: 0.4 }}
+                    className="relative"
+                  >
+                    <motion.div
+                      key="desktop-view"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      <div className="scale-[0.7] sm:scale-90 md:scale-100 origin-center">
+                        <DashboardDesktopShowcase />
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Focus Prompt Overlay */}
+              {!isGameFocused && activeGame !== "expense-tracker" && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 bg-zinc-900/40 backdrop-blur-[2px] rounded-[32px] md:rounded-[40px] flex flex-col items-center justify-center z-30 cursor-pointer group/overlay"
+                >
+                  <div className="bg-white text-zinc-900 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 transform group-hover/overlay:scale-110 transition-transform">
+                    <Gamepad2 className="w-5 h-5 text-brand-primary" />
+                    Click to Play
+                  </div>
+                  <p className="text-white/80 text-[10px] font-bold uppercase tracking-[0.2em] mt-4">Arrow keys will be enabled</p>
                 </motion.div>
               )}
-            </AnimatePresence>
+            </div>
             
             {/* Floating Instructions */}
             {activeGame !== "expense-tracker" && (
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 glass px-4 py-3 md:px-6 md:py-4 rounded-2xl md:rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20 hidden sm:block"
+                animate={{ y: isGameFocused ? 20 : [0, 10, 0] }}
+                transition={{ duration: 3, repeat: isGameFocused ? 0 : Infinity }}
+                className={`absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 glass px-4 py-3 md:px-6 md:py-4 rounded-2xl md:rounded-3xl shadow-2xl border border-zinc-100 bg-white/50 z-20 hidden sm:block transition-all duration-500 ${isGameFocused ? 'translate-y-10 opacity-0' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-3">
                   <div className="flex flex-col gap-1">
@@ -265,7 +324,23 @@ export default function Fun() {
                 </div>
               </motion.div>
             )}
+
+            {/* Exit Instruction */}
+            <AnimatePresence>
+              {isGameFocused && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-zinc-900/90 text-white px-6 py-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl z-[110]"
+                >
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold">ESC</div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Press to exit game</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
+
         </div>
       </div>
     </section>

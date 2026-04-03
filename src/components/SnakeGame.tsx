@@ -8,7 +8,7 @@ const INITIAL_FOOD = { x: 15, y: 15 };
 const INITIAL_DIRECTION = { x: 1, y: 0 };
 const SPEED = 150;
 
-export default function SnakeGame() {
+export default function SnakeGame({ isFocused = true }: { isFocused?: boolean }) {
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [food, setFood] = useState(INITIAL_FOOD);
   const [direction, setDirection] = useState(INITIAL_DIRECTION);
@@ -20,7 +20,7 @@ export default function SnakeGame() {
   const gameLoop = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const moveSnake = useCallback(() => {
-    if (isGameOver || isPaused) return;
+    if (isGameOver || isPaused || !isFocused) return;
 
     const newSnake = [...snake];
     const head = { ...newSnake[0] };
@@ -52,7 +52,7 @@ export default function SnakeGame() {
     }
 
     setSnake(newSnake);
-  }, [snake, direction, food, isGameOver, isPaused, score, highScore]);
+  }, [snake, direction, food, isGameOver, isPaused, score, highScore, isFocused]);
 
   useEffect(() => {
     gameLoop.current = setInterval(moveSnake, SPEED);
@@ -63,6 +63,12 @@ export default function SnakeGame() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isFocused) return;
+
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+
       switch (e.key) {
         case "ArrowUp": if (direction.y === 0) setDirection({ x: 0, y: -1 }); break;
         case "ArrowDown": if (direction.y === 0) setDirection({ x: 0, y: 1 }); break;
@@ -73,7 +79,7 @@ export default function SnakeGame() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [direction]);
+  }, [direction, isFocused]);
 
   const resetGame = () => {
     setSnake(INITIAL_SNAKE);

@@ -82,7 +82,7 @@ interface Piece {
   type: TetrominoType
 }
 
-export const BlockGame = () => {
+export const BlockGame = ({ isFocused = true }: { isFocused?: boolean }) => {
   const [board, setBoard] = useState<Board>(() =>
     Array(BOARD_HEIGHT)
       .fill(null)
@@ -175,7 +175,7 @@ export const BlockGame = () => {
 
   // Move piece down
   const movePieceDown = useCallback(() => {
-    if (!currentPiece || gameOver || isPaused) return
+    if (!currentPiece || gameOver || isPaused || !isFocused) return
 
     const newPosition = { ...currentPiece.position, y: currentPiece.position.y + 1 }
 
@@ -199,11 +199,17 @@ export const BlockGame = () => {
         setGameOver(true)
       }
     }
-  }, [currentPiece, gameOver, isPaused, canPlacePiece, placePieceOnBoard, clearLines, level, createNewPiece, score, highScore])
+  }, [currentPiece, gameOver, isPaused, canPlacePiece, placePieceOnBoard, clearLines, level, createNewPiece, score, highScore, isFocused])
 
   // Handle keyboard input
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
+      if (!isFocused) return
+
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(event.key)) {
+        event.preventDefault()
+      }
+
       if (!currentPiece || gameOver || isPaused) {
         if (event.key === " " && !gameOver) {
           setIsPaused(prev => !prev)
@@ -213,7 +219,6 @@ export const BlockGame = () => {
 
       switch (event.key) {
         case "ArrowLeft":
-          event.preventDefault()
           const leftPosition = { ...currentPiece.position, x: currentPiece.position.x - 1 }
           if (canPlacePiece(currentPiece, leftPosition)) {
             setCurrentPiece({ ...currentPiece, position: leftPosition })
@@ -221,7 +226,6 @@ export const BlockGame = () => {
           break
 
         case "ArrowRight":
-          event.preventDefault()
           const rightPosition = { ...currentPiece.position, x: currentPiece.position.x + 1 }
           if (canPlacePiece(currentPiece, rightPosition)) {
             setCurrentPiece({ ...currentPiece, position: rightPosition })
@@ -229,13 +233,11 @@ export const BlockGame = () => {
           break
 
         case "ArrowDown":
-          event.preventDefault()
           movePieceDown()
           break
 
         case "ArrowUp":
         case " ":
-          event.preventDefault()
           const rotated = rotatePiece(currentPiece)
           if (canPlacePiece(rotated, rotated.position)) {
             setCurrentPiece(rotated)
@@ -243,7 +245,7 @@ export const BlockGame = () => {
           break
       }
     },
-    [currentPiece, gameOver, isPaused, canPlacePiece, movePieceDown, rotatePiece],
+    [currentPiece, gameOver, isPaused, canPlacePiece, movePieceDown, rotatePiece, isFocused],
   )
 
   // Game loop

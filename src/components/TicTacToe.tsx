@@ -4,7 +4,7 @@ import { X, Circle, RotateCcw } from "lucide-react";
 
 type Player = "X" | "O" | null;
 
-export default function TicTacToe() {
+export default function TicTacToe({ isFocused = true }: { isFocused?: boolean }) {
   const [board, setBoard] = useState<Player[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [winner, setWinner] = useState<Player | "Draw">(null);
