@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Wallet, TrendingUp, Users, Trophy, Target, ArrowUpRight, Zap, Bell, Settings, PieChart, CreditCard, Search, Plus } from "lucide-react";
+import { Wallet, TrendingUp, Users, Trophy, Target, ArrowUpRight, Zap, Bell, Settings, PieChart, CreditCard, Search, Plus, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function DashboardDesktopShowcase() {
   const friends = [
@@ -15,9 +16,21 @@ export default function DashboardDesktopShowcase() {
   ];
 
   return (
-    <div className="w-full max-w-[800px] mx-auto group">
+    <div className="w-full max-w-[800px] mx-auto group relative">
+      {/* View Full App Overlay - only appears on hover */}
+      <div className="absolute inset-0 z-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-900/40 backdrop-blur-[2px] rounded-2xl pointer-events-none">
+        <Link 
+          to="/split-and-grow" 
+          className="bg-white text-zinc-900 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 transform group-hover:scale-110 transition-transform pointer-events-auto"
+        >
+          <ExternalLink className="w-4 h-4 text-brand-primary" />
+          View Full Interactive App
+        </Link>
+      </div>
+
       {/* Browser Frame */}
       <div className="bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col h-[500px]">
+
         {/* Browser Top Bar */}
         <div className="bg-zinc-50 border-b border-zinc-200 px-4 py-3 flex items-center gap-4">
           <div className="flex gap-1.5">

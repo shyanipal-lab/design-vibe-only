@@ -340,7 +340,6 @@ export default function Fun() {
               )}
             </AnimatePresence>
           </motion.div>
-
         </div>
       </div>
     </section>
