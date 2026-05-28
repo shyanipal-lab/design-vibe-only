@@ -8,6 +8,9 @@ import HoshakshamApp from "../components/HoshakshamApp";
 import FyleWebApp from "../components/FyleWebApp";
 import FyleReimbursementApp from "../components/FyleReimbursementApp";
 import MercedesApp from "../components/MercedesApp";
+import EditableImage from "../components/EditableImage";
+import SobersApp from "../components/SobersApp";
+import { CinematicHero } from "../components/ui/cinematic-hero";
 
 interface Section {
   id: string;
@@ -28,6 +31,54 @@ interface CaseStudy {
 }
 
 const CASE_STUDIES: Record<string, CaseStudy> = {
+  sobers: {
+    title: "Sobers",
+    subtitle: "making accountability effortless",
+    category: "HealthTech · Support System · 0 → 1",
+    duration: "4 Months",
+    year: "2026",
+    heroComponent: (
+      <div className="w-full h-full min-h-[480px] bg-zinc-950 overflow-hidden relative">
+        <CinematicHero 
+          brandName="Sobers"
+          tagline1="Track the journey,"
+          tagline2="not just the days."
+          cardHeading="Accountability, redefined."
+          cardDescription={<><span className="text-white font-semibold">Sobers</span> empowers partners in recovery with structured accountability, precise sobriety tracking, and beautiful shared timelines.</>}
+          metricValue={365}
+          metricLabel="Days Clean"
+          ctaHeading="Reclaim your time."
+          ctaDescription="Join thousands of peers in the 12-step program taking control of their timeline."
+          className="w-full h-full scale-[0.80] sm:scale-95 md:scale-100 origin-center bg-transparent"
+        />
+      </div>
+    ),
+    keyInsight: "For recovery partners, a daily check-in is not just raw data. It is a lifeline of trust.",
+    sections: [
+      { id: "app", label: "Interactive System" }
+    ],
+    content: (
+      <div className="space-y-20 font-sans pb-40">
+        <section id="app" className="scroll-mt-32">
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-4 mb-2">
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">Interactive System Protocol</h2>
+              <span className="px-3 py-1 bg-brand-primary/15 text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-full">Active Prototype</span>
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">Encrypted peer check-ins & structured accountability</p>
+            
+            <p className="text-zinc-600 font-bold mb-8 leading-relaxed text-lg">
+              Explore the live companion app for Sobers. Check-in on daily recovery states, log partner call completions, sign badges, and send direct supportive thoughts across our secure environment mockup.
+            </p>
+
+            <div className="w-full text-white rounded-[40px] border-[6px] border-zinc-900 shadow-2xl relative overflow-hidden h-[540px]">
+              <SobersApp />
+            </div>
+          </div>
+        </section>
+      </div>
+    )
+  },
   hoshaksham: {
     title: "Hoshaksham",
     subtitle: "Making admin feel like money",
@@ -67,7 +118,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               {[
                 { label: "Type", val: "0 → 1 SaaS" },
                 { label: "Platform", val: "Web App" },
-                { label: "My Role", val: "End-to-end design lead" },
+                { label: "My Role", val: "Founding Product Designer Lead" },
                 { label: "Approach", val: "UCD + Co-design" },
               ].map(item => (
                 <div key={item.label}>
@@ -91,6 +142,19 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                 </p>
               </div>
             </div>
+
+            <EditableImage 
+              id="hoshaksham-context-hero" 
+              label="The Workspace Illustration" 
+              className="mb-12"
+              defaultIllustration={
+                <svg viewBox="0 0 400 225" fill="none" className="w-full h-full p-20 opacity-20">
+                  <rect x="50" y="50" width="300" height="125" rx="20" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="200" cy="112" r="30" stroke="currentColor" strokeWidth="2" />
+                  <path d="M100 112H150M250 112H300" stroke="currentColor" strokeWidth="2" />
+                </svg>
+              }
+            />
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
@@ -128,6 +192,31 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                 That constraint defined our entire product strategy: radical simplicity, emotional alignment, zero admin overhead.
               </p>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+            <EditableImage 
+              id="hoshaksham-brief-1" 
+              label="Legacy Experience" 
+              defaultIllustration={
+                <svg viewBox="0 0 100 100" className="w-20 h-20 text-zinc-200">
+                  <rect x="20" y="20" width="60" height="60" className="fill-none stroke-current" strokeWidth="2" />
+                  <line x1="20" y1="40" x2="80" y2="40" className="stroke-current" strokeWidth="1" />
+                  <line x1="20" y1="60" x2="80" y2="60" className="stroke-current" strokeWidth="1" />
+                  <line x1="40" y1="20" x2="40" y2="80" className="stroke-current" strokeWidth="1" />
+                </svg>
+              }
+            />
+            <EditableImage 
+              id="hoshaksham-brief-2" 
+              label="Hoshaksham Scalpel Approach" 
+              defaultIllustration={
+                <svg viewBox="0 0 100 100" className="w-20 h-20 text-brand-primary">
+                  <circle cx="50" cy="50" r="30" className="fill-none stroke-current" strokeWidth="4" />
+                  <path d="M50 35V65M35 50H65" className="stroke-current" strokeWidth="4" />
+                </svg>
+              }
+            />
           </div>
 
           <div className="mt-12 p-12 bg-zinc-900 rounded-[48px] text-white italic relative overflow-hidden group">
@@ -175,13 +264,19 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             </div>
           </div>
 
-          <div className="p-10 border-[6px] border-zinc-900 rounded-[40px] flex gap-8 items-center">
+          <div className="p-10 border-[6px] border-zinc-900 rounded-[40px] flex gap-8 items-center mb-12">
              <div className="flex-1">
                 <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4">Process Principle I apply when leading teams</p>
                 <p className="text-2xl font-black leading-tight mb-4">One deep interview beats a hundred shallow surveys at zero stage.</p>
                 <p className="text-zinc-500 font-medium">I coach designers to resist the pressure to scale research before the core insight is locked. Depth first, breadth later.</p>
              </div>
           </div>
+
+          <EditableImage 
+            id="hoshaksham-research-artifacts" 
+            label="Research synthesis boards (Figma/FigJam)" 
+            aspectRatio="aspect-[21/9]"
+          />
         </section>
 
         {/* Design Strategy */}
@@ -211,6 +306,13 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
               </div>
             ))}
           </div>
+
+          <EditableImage 
+            id="hoshaksham-strategy-visual" 
+            label="Visualizing the 'Credit-only bank' principle" 
+            className="mb-12"
+            aspectRatio="aspect-[21/9]"
+          />
 
           <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest italic">
             These weren't style choices. They were strategic decisions grounded in research, documented as 
@@ -271,6 +373,12 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
             </p>
           </div>
 
+          <EditableImage 
+            id="hoshaksham-direction-dashboard" 
+            label="Dashboard Architecture & Information Hierarchy" 
+            className="mb-8"
+          />
+
           <div className="p-10 bg-zinc-900 text-white rounded-[40px]">
             <p className="text-[10px] font-black uppercase tracking-widest text-brand-primary mb-6">Why this mattered beyond this project</p>
             <p className="text-xl font-bold leading-tight italic">
@@ -300,22 +408,29 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20 items-center">
-            {[
-              { icon: Sparkles, label: "Figma", desc: "Colour, type & spacing as local styles + variables" },
-              { icon: Layout, label: "Design tokens", desc: "Named variables structured for export" },
-              { icon: Zap, label: "Copied to FlutterFlow", desc: "Tokens mapped manually into FF theme settings" },
-              { icon: CheckCircle2, label: "Production build", desc: "Single source of truth — no guessed hex codes" },
-            ].map((step, i) => (
-              <div key={i} className="bg-zinc-900 p-8 rounded-[32px] text-zinc-100 flex flex-col items-center text-center relative group">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <step.icon className="w-6 h-6 text-brand-primary" />
-                </div>
-                <p className="text-sm font-black mb-2">{step.label}</p>
-                <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-tight">{step.desc}</p>
-                {i < 3 && <div className="hidden lg:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 text-zinc-300">→</div>}
-              </div>
-            ))}
-          </div>
+             {[
+               { icon: Sparkles, label: "Figma", desc: "Colour, type & spacing as local styles + variables" },
+               { icon: Layout, label: "Design tokens", desc: "Named variables structured for export" },
+               { icon: Zap, label: "Copied to FlutterFlow", desc: "Tokens mapped manually into FF theme settings" },
+               { icon: CheckCircle2, label: "Production build", desc: "Single source of truth — no guessed hex codes" },
+             ].map((step, i) => (
+               <div key={i} className="bg-zinc-900 p-8 rounded-[32px] text-zinc-100 flex flex-col items-center text-center relative group">
+                 <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                   <step.icon className="w-6 h-6 text-brand-primary" />
+                 </div>
+                 <p className="text-sm font-black mb-2">{step.label}</p>
+                 <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-tight">{step.desc}</p>
+                 {i < 3 && <div className="hidden lg:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 text-zinc-300">→</div>}
+               </div>
+             ))}
+           </div>
+
+           <EditableImage 
+             id="hoshaksham-des-tokens" 
+             label="Visualizing the Design Tokens & Build Pipeline" 
+             className="mb-20"
+             aspectRatio="aspect-[21/9]"
+           />
 
           <div className="space-y-12 mb-20">
             {[
@@ -404,6 +519,27 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
                 </p>
              </div>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+            <EditableImage 
+              id="hoshaksham-hicks-ui" 
+              label="Hick's Law: UI Reduction Example" 
+              defaultIllustration={
+                <div className="w-full flex justify-center gap-4">
+                  <div className="w-12 h-2 rounded bg-zinc-200" />
+                  <div className="w-12 h-2 rounded bg-brand-primary" />
+                  <div className="w-12 h-2 rounded bg-zinc-200" />
+                </div>
+              }
+            />
+            <EditableImage 
+              id="hoshaksham-zeigarnik-ui" 
+              label="Zeigarnik Effect: Progress Indicators" 
+              defaultIllustration={
+                <div className="w-32 h-32 rounded-full border-8 border-brand-primary border-t-zinc-200 rotate-45" />
+              }
+            />
+          </div>
         </section>
 
         {/* Impact */}
@@ -432,6 +568,13 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
              <p className="text-5xl font-black text-brand-primary mb-2">1-tap</p>
              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">WhatsApp invoice delivery — where students already are</p>
           </div>
+
+          <EditableImage 
+            id="hoshaksham-impact-charts" 
+            label="Impact Charts: Admin time Reduction" 
+            className="mt-12"
+            aspectRatio="aspect-[21/9]"
+          />
         </section>
 
         {/* Reflections */}
@@ -766,146 +909,100 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div className="bg-white min-h-screen font-sans">
-      <CaseStudyNav sections={study.sections} />
-      
-      {/* Hero Section */}
-      <section className="pt-48 pb-20 px-6 relative overflow-hidden">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-6 mb-12">
-            <Link 
-              to="/" 
-              className="inline-flex items-center gap-2 text-zinc-400 hover:text-brand-primary font-bold uppercase tracking-widest text-[10px] transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Back to Work
-            </Link>
-            <div className="w-1 h-1 rounded-full bg-zinc-200" />
-            <Link 
-              to="/" 
-              className="text-zinc-400 hover:text-brand-primary font-bold uppercase tracking-widest text-[10px] transition-colors"
-            >
-              Home
-            </Link>
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
-            <div className="flex items-center gap-4 mb-8">
-              <span className="font-mono text-brand-primary font-bold text-sm">{study.year}</span>
-              <div className="w-12 h-[1px] bg-zinc-200" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{study.category}</span>
-            </div>
-            
-            <h1 className="font-header text-6xl md:text-9xl font-black uppercase tracking-tighter mb-10 leading-[0.85]">
-              {study.title.split(' — ')[0]} — <br />
-              <span className="text-brand-primary font-accent lowercase">{study.title.split(' — ')[1] || study.subtitle}</span>
-            </h1>
-          </motion.div>
+    <div className="bg-zinc-950 min-h-screen font-sans flex flex-col pt-16 text-white">
+      {/* Immersive minimalist header */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900 py-4 px-6 md:px-12 flex justify-between items-center">
+        <Link 
+          to="/" 
+          className="inline-flex items-center gap-2 text-zinc-400 font-bold uppercase tracking-widest text-[10px] transition-all hover:text-brand-primary group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Work
+        </Link>
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] uppercase font-bold tracking-widest text-zinc-500">Current View —</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-white">{study.title}</span>
         </div>
-      </section>
+      </header>
 
-      {/* Hero Image */}
-      <section className="px-6 mb-32">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="aspect-[21/9] rounded-[60px] overflow-hidden bg-zinc-100 shadow-2xl relative"
-          >
-            {study.heroComponent ? (
-              <div className="w-full h-full">
-                {study.heroComponent}
+      {/* Main product showcase view (no sidebars, no messy case study document text/details boxes) */}
+      <main className="flex-1 w-full bg-zinc-950 flex flex-col">
+        {/* Universal, gorgeous, stable introduction banner */}
+        <div className="w-full bg-zinc-950 py-16 md:py-24 px-6 md:px-12 flex flex-col items-center justify-center border-b border-zinc-900 relative overflow-hidden">
+          {/* Subtle grid pattern background to enrich look without bloating */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+          <div className="max-w-4xl w-full text-center md:text-left relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-12">
+            <div className="flex-1">
+              <span className="font-mono text-brand-primary font-bold text-xs uppercase tracking-widest block mb-4">
+                {study.year} • {study.category} • {study.duration}
+              </span>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter mb-4 leading-[1.1] text-white">
+                {study.title}
+              </h1>
+              <p className="text-zinc-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+                {study.subtitle}
+              </p>
+            </div>
+
+            {/* Strategic Key Insight Panel on the right */}
+            <div className="md:w-80 bg-zinc-900/60 p-6 md:p-8 rounded-[32px] border border-zinc-800 backdrop-blur-sm self-stretch flex flex-col justify-between text-left">
+              <div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-brand-primary block mb-2">Key Insight</span>
+                <p className="text-sm md:text-base font-bold italic leading-snug text-zinc-100">
+                  "{study.keyInsight}"
+                </p>
               </div>
-            ) : (
-              <img 
-                src={study.heroImage} 
-                alt={study.title} 
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            )}
-          </motion.div>
+              <div className="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                <span>Role: Lead Designer</span>
+                <span>Tools: Figma, React</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      {/* Content Layout */}
-      <section className="pb-40 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-            {/* Main Content */}
-            <div className="lg:col-span-8">
-              {study.content}
+        {/* The Live Interactive Core Mockup App Workspace */}
+        <div className="w-full bg-zinc-950 py-16 px-4 md:px-12 flex flex-col items-center justify-center">
+          <div className="w-full max-w-6xl">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 text-white">
+              <div>
+                <span className="px-3 py-1 bg-brand-primary/15 text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-full">
+                  Live Interactive Workspace
+                </span>
+                <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mt-3 text-white">
+                  {study.title.split(' — ')[0]} Protocol Prototype
+                </h2>
+              </div>
+              <p className="text-zinc-400 text-xs font-semibold max-w-md">
+                This is the complete functional user interface designed for {study.title.split(' — ')[0]}. Use the interactive elements to experience the full operational system in real-time.
+              </p>
             </div>
 
-            {/* Sticky Sidebar */}
-            <aside className="lg:col-span-4 hidden lg:block">
-              <div className="sticky top-40 space-y-12">
-                <div className="p-10 rounded-[40px] bg-zinc-50 border border-zinc-100">
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-8">Project Details</h4>
-                  <div className="space-y-8">
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Duration</p>
-                      <p className="font-bold text-zinc-900">{study.duration}</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Year</p>
-                      <p className="font-bold text-zinc-900">{study.year}</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Role</p>
-                      <p className="font-bold text-zinc-900">Lead Product Designer</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Tools</p>
-                      <p className="font-bold text-zinc-900">Figma, Maze, React</p>
-                    </div>
+            {/* Embed the custom product interactive app */}
+            <div className="w-full bg-zinc-950 text-white rounded-[40px] border-[6px] border-zinc-950 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] relative overflow-hidden min-h-[580px] lg:min-h-[640px]">
+              {id?.toLowerCase() === "sobers" && <SobersApp />}
+              {id?.toLowerCase() === "hoshaksham" && <HoshakshamApp />}
+              {id?.toLowerCase() === "mercedes" && <MercedesApp />}
+              {id?.toLowerCase() === "fyle" && (
+                <div className="w-full h-full flex flex-col bg-white text-zinc-900">
+                  <div className="h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                  </div>
+                  <div className="flex-1 overflow-auto min-h-[500px]">
+                    <FyleReimbursementApp />
                   </div>
                 </div>
-
-                <div className="p-10 rounded-[40px] bg-zinc-900 text-white">
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-accent lowercase mb-6">Key Insight</h4>
-                  <p className="text-lg font-display font-bold italic leading-tight">
-                    {study.keyInsight}
-                  </p>
-                </div>
-              </div>
-            </aside>
+              )}
+            </div>
           </div>
         </div>
-      </section>
+      </main>
 
-      {/* Next Project Footer */}
-      <footer className="bg-zinc-900 text-white py-40">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 mb-8">Next Project</p>
-          {(() => {
-            const keys = Object.keys(CASE_STUDIES);
-            const currentIndex = keys.indexOf(id?.toLowerCase() || "");
-            const nextIndex = (currentIndex + 1) % keys.length;
-            const nextKey = keys[nextIndex];
-            const nextProject = CASE_STUDIES[nextKey as keyof typeof CASE_STUDIES];
-            
-            return (
-              <Link 
-                to={`/case-study/${nextKey}`}
-                className="group inline-block"
-              >
-                <h2 className="font-display text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 group-hover:text-brand-primary transition-colors">
-                  {nextProject.title.split(' — ')[0]}
-                  <ChevronRight className="inline-block w-12 h-12 md:w-20 md:h-20 group-hover:translate-x-4 transition-transform" />
-                </h2>
-              </Link>
-            );
-          })()}
-        </div>
-      </footer>
-
+      {/* Minimal clean footer */}
       <Footer />
     </div>
   );

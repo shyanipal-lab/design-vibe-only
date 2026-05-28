@@ -7,16 +7,25 @@ export function useCurrency() {
   useEffect(() => {
     const fetchCurrency = async () => {
       try {
-        const response = await fetch("https://ipapi.co/json/");
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+
+        const response = await fetch("https://ipapi.co/json/", { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
         const data = await response.json();
         if (data.currency) {
           setCurrency(data.currency);
         }
       } catch (error) {
-        console.error("Failed to fetch currency:", error);
+        // Fallback to browser locale - silent if successful
         try {
           const localeCurrency = new Intl.NumberFormat().resolvedOptions().currency;
-          if (localeCurrency) setCurrency(localeCurrency);
+          if (localeCurrency) {
+            setCurrency(localeCurrency);
+          } else {
+            setCurrency("USD");
+          }
         } catch (e) {
           setCurrency("USD");
         }

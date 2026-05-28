@@ -3,9 +3,11 @@ import { User, Sparkles, Heart, Coffee, Code, CheckCircle2, Car } from "lucide-r
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LocationMap } from "./ui/expand-map";
+import { MovingBorder } from "./ui/moving-border";
+import profileImg from "../assets/images/regenerated_image_1779998441461.png";
 
 const ABOUT_IMAGES = [
-  { id: 1, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4&style=circle", alt: "Shyani Pal - Caricature" },
+  { id: 1, src: profileImg, alt: "Shyani Pal" },
   { id: 2, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Design&backgroundColor=c0aede&style=circle", alt: "Design Workshop - Caricature" },
   { id: 3, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Collab&backgroundColor=d1d4f9&style=circle", alt: "Collaboration - Caricature" },
   { id: 4, src: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pixel&backgroundColor=ffd5dc&style=circle", alt: "Pixel Perfection - Caricature" },
@@ -39,10 +41,20 @@ export default function About() {
                   >
                     <div className="absolute inset-0 bg-brand-primary/10 rounded-[40px] md:rounded-[60px] rotate-6" />
                     <div className="absolute inset-0 bg-zinc-900 rounded-[40px] md:rounded-[60px] -rotate-3 overflow-hidden shadow-2xl">
+                      <MovingBorder
+                        outerClassName="absolute inset-0 pointer-events-none z-10"
+                        className="bg-transparent w-full h-full"
+                        borderWidth={2}
+                        gradientWidth={140}
+                        duration={5}
+                        colors={["#dce817", "#10f400", "#75ba33"]}
+                      >
+                        <div className="w-full h-full bg-transparent" />
+                      </MovingBorder>
                       <img 
                         src={ABOUT_IMAGES[0].src} 
                         alt="Shyani" 
-                        className="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-700"
+                        className="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-700 relative z-0"
                         referrerPolicy="no-referrer"
                       />
                     </div>

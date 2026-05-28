@@ -6,8 +6,23 @@ import HoshakshamApp from "./HoshakshamApp";
 import FyleWebApp from "./FyleWebApp";
 import FyleReimbursementApp from "./FyleReimbursementApp";
 import MercedesApp from "./MercedesApp";
+import SobersApp from "./SobersApp";
 
 const CASE_STUDIES = [
+  {
+    id: "sobers",
+    year: "2026",
+    title: "Sobers — Structured Accountability",
+    subtitle: "Empowering sponsors and sponsees with real-time sobriety tracking, milestone rewards, and interactive visual timelines.",
+    category: "Health • 0 → 1 • Case Study",
+    role: "Founding Lead Designer",
+    impact: "99% accountability rating",
+    link: "/case-study/sobers",
+    featured: true,
+    component: <SobersApp />,
+    type: "web",
+    color: "bg-zinc-950"
+  },
   {
     id: "fyle",
     year: "2020",
@@ -28,7 +43,7 @@ const CASE_STUDIES = [
     title: "Hoshaksham — Service Management",
     subtitle: "Making admin feel like money for independent service providers.",
     category: "SaaS • 0 → 1 • Case Study",
-    role: "Product Designer",
+    role: "Founding Product Designer Lead",
     impact: "0 spreadsheets required",
     link: "/case-study/hoshaksham",
     featured: false,
