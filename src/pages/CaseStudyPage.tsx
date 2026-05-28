@@ -9,7 +9,6 @@ import FyleWebApp from "../components/FyleWebApp";
 import FyleReimbursementApp from "../components/FyleReimbursementApp";
 import MercedesApp from "../components/MercedesApp";
 import EditableImage from "../components/EditableImage";
-import SobersApp from "../components/SobersApp";
 import { CinematicHero } from "../components/ui/cinematic-hero";
 
 interface Section {
@@ -31,54 +30,6 @@ interface CaseStudy {
 }
 
 const CASE_STUDIES: Record<string, CaseStudy> = {
-  sobers: {
-    title: "Sobers",
-    subtitle: "making accountability effortless",
-    category: "HealthTech · Support System · 0 → 1",
-    duration: "4 Months",
-    year: "2026",
-    heroComponent: (
-      <div className="w-full h-full min-h-[480px] bg-zinc-950 overflow-hidden relative">
-        <CinematicHero 
-          brandName="Sobers"
-          tagline1="Track the journey,"
-          tagline2="not just the days."
-          cardHeading="Accountability, redefined."
-          cardDescription={<><span className="text-white font-semibold">Sobers</span> empowers partners in recovery with structured accountability, precise sobriety tracking, and beautiful shared timelines.</>}
-          metricValue={365}
-          metricLabel="Days Clean"
-          ctaHeading="Reclaim your time."
-          ctaDescription="Join thousands of peers in the 12-step program taking control of their timeline."
-          className="w-full h-full scale-[0.80] sm:scale-95 md:scale-100 origin-center bg-transparent"
-        />
-      </div>
-    ),
-    keyInsight: "For recovery partners, a daily check-in is not just raw data. It is a lifeline of trust.",
-    sections: [
-      { id: "app", label: "Interactive System" }
-    ],
-    content: (
-      <div className="space-y-20 font-sans pb-40">
-        <section id="app" className="scroll-mt-32">
-          <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-2">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">Interactive System Protocol</h2>
-              <span className="px-3 py-1 bg-brand-primary/15 text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-full">Active Prototype</span>
-            </div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">Encrypted peer check-ins & structured accountability</p>
-            
-            <p className="text-zinc-600 font-bold mb-8 leading-relaxed text-lg">
-              Explore the live companion app for Sobers. Check-in on daily recovery states, log partner call completions, sign badges, and send direct supportive thoughts across our secure environment mockup.
-            </p>
-
-            <div className="w-full text-white rounded-[40px] border-[6px] border-zinc-900 shadow-2xl relative overflow-hidden h-[540px]">
-              <SobersApp />
-            </div>
-          </div>
-        </section>
-      </div>
-    )
-  },
   hoshaksham: {
     title: "Hoshaksham",
     subtitle: "Making admin feel like money",
@@ -908,8 +859,16 @@ export default function CaseStudyPage() {
     return <Navigate to="/" replace />;
   }
 
+  const keys = Object.keys(CASE_STUDIES);
+  const currentIndex = keys.indexOf(id.toLowerCase());
+  const nextIndex = (currentIndex + 1) % keys.length;
+  const nextId = keys[nextIndex];
+  const nextStudy = CASE_STUDIES[nextId];
+
   return (
-    <div className="bg-zinc-950 min-h-screen font-sans flex flex-col pt-16 text-white">
+    <div className="bg-zinc-950 min-h-screen font-sans flex flex-col pt-16 text-white text-left">
+      <CaseStudyNav sections={study.sections} />
+
       {/* Immersive minimalist header */}
       <header className="fixed top-0 left-0 w-full z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900 py-4 px-6 md:px-12 flex justify-between items-center">
         <Link 
@@ -925,7 +884,7 @@ export default function CaseStudyPage() {
         </div>
       </header>
 
-      {/* Main product showcase view (no sidebars, no messy case study document text/details boxes) */}
+      {/* Main product showcase view */}
       <main className="flex-1 w-full bg-zinc-950 flex flex-col">
         {/* Universal, gorgeous, stable introduction banner */}
         <div className="w-full bg-zinc-950 py-16 md:py-24 px-6 md:px-12 flex flex-col items-center justify-center border-b border-zinc-900 relative overflow-hidden">
@@ -964,9 +923,9 @@ export default function CaseStudyPage() {
         </div>
 
         {/* The Live Interactive Core Mockup App Workspace */}
-        <div className="w-full bg-zinc-950 py-16 px-4 md:px-12 flex flex-col items-center justify-center">
+        <div className="w-full bg-zinc-950 py-16 px-4 md:px-12 flex flex-col items-center justify-center border-b border-zinc-900">
           <div className="w-full max-w-6xl">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 text-white">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 text-white text-left">
               <div>
                 <span className="px-3 py-1 bg-brand-primary/15 text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-full">
                   Live Interactive Workspace
@@ -975,14 +934,13 @@ export default function CaseStudyPage() {
                   {study.title.split(' — ')[0]} Protocol Prototype
                 </h2>
               </div>
-              <p className="text-zinc-400 text-xs font-semibold max-w-md">
+              <p className="text-zinc-400 text-xs font-semibold max-w-md text-left">
                 This is the complete functional user interface designed for {study.title.split(' — ')[0]}. Use the interactive elements to experience the full operational system in real-time.
               </p>
             </div>
 
             {/* Embed the custom product interactive app */}
             <div className="w-full bg-zinc-950 text-white rounded-[40px] border-[6px] border-zinc-950 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] relative overflow-hidden min-h-[580px] lg:min-h-[640px]">
-              {id?.toLowerCase() === "sobers" && <SobersApp />}
               {id?.toLowerCase() === "hoshaksham" && <HoshakshamApp />}
               {id?.toLowerCase() === "mercedes" && <MercedesApp />}
               {id?.toLowerCase() === "fyle" && (
@@ -999,6 +957,87 @@ export default function CaseStudyPage() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* The Detailed Case Study Document Narrative */}
+        <div className="w-full bg-zinc-950 py-24 px-6 md:px-12 flex justify-center">
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            {/* Left Column: Rich Process & Narrative */}
+            <div className="lg:col-span-8 space-y-12 text-zinc-300 [&_p]:text-zinc-300 [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_li_p]:text-zinc-300 [&_p_span]:text-white text-left">
+              {study.content}
+            </div>
+
+            {/* Right Column: Sticky Navigation Hub & Specs */}
+            <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 self-start hidden lg:block text-left">
+              <div className="bg-zinc-900/40 border border-zinc-900 rounded-[32px] p-8 space-y-6 backdrop-blur-sm">
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary block">Metadata Protocols</span>
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Temporal Frame</span>
+                    <p className="text-sm font-bold text-white mt-1">{study.duration}</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Cycle Year</span>
+                    <p className="text-sm font-bold text-white mt-1">{study.year}</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Categorization</span>
+                    <p className="text-sm font-bold text-white mt-1">{study.category}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dynamic Document Roadmap Outline */}
+              <div className="bg-zinc-900/40 border border-zinc-900 rounded-[32px] p-8 space-y-4 backdrop-blur-sm">
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary block">Roadmap Index</span>
+                <ul className="space-y-2">
+                  {study.sections.map((sec) => (
+                    <li key={sec.id}>
+                      <button
+                        onClick={() => {
+                          const el = document.getElementById(sec.id);
+                          if (el) {
+                            const offset = 100;
+                            const bodyRect = document.body.getBoundingClientRect().top;
+                            const elementRect = el.getBoundingClientRect().top;
+                            const elementPosition = elementRect - bodyRect;
+                            const offsetPosition = elementPosition - offset;
+                            window.scrollTo({
+                              top: offsetPosition,
+                              behavior: "smooth"
+                            });
+                          }
+                        }}
+                        className="text-xs font-semibold text-zinc-400 hover:text-white flex items-center gap-2 transition-colors text-left py-1"
+                      >
+                        <ChevronRight className="w-3 h-3 text-brand-primary" />
+                        {sec.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        {/* Dynamic Next Project Portal */}
+        <div className="w-full bg-zinc-900/30 border-t border-zinc-900 py-24 px-6 text-center flex flex-col items-center">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-brand-primary font-bold block mb-4">
+            Next Structured Protocol
+          </span>
+          <Link 
+            to={`/case-study/${nextId}`} 
+            className="group inline-flex flex-col items-center gap-2 max-w-2xl"
+          >
+            <span className="text-3xl md:text-5xl font-black uppercase tracking-tighter hover:text-brand-primary text-white transition-colors leading-tight">
+              {nextStudy.title}
+            </span>
+            <span className="text-xs font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors mt-4 flex items-center gap-1.5 uppercase tracking-widest">
+              Read Next Case Study <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-brand-primary" />
+            </span>
+          </Link>
         </div>
       </main>
 
