@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LocationMap } from "./ui/expand-map";
 import { MovingBorder } from "./ui/moving-border";
-import profileImg from "../assets/images/regenerated_image_1779998441461.png";
+import profileImg from "../assets/images/regenerated_image_1780031625396.png";
 
 const ABOUT_IMAGES = [
   { id: 1, src: profileImg, alt: "Shyani Pal" },

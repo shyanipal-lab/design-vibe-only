@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import Footer from "../components/Footer";
 import { ArrowLeft, Sparkles, User, Target, Heart, GraduationCap, Briefcase, BookOpen, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
+import profileImg from "../assets/images/regenerated_image_1780031625396.png";
 
 export default function AboutPage() {
   return (
@@ -44,11 +45,11 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative max-w-[70%] mx-auto lg:ml-auto lg:mr-0"
             >
-              <div className="aspect-square rounded-[60px] overflow-hidden bg-zinc-100 border-8 border-white shadow-2xl rotate-3">
+              <div className="aspect-square rounded-[60px] overflow-hidden bg-zinc-900 border-8 border-white shadow-2xl rotate-3">
                 <img 
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4&style=circle" 
-                  alt="Shyani Pal - Caricature" 
-                  className="w-full h-full object-cover"
+                  src={profileImg} 
+                  alt="Shyani Pal - Avatar" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
               </div>
