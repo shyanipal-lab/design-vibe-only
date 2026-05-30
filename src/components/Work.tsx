@@ -136,7 +136,7 @@ export default function Work() {
                     </div>
                   ) : project.component ? (
                     <div className="aspect-[4/3] md:aspect-[16/10] flex items-center justify-center p-3 md:p-12 bg-zinc-50 overflow-hidden">
-                      <div className="w-full h-full bg-white rounded-xl md:rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col scale-[0.85] sm:scale-90 md:scale-100 origin-center">
+                      <div className="w-full h-full bg-white rounded-xl md:rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col origin-center">
                         <div className="h-6 md:h-8 bg-zinc-100 border-b border-zinc-200 flex items-center px-3 md:px-4 gap-1 md:gap-1.5 shrink-0">
                           <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
                           <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
@@ -144,39 +144,39 @@ export default function Work() {
                         </div>
                         <div className="flex-1 overflow-hidden relative">
                           {project.id === "mercedes" && !isMercedesUnlocked ? (
-                            <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center text-center p-4 relative overflow-hidden select-none">
+                            <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center text-center p-6 relative overflow-hidden select-none">
                               <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
                               
-                              <div className="w-12 h-12 rounded-full bg-zinc-90 w-12 h-12 flex items-center justify-center mb-3 text-red-400 bg-zinc-900 border border-zinc-800 shadow-lg">
-                                <Lock className="w-5 h-5 animate-pulse" />
+                              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-3 text-red-400 bg-zinc-900 border border-zinc-800 shadow-lg">
+                                <Lock className="w-4 h-4 md:w-5 md:h-5 animate-pulse" />
                               </div>
 
-                              <span className="text-[7px] font-black uppercase tracking-[0.25em] text-red-300 block mb-1">
+                              <span className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.25em] text-red-300 block mb-1">
                                 NDA ENCRYPTED PREVIEW
                               </span>
-                              <h4 className="text-xs font-black text-white uppercase tracking-tight mb-2">
+                              <h4 className="text-sm md:text-base font-black text-white uppercase tracking-tight mb-3">
                                 Access Restricted
                               </h4>
 
-                              <form onSubmit={handleInlineUnlock} className="flex flex-col items-center gap-1.5 max-w-[200px] w-full z-10">
+                              <form onSubmit={handleInlineUnlock} className="flex flex-col items-center gap-2 max-w-[240px] w-full z-10">
                                 <input 
                                   type="text"
                                   style={{ WebkitTextSecurity: 'disc' } as any}
-                                  placeholder="Enter Passcode"
+                                  placeholder="Enter Passcode (mercedes)"
                                   value={inlinePassword}
                                   onChange={(e) => {
                                     setInlinePassword(e.target.value);
                                     if (inlineError) setInlineError("");
                                   }}
-                                  className="w-full bg-zinc-900 border border-zinc-805 focus:border-brand-primary placeholder-zinc-700 focus:outline-none rounded-lg py-1.5 px-3 text-[10px] text-center text-white font-mono transition-all"
+                                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-brand-primary placeholder-zinc-600 focus:outline-none rounded-xl py-2.5 px-4 text-xs md:text-sm text-center text-white font-mono transition-all"
                                   autoComplete="new-password"
                                 />
                                 {inlineError && (
-                                  <span className="text-[8px] font-mono font-bold text-rose-400">{inlineError}</span>
+                                  <span className="text-[10px] font-mono font-bold text-rose-400">{inlineError}</span>
                                 )}
                                 <button
                                   type="submit"
-                                  className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-[8px] uppercase tracking-wider py-1.5 px-3 rounded-lg transition-all"
+                                  className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all active:scale-[0.98]"
                                 >
                                   Unlock Preview
                                 </button>
@@ -187,7 +187,7 @@ export default function Work() {
                                   setIsMercedesUnlocked(true);
                                   sessionStorage.setItem("mercedes_unlocked", "true");
                                 }}
-                                className="mt-3 text-[8px] text-zinc-500 hover:text-zinc-300 font-bold uppercase tracking-wider transition-colors underline underline-offset-2"
+                                className="mt-4 text-[10px] text-zinc-500 hover:text-zinc-300 font-bold uppercase tracking-wider transition-colors underline underline-offset-2"
                               >
                                 Rapid Bypass
                               </button>
