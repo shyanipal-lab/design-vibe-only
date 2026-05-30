@@ -571,9 +571,9 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
   },
   fyle: {
     title: "Fyle — Bulk Mileage",
-    subtitle: "Expense Report",
+    subtitle: "Bulk Mileage Expense Report",
     category: "Fintech · Expense Management · Case Study",
-    duration: "1 Month",
+    duration: "6 Weeks",
     year: "2020",
     heroComponent: (
       <div className="w-full h-full bg-white flex flex-col">
@@ -587,133 +587,364 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
         </div>
       </div>
     ),
-    keyInsight: "Users were filing mileage expenses one painful entry at a time.",
+    keyInsight: "500+ users were filing mileage expenses one painful entry at a time — cut complaint tickets by 60% in 6 weeks.",
     sections: [
-      { id: "story", label: "The Story" },
-      { id: "impact", label: "Impact" },
+      { id: "context", label: "The Setup" },
+      { id: "problem", label: "The Problem" },
+      { id: "audience", label: "Our Audience" },
+      { id: "research", label: "Research" },
+      { id: "exploration", label: "Exploration" },
+      { id: "transformation", label: "Before vs After" },
+      { id: "accessibility", label: "Accessibility" },
+      { id: "outcome", label: "Outcome" },
+      { id: "reflection", label: "Reflection" }
     ],
     content: (
-      <div className="space-y-24 font-sans">
-        {/* Comic Book Intro */}
-        <section id="story" className="scroll-mt-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 auto-rows-min">
-            
-            {/* Panel 1: The Crisis */}
-            <div className="lg:col-span-7 border-[6px] border-zinc-900 bg-white p-8 relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1">
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '6px 6px' }}></div>
-              <div className="absolute top-0 left-0 bg-zinc-900 text-white px-4 py-1 font-black uppercase tracking-widest text-[10px] z-10">The Crisis</div>
-              <div className="mt-4">
-                <h4 className="text-4xl font-black uppercase tracking-tighter mb-4 leading-none">500+ Support Tickets!</h4>
-                <p className="text-lg font-bold text-zinc-600 leading-tight mb-6">
-                  The inbox was a battlefield. Users were drowning in forms. Some were literally crying over mileage logs.
-                </p>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-2xl">😭</div>
-                  <div className="bg-zinc-100 p-4 rounded-2xl rounded-tl-none border-2 border-zinc-900 relative">
-                    <p className="text-sm font-bold italic">"I'd rather walk than file another expense!"</p>
-                    <div className="absolute -left-2 top-0 w-4 h-4 bg-zinc-100 border-l-2 border-t-2 border-zinc-900 transform -rotate-45"></div>
-                  </div>
-                </div>
+      <div className="space-y-40 font-sans pb-40">
+        {/* Setup */}
+        <section id="context" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">What is Fyle, and why was mileage broken?</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-[#1a6b4a] mb-10 font-bold">The Setup</p>
+
+          <div className="max-w-4xl space-y-6 text-xl text-zinc-600 leading-relaxed mb-12">
+            <p>
+              Fyle is a B2B expense management platform built for companies whose employees travel regularly. The mileage feature let users log routes and get reimbursed for distance — sensible in theory.
+            </p>
+            <p>
+              In practice: every single trip required its own form submission. Date, vehicle type, cost centre, project, route — filled out from scratch, every time. For a daily commuter, that's 20+ identical submissions a month. The support inbox reflected it.
+            </p>
+          </div>
+
+          <div className="p-12 bg-emerald-50 border border-emerald-100 rounded-[48px] text-zinc-900 italic relative overflow-hidden group mb-12">
+            <p className="text-[10px] font-black uppercase tracking-widest text-[#1a6b4a] mb-6 font-bold">User Quote</p>
+            <p className="text-2xl md:text-3xl font-display font-medium leading-tight mb-4" style={{ color: '#000000' }}>
+              "I've genuinely considered not claiming expenses anymore. The form takes longer than the commute itself."
+            </p>
+            <p className="text-xs font-bold text-zinc-500 font-mono" style={{ color: '#000000' }}>
+              — JATIN SHARMA, DAILY COMMUTER AND FYLE USER
+            </p>
+          </div>
+
+          <div className="max-w-4xl text-xl text-zinc-600 leading-relaxed mb-12">
+            <p>
+              The problem wasn't just friction — it was an equity issue. The users who travelled most were being penalised the most. The design was inadvertently punishing its heaviest users.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 py-10 border-y border-zinc-200">
+            {[
+              { label: "Timeline", val: "March – April 2020" },
+              { label: "Duration", val: "6 weeks" },
+              { label: "My Role", val: "End-to-end designer" },
+              { label: "Platform", val: "Web app" },
+              { label: "Team", val: "1 Designer · 4 Engineers" },
+            ].map(item => (
+              <div key={item.label}>
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-405 mb-2">{item.label}</p>
+                <p className="text-sm font-bold text-zinc-900">{item.val}</p>
               </div>
-            </div>
-
-            {/* Panel 2: The Insight */}
-            <div className="lg:col-span-5 border-[6px] border-zinc-900 bg-brand-primary p-8 relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
-              <div className="absolute top-0 left-0 bg-zinc-900 text-white px-4 py-1 font-black uppercase tracking-widest text-[10px]">The Insight</div>
-              <div className="flex flex-col h-full justify-center text-white">
-                <div className="text-7xl font-black mb-2">93%</div>
-                <p className="text-xl font-bold leading-none uppercase tracking-tighter">
-                  Travel every single day.
-                </p>
-                <div className="mt-6 p-4 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30">
-                  <p className="text-sm font-medium">If they travel daily, the date is almost always <span className="underline decoration-4">TODAY</span>.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Panel 3: The Hero Moment */}
-            <div className="lg:col-span-12 border-[6px] border-zinc-900 bg-zinc-50 p-12 relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] mt-8 overflow-hidden">
-              <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '8px 8px' }}></div>
-              <div className="absolute top-0 left-0 bg-zinc-900 text-white px-4 py-1 font-black uppercase tracking-widest text-[10px] z-10">The Solution</div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-                <div>
-                  <div className="inline-block bg-yellow-400 text-zinc-900 px-6 py-2 font-black text-3xl uppercase tracking-tighter mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -rotate-2">
-                    BULK ENTRY!
-                  </div>
-                  <h4 className="text-3xl font-black uppercase tracking-tighter mb-4 leading-none">No more one-by-one pain.</h4>
-                  <p className="text-zinc-600 font-bold leading-relaxed">
-                    We ditched the repetitive forms for a high-speed table. Set your vehicle once. Set your project once. Then just fly through the rows.
-                  </p>
-                </div>
-                <div className="relative">
-                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20 animate-bounce">
-                    <span className="font-black text-3xl uppercase tracking-tighter -rotate-12 text-zinc-900">BAM!</span>
-                  </div>
-                  <div className="relative w-full aspect-video bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col">
-                    <div className="h-6 bg-zinc-100 border-b border-zinc-200 flex items-center px-3 gap-1 shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
-                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
-                      <div className="w-2 h-2 rounded-full bg-zinc-300" />
-                    </div>
-                    <div className="flex-1 overflow-hidden">
-                      <FyleReimbursementApp />
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 bg-brand-primary text-white p-4 font-black text-xl uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-3">
-                    FIXED!
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Panel 4: The Result */}
-            <div className="lg:col-span-6 border-[6px] border-zinc-900 bg-white p-8 relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 mt-8">
-              <div className="absolute top-0 left-0 bg-zinc-900 text-white px-4 py-1 font-black uppercase tracking-widest text-[10px]">The Result</div>
-              <div className="flex items-center gap-8">
-                <div className="text-6xl">📉</div>
-                <div>
-                  <h4 className="text-2xl font-black uppercase tracking-tighter mb-2">Tickets Plummeted</h4>
-                  <p className="text-zinc-500 font-bold">The support team finally got their lunch breaks back.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Panel 5: The Takeaway */}
-            <div className="lg:col-span-6 border-[6px] border-zinc-900 bg-zinc-900 p-8 relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform rotate-1 mt-8 text-white">
-              <div className="absolute top-0 left-0 bg-brand-primary text-white px-4 py-1 font-black uppercase tracking-widest text-[10px]">The Lesson</div>
-              <p className="text-xl font-bold italic leading-tight mt-4">
-                "Listen to the patterns in the pain. 500 tickets aren't just complaints — they're a roadmap."
-              </p>
-            </div>
-
+            ))}
           </div>
         </section>
 
-        {/* Impact Stats */}
-        <section id="impact" className="scroll-mt-32">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-y-4 border-zinc-900">
+        {/* The Problem */}
+        <section id="problem" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">Four compounding frustrations, not one</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">The Problem</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            After reviewing 500+ support tickets, four patterns emerged — each making the others worse.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { val: "500+", label: "tickets resolved" },
-              { val: "6 wks", label: "to ship" },
-              { val: "93%", label: "daily travelers" },
-              { val: "100%", label: "peace restored" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-5xl font-black text-brand-primary uppercase tracking-tighter mb-2">{stat.val}</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-tight max-w-[120px] mx-auto">{stat.label}</p>
+              { emoji: "😨", title: "One expense at a time", text: "Every trip meant opening the full form, filling all fields, submitting — then starting from scratch. Daily commuters repeated this loop ~20 times a month." },
+              { emoji: "🔁", title: "Repetitive data entry", text: "Vehicle, cost centre, and project were almost always identical across trips — yet the form asked for them fresh each time. Users were penalised for consistency." },
+              { emoji: "🧐", title: "No sense of progress", text: "No overview, no count — just a screen of input fields. Users had to mentally track how many entries they'd made and how many remained." },
+              { emoji: "🫠", title: "No visibility into status", text: "Checking which expenses were saved, pending, or reported meant navigating away entirely. No glanceable summary existed." },
+            ].map(card => (
+              <div key={card.title} className="p-8 bg-zinc-50 border border-zinc-100 rounded-[32px] hover:border-zinc-300 transition-colors">
+                <span className="text-4xl block mb-6">{card.emoji}</span>
+                <h4 className="text-lg font-black uppercase tracking-tight mb-2 text-zinc-900" style={{ color: '#000000' }}>{card.title}</h4>
+                <p className="text-sm text-zinc-500 font-medium leading-relaxed" style={{ color: '#000000' }}>{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Our Audience */}
+        <section id="audience" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">The people stuck in this loop</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">Our Audience</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            Three user types emerged from the ticket analysis — with very different travel patterns but the same core frustration.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { initials: "SV", name: "Shweta Vas, 27", role: "Daily commuter by car", pain: "I save everything up and do it all at month-end. It takes over an hour. I dread it." },
+              { initials: "JA", name: "Jasmine Ansary, 28", role: "Client visits, 3–4x/week", pain: "I start filing and then just give up halfway. It's not worth it for the amount I'd get back." },
+              { initials: "JS", name: "Jatin Sharma, 26", role: "Daily commuter, field team", pain: "I've genuinely considered just not claiming. The form takes longer than my actual commute." },
+            ].map((persona, i) => (
+              <div key={persona.name} className="p-8 bg-white border border-zinc-200 rounded-[32px] flex flex-col justify-between">
+                <div>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm text-white mb-6 tracking-wider ${
+                    i === 0 ? "bg-[#1a6b4a]" : i === 1 ? "bg-amber-600" : "bg-neutral-800"
+                  }`}>
+                    {persona.initials}
+                  </div>
+                  <h4 className="text-base font-black text-zinc-900 leading-tight mb-1">{persona.name}</h4>
+                  <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-6" style={{ color: '#000000' }}>{persona.role}</p>
+                </div>
+                <p className="text-sm text-zinc-650 italic font-medium leading-relaxed bg-zinc-50 p-4 rounded-2xl border border-zinc-100" style={{ color: i === 1 ? '#551010' : '#000000' }}>
+                  "{persona.pain}"
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Quantitative Research */}
+        <section id="research" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">32 survey responses. One number changed everything.</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-[#1a6b4a] mb-10 font-bold">Quantitative Research</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            Given the 6-week ship window, I ran a focused survey rather than wait for a full study — designed to validate directional hypotheses quickly, not replace qualitative research. 32 responses came back. One data point immediately shaped the entire design direction.
+          </p>
+
+          <div className="p-12 border-2 border-zinc-900 rounded-[48px] bg-white flex flex-col items-center text-center max-w-xl mx-auto mb-12 shadow-[8px_8px_0px_0px_rgba(26,107,74,1)]">
+            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4 block">SURVEY REVEAL PERCENTAGE</span>
+            <span className="text-8xl font-black text-[#1a6b4a] tracking-tight mb-2">93%</span>
+            <p className="text-base font-bold text-zinc-700 uppercase tracking-wider max-w-xs" style={{ color: '#000000' }}>
+              of users travel <strong>every working day</strong>
+            </p>
+          </div>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            This single stat flipped how I thought about the problem. This wasn't a bulk-entry edge case — it was the primary use pattern. The design was built for the exception, not the rule.
+          </p>
+
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-8">Three design principles followed directly from the data</p>
+
+          <div className="space-y-6">
+            {[
+              { emoji: "📅", title: "Auto-fill the date", desc: "93% travel daily — the date is almost always today. Don't make them type it. Editable if needed, but never blank by default." },
+              { emoji: "⚡", title: "Show all entries at once", desc: "Users need the full picture — saved, reported, pending — without bouncing between screens. A table view maps to how people mentally track a month of travel." },
+              { emoji: "🔁", title: "Reduce repeated fields to near-zero", desc: "Vehicle, cost centre, and project are constant for most users across a month. Set them once as defaults, not as a question asked 20 times." },
+            ].map(item => (
+              <div key={item.title} className="flex gap-6 p-6 border border-zinc-150 rounded-[24px] bg-white items-start shadow-sm">
+                <span className="text-2xl mt-1">{item.emoji}</span>
+                <div>
+                  <h4 className="text-base font-black uppercase tracking-tight text-zinc-900 mb-1" style={{ color: '#000000' }}>{item.title}</h4>
+                  <p className="text-sm text-zinc-500 font-medium leading-relaxed" style={{ color: '#000000' }}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Design Exploration */}
+        <section id="exploration" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">Three directions. Two dead ends.</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">Design Exploration</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            Before committing to the table UI, I explored three distinct approaches. The goal was to stress-test the research findings — to see if the mental model I'd built actually held up in form.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[
+              { type: "Wizard flow", title: "Step-by-step wizard", desc: "Grouped similar expenses into a guided multi-step flow. Felt structured — but forced a linear path through data that users wanted to scan non-linearly. Added steps without removing pain.", status: "Rejected", color: "bg-red-50 text-red-700 border-red-100" },
+              { type: "Calendar view", title: "Calendar-based entry", desc: "Tap a day, confirm your commute. Felt closest to how people mentally track their week. Engineering flagged a 300ms latency on the date-lookup API — at scale, it made the interaction feel broken. Killed.", status: "Rejected", color: "bg-red-50 text-red-700 border-red-100" },
+              { type: "Table view", title: "Inline editable table", desc: "A persistent overview of all entries with inline editing. Gave users immediate visibility into saved vs pending vs reported — without navigating away. No latency risk. Matched how accounting-minded users already thought.", status: "Chosen", color: "bg-emerald-50 text-emerald-700 border-emerald-100" },
+            ].map(exploration => (
+              <div key={exploration.title} className="border border-zinc-200 rounded-[32px] overflow-hidden bg-white flex flex-col justify-between shadow-sm">
+                <div className={`p-8 border-b border-zinc-100 flex items-center justify-between ${
+                  exploration.status === "Chosen" ? "bg-emerald-50/50" : "bg-red-50/50"
+                }`}>
+                  <span className="text-xs font-bold font-mono tracking-wider text-zinc-500 uppercase">{exploration.type}</span>
+                  <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-black tracking-wider ${exploration.color}`}>
+                    {exploration.status}
+                  </span>
+                </div>
+                <div className="p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 className="text-sm font-black uppercase tracking-tight text-zinc-900 mb-3">{exploration.title}</h4>
+                    <p className="text-xs text-zinc-500 font-medium leading-relaxed" style={{ color: '#000000' }}>{exploration.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-10 bg-amber-50 border border-amber-100 rounded-[40px] text-zinc-900 relative overflow-hidden group">
+            <span className="text-[10px] font-black uppercase tracking-widest text-amber-700 block mb-4">Engineering Trade-off</span>
+            <p className="text-lg font-medium leading-relaxed text-zinc-700 italic" style={{ color: '#000000' }}>
+               <strong>The engineering trade-off that mattered:</strong> The calendar view was the most intuitive direction — but our engineers flagged that the date-lookup API introduced ~300ms of latency per interaction. At 20+ entries per user per month, that compounds. We chose the table view partly on its merits, and partly because it didn't carry that cost. That conversation shaped the final interaction model more than any design decision I made alone.
+            </p>
+          </div>
+        </section>
+
+        {/* Before vs After */}
+        <section id="transformation" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">Before vs after — point by point</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">The Transformation</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            The change wasn't cosmetic. Every item in the "after" column maps directly back to a finding from the 500+ support tickets or the 32-response survey.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="border border-red-100 rounded-[38px] overflow-hidden bg-white shadow-sm">
+              <div className="bg-red-50/50 px-8 py-5 border-b border-red-150 text-red-700 font-black uppercase tracking-widest text-xs">
+                Before
+              </div>
+              <ul className="divide-y divide-zinc-100 text-xs text-zinc-500">
+                {[
+                  "One mileage expense added per session",
+                  "All fields manually entered every time",
+                  "Date typed in fresh for each entry",
+                  "No overview — just a screen of inputs",
+                  "Had to navigate to reports page for status",
+                  "Single save-and-submit per entry",
+                  "500+ complaint tickets per month",
+                ].map((item, i) => (
+                  <li key={i} className="px-8 py-4 flex gap-4 items-start">
+                    <span className="text-red-400 font-bold shrink-0">✕</span>
+                    <span className="font-sans text-[13px] font-medium text-zinc-600 leading-normal">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="border border-emerald-100 rounded-[38px] overflow-hidden bg-white shadow-sm">
+              <div className="bg-emerald-50/50 px-8 py-5 border-b border-emerald-150 text-emerald-700 font-black uppercase tracking-widest text-xs">
+                After
+              </div>
+              <ul className="divide-y divide-zinc-100 text-xs text-zinc-500">
+                {[
+                  "Multiple entries added in a single session",
+                  "Constant fields set once as defaults",
+                  "Date auto-filled — editable if needed",
+                  "Table overview with all entries visible",
+                  "Status visible inline — saved, pending, reported",
+                  "Bulk save or report in a single action",
+                  "~60% drop in tickets within 30 days",
+                ].map((item, i) => (
+                  <li key={i} className="px-8 py-4 flex gap-4 items-start">
+                    <span className="text-emerald-500 font-bold shrink-0">✓</span>
+                    <span className="font-sans text-[13px] font-medium text-zinc-900 leading-normal">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Accessibility */}
+        <section id="accessibility" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">Bulk entry tools need to work for everyone</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10">Accessibility & inclusive design</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            A table-based interface with inline editing introduces real accessibility risk — particularly for keyboard-only users and those using screen readers. These weren't afterthoughts.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { emoji: "⌨️", title: "Keyboard navigation", desc: "Validated that Tab moved logically across rows and columns. Enter triggered the expected action in each cell context — edit mode vs confirm vs row action." },
+              { emoji: "🎨", title: "Colour + icon pairing", desc: "The status column (saved / pending / reported) uses both colour and icon to communicate state — never colour alone. WCAG AA contrast ratios validated across all status states." },
+              { emoji: "🔍", title: "Focus management", desc: "After adding a new row, focus landed on the first editable field in that row — not back at the top of the table. Small detail, significant difference for power users." },
+            ].map(card => (
+              <div key={card.title} className="p-8 bg-zinc-50 border border-zinc-100 rounded-[32px]">
+                <span className="text-3xl block mb-6" style={{ color: card.emoji === "⌨️" ? '#000000' : undefined }}>{card.emoji}</span>
+                <h4 className="text-sm font-black uppercase tracking-tight text-zinc-900 mb-3" style={{ color: '#000000' }}>{card.title}</h4>
+                <p className="text-xs text-zinc-500 font-medium leading-relaxed" style={{ color: '#000000' }}>{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Outcome */}
+        <section id="outcome" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">What happened after launch</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10 font-bold">Outcome</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            The feature shipped at the end of April 2020. The results came quickly.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[
+              { val: "~60%", label: "drop in mileage-related support tickets within 30 days" },
+              { val: "6 wks", label: "from first survey response to live feature" },
+              { val: "0", label: "additional fields added to the form — we removed complexity, not added it" },
+            ].map(stat => (
+              <div key={stat.label} className="p-8 bg-emerald-50/50 border border-emerald-100/60 rounded-[32px] text-center">
+                <p className="text-5xl font-black text-[#1a6b4a] uppercase tracking-tighter mb-4" style={{ color: '#000000' }}>{stat.val}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 leading-tight max-w-[180px] mx-auto" style={{ color: '#000000' }}>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-xl text-zinc-600 leading-relaxed max-w-4xl">
+            The most telling signal wasn't the ticket count — it was what stopped coming in. The "I can't figure out how to add multiple entries" category of ticket essentially disappeared. The feature had answered the question before users had to ask it.
+          </p>
+        </section>
+
+        {/* Reflection */}
+        <section id="reflection" className="scroll-mt-32">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-5xl font-black uppercase tracking-tighter">What I'd do differently</h2>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-10 font-bold">Reflection</p>
+
+          <p className="text-xl text-zinc-600 leading-relaxed mb-12 max-w-4xl">
+            This was a fast, constrained project — and the constraints produced some of the best design decisions. But there are things I'd revisit.
+          </p>
+
+          <div className="space-y-8">
+            {[
+              "The table UI was optimised hard for the 93% who travel daily. I'd want to test how the 7% — irregular travellers — experienced it. A table with sparse data feels different from a table with 20 rows. They may have needed a different entry point.",
+              "I killed the calendar view because of API latency — but I never tested whether users preferred it anyway, latency and all. A perception of responsiveness can be designed around. That trade-off deserved more exploration before I closed the door.",
+              "32 survey responses was enough to validate a direction, but not enough to rule out blind spots. Given more time, I'd have supplemented with 5–8 usability sessions on the table prototype before engineering started building. We shipped correctly, but partly by luck."
+            ].map((text, i) => (
+              <div key={i} className="flex gap-8">
+                <div className="shrink-0 w-12 h-12 rounded-full border-2 border-zinc-900 flex items-center justify-center font-black text-xs font-mono">
+                  {i + 1}
+                </div>
+                <p className="text-lg text-zinc-650 leading-relaxed font-semibold self-center">{text}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="text-center py-20">
+        <section className="text-center py-20 border-t border-zinc-100">
           <h4 className="text-2xl font-black uppercase tracking-tighter mb-8">Want the boring version?</h4>
           <a 
             href="https://heyshyani.design/fyle-case-study.html" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white rounded-none font-black uppercase tracking-widest hover:bg-brand-primary transition-all shadow-[8px_8px_0px_0px_rgba(242,125,38,1)] active:translate-x-1 active:translate-y-1 active:shadow-none group"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white rounded-none font-black uppercase tracking-widest hover:bg-[#1a6b4a] transition-all shadow-[8px_8px_0px_0px_rgba(242,125,38,1)] active:translate-x-1 active:translate-y-1 active:shadow-none group"
           >
             Read Full Case Study
             <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

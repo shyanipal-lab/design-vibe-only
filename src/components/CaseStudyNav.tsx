@@ -71,7 +71,18 @@ export default function CaseStudyNav({ sections }: CaseStudyNavProps) {
           exit={{ y: -100, opacity: 0 }}
           className="fixed top-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-fit px-4"
         >
-          <div className="glass rounded-full p-1.5 flex items-center gap-1 shadow-2xl border border-zinc-200/50">
+          <div 
+            className="glass rounded-full p-1.5 flex items-center gap-1 shadow-2xl border border-zinc-200/50"
+            style={{
+              paddingLeft: '10px',
+              marginLeft: '10px',
+              marginTop: '20px',
+              marginRight: '0px',
+              width: '1000px',
+              height: '80px',
+              backgroundColor: '#000000'
+            }}
+          >
             {sections.map((section) => (
               <button
                 key={section.id}
