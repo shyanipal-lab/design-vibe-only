@@ -162,13 +162,13 @@ export default function Work() {
                                 <input 
                                   type="text"
                                   style={{ WebkitTextSecurity: 'disc' } as any}
-                                  placeholder="Enter Passcode (mercedes)"
+                                  placeholder="Clearance Passcode"
                                   value={inlinePassword}
                                   onChange={(e) => {
                                     setInlinePassword(e.target.value);
                                     if (inlineError) setInlineError("");
                                   }}
-                                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-brand-primary placeholder-zinc-600 focus:outline-none rounded-xl py-2.5 px-4 text-xs md:text-sm text-center text-white font-mono transition-all"
+                                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-brand-primary placeholder-zinc-650 focus:outline-none rounded-xl py-2.5 px-4 text-xs md:text-sm text-center text-white font-mono transition-all"
                                   autoComplete="new-password"
                                 />
                                 {inlineError && (
@@ -181,16 +181,6 @@ export default function Work() {
                                   Unlock Preview
                                 </button>
                               </form>
-
-                              <button
-                                onClick={() => {
-                                  setIsMercedesUnlocked(true);
-                                  sessionStorage.setItem("mercedes_unlocked", "true");
-                                }}
-                                className="mt-4 text-[10px] text-zinc-500 hover:text-zinc-300 font-bold uppercase tracking-wider transition-colors underline underline-offset-2"
-                              >
-                                Rapid Bypass
-                              </button>
                             </div>
                           ) : (
                             project.component

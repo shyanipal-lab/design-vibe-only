@@ -888,14 +888,8 @@ export default function CaseStudyPage() {
       sessionStorage.setItem("mercedes_unlocked", "true");
       setError("");
     } else {
-      setError("Incorrect passcode. Hint: Use 'mercedes' or choose auto-unlock.");
+      setError("Incorrect passcode.");
     }
-  };
-
-  const handleAutoUnlock = () => {
-    setIsUnlocked(true);
-    sessionStorage.setItem("mercedes_unlocked", "true");
-    setError("");
   };
 
   const keys = Object.keys(CASE_STUDIES);
@@ -992,18 +986,11 @@ export default function CaseStudyPage() {
               </button>
             </form>
 
-            <div className="mt-10 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+            <div className="mt-10 pt-8 border-t border-zinc-900 flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
               <div className="flex items-center gap-2">
-                <span className="w-1.1 h-1.1 rounded-full bg-amber-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                 <span>Clearance Level: Guest / Assessor</span>
               </div>
-              <button 
-                onClick={handleAutoUnlock}
-                type="button"
-                className="text-brand-primary hover:text-white transition-colors underline decoration-2 underline-offset-4"
-              >
-                Auto-Unlock &amp; Demo Case Study
-              </button>
             </div>
           </motion.div>
         </div>
