@@ -855,15 +855,162 @@ export default function CaseStudyPage() {
   const { id } = useParams();
   const study = id ? CASE_STUDIES[id.toLowerCase() as keyof typeof CASE_STUDIES] : null;
 
+  const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [isUnlocked, setIsUnlocked] = React.useState(() => {
+    return sessionStorage.getItem("mercedes_unlocked") === "true";
+  });
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setIsUnlocked(sessionStorage.getItem("mercedes_unlocked") === "true");
+    };
+    window.addEventListener("storage", handleStorageChange);
+    const checkInterval = setInterval(handleStorageChange, 1000);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(checkInterval);
+    };
+  }, []);
+
   if (!study) {
     return <Navigate to="/" replace />;
   }
+
+  const isMercedes = id?.toLowerCase() === "mercedes";
+
+  const handleUnlock = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const cleanPass = password.trim().toLowerCase();
+    // Allow standard case-insensitive passcode variations for seamless verification
+    if (["mercedes", "amg2025", "benz", "shyanipal", "amg", "1234"].includes(cleanPass)) {
+      setIsUnlocked(true);
+      sessionStorage.setItem("mercedes_unlocked", "true");
+      setError("");
+    } else {
+      setError("Incorrect passcode. Hint: Use 'mercedes' or choose auto-unlock.");
+    }
+  };
+
+  const handleAutoUnlock = () => {
+    setIsUnlocked(true);
+    sessionStorage.setItem("mercedes_unlocked", "true");
+    setError("");
+  };
 
   const keys = Object.keys(CASE_STUDIES);
   const currentIndex = keys.indexOf(id.toLowerCase());
   const nextIndex = (currentIndex + 1) % keys.length;
   const nextId = keys[nextIndex];
   const nextStudy = CASE_STUDIES[nextId];
+
+  if (isMercedes && !isUnlocked) {
+    return (
+      <div className="bg-zinc-950 min-h-screen font-sans flex flex-col pt-16 text-white text-left relative overflow-hidden">
+        {/* Ambient Silver Arrows Luxury Neon Background Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-10 left-1/4 w-[400px] h-[200px] bg-brand-primary/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+
+        {/* Minimalist header for lock screen */}
+        <header className="fixed top-0 left-0 w-full z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900 py-4 px-6 md:px-12 flex justify-between items-center">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-zinc-400 font-bold uppercase tracking-widest text-[10px] transition-all hover:text-brand-primary group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Work
+          </Link>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-zinc-500">Security —</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-red-400">NDA Restricted</span>
+          </div>
+        </header>
+
+        <div className="flex-1 flex flex-col justify-center items-center py-20 px-4 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-xl w-full bg-zinc-900/40 border border-zinc-900/90 rounded-[40px] p-8 md:p-12 backdrop-blur-md shadow-[0_30px_100px_rgba(0,0,0,0.8)] text-center relative overflow-hidden"
+          >
+            {/* Top security linear element */}
+            <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-brand-primary to-transparent" />
+            
+            {/* Elegant Mercedes Benz star geometric vector representation */}
+            <div className="mx-auto w-16 h-16 rounded-full bg-zinc-950/80 border border-zinc-850 flex items-center justify-center mb-8 shadow-inner text-zinc-400 select-none">
+              <svg className="w-8 h-8 stroke-current stroke-[1.2] fill-none" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="2" x2="12" y2="12" />
+                <line x1="12" y1="12" x2="3.35" y2="17" />
+                <line x1="12" y1="12" x2="20.65" y2="17" />
+              </svg>
+            </div>
+
+            <span className="text-[10px] font-black tracking-[0.25em] text-brand-primary uppercase block mb-3">
+              Mercedes-Benz Group AG
+            </span>
+            <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-4">
+              NDA Passcode Required
+            </h2>
+            <p className="text-zinc-400 text-xs md:text-sm font-semibold leading-relaxed mb-8 max-w-md mx-auto">
+              This case study contains proprietary internal tooling, OS interfaces, and design specifications which are confidential.
+              Please verify your clearance to unlock this case study.
+            </p>
+
+            <form onSubmit={handleUnlock} className="space-y-4 max-w-sm mx-auto">
+              <div className="relative">
+                <input 
+                  type="text"
+                  style={{ WebkitTextSecurity: 'disc' } as any}
+                  placeholder="Clearance Passcode"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (error) setError("");
+                  }}
+                  className="w-full bg-zinc-950 border border-zinc-850 focus:border-brand-primary placeholder-zinc-700 focus:outline-none rounded-xl py-3.5 px-5 text-sm text-center text-white tracking-widest font-mono transition-colors"
+                  autoComplete="new-password"
+                />
+              </div>
+
+              {error && (
+                <motion.p 
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-[11px] font-mono text-rose-400 font-bold"
+                >
+                  {error}
+                </motion.p>
+              )}
+
+              <button 
+                type="submit"
+                className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-xl transition-all shadow-md active:scale-[0.98]"
+              >
+                Unlock Case Study
+              </button>
+            </form>
+
+            <div className="mt-10 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+              <div className="flex items-center gap-2">
+                <span className="w-1.1 h-1.1 rounded-full bg-amber-400 animate-pulse" />
+                <span>Clearance Level: Guest / Assessor</span>
+              </div>
+              <button 
+                onClick={handleAutoUnlock}
+                type="button"
+                className="text-brand-primary hover:text-white transition-colors underline decoration-2 underline-offset-4"
+              >
+                Auto-Unlock &amp; Demo Case Study
+              </button>
+            </div>
+          </motion.div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-zinc-950 min-h-screen font-sans flex flex-col pt-16 text-white text-left">

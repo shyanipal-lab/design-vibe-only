@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles, Globe, Layout, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, Globe, Layout, Zap, Lock } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import HoshakshamApp from "./HoshakshamApp";
@@ -53,6 +53,36 @@ const CASE_STUDIES = [
 ];
 
 export default function Work() {
+  const [isMercedesUnlocked, setIsMercedesUnlocked] = React.useState(() => {
+    return sessionStorage.getItem("mercedes_unlocked") === "true";
+  });
+  const [inlinePassword, setInlinePassword] = React.useState("");
+  const [inlineError, setInlineError] = React.useState("");
+
+  const handleInlineUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanPass = inlinePassword.trim().toLowerCase();
+    if (["mercedes", "amg2025", "benz", "shyanipal", "amg", "1234"].includes(cleanPass)) {
+      setIsMercedesUnlocked(true);
+      sessionStorage.setItem("mercedes_unlocked", "true");
+      setInlineError("");
+    } else {
+      setInlineError("Wrong code.");
+    }
+  };
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setIsMercedesUnlocked(sessionStorage.getItem("mercedes_unlocked") === "true");
+    };
+    window.addEventListener("storage", handleStorageChange);
+    const checkInterval = setInterval(handleStorageChange, 1000);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(checkInterval);
+    };
+  }, []);
+
   return (
     <section id="work" className="py-32 bg-white scroll-mt-32">
       <div className="container mx-auto px-6">
@@ -112,8 +142,59 @@ export default function Work() {
                           <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
                           <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-zinc-300" />
                         </div>
-                        <div className="flex-1 overflow-hidden">
-                          {project.component}
+                        <div className="flex-1 overflow-hidden relative">
+                          {project.id === "mercedes" && !isMercedesUnlocked ? (
+                            <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center text-center p-4 relative overflow-hidden select-none">
+                              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                              
+                              <div className="w-12 h-12 rounded-full bg-zinc-90 w-12 h-12 flex items-center justify-center mb-3 text-red-400 bg-zinc-900 border border-zinc-800 shadow-lg">
+                                <Lock className="w-5 h-5 animate-pulse" />
+                              </div>
+
+                              <span className="text-[7px] font-black uppercase tracking-[0.25em] text-red-300 block mb-1">
+                                NDA ENCRYPTED PREVIEW
+                              </span>
+                              <h4 className="text-xs font-black text-white uppercase tracking-tight mb-2">
+                                Access Restricted
+                              </h4>
+
+                              <form onSubmit={handleInlineUnlock} className="flex flex-col items-center gap-1.5 max-w-[200px] w-full z-10">
+                                <input 
+                                  type="text"
+                                  style={{ WebkitTextSecurity: 'disc' } as any}
+                                  placeholder="Enter Passcode"
+                                  value={inlinePassword}
+                                  onChange={(e) => {
+                                    setInlinePassword(e.target.value);
+                                    if (inlineError) setInlineError("");
+                                  }}
+                                  className="w-full bg-zinc-900 border border-zinc-805 focus:border-brand-primary placeholder-zinc-700 focus:outline-none rounded-lg py-1.5 px-3 text-[10px] text-center text-white font-mono transition-all"
+                                  autoComplete="new-password"
+                                />
+                                {inlineError && (
+                                  <span className="text-[8px] font-mono font-bold text-rose-400">{inlineError}</span>
+                                )}
+                                <button
+                                  type="submit"
+                                  className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-[8px] uppercase tracking-wider py-1.5 px-3 rounded-lg transition-all"
+                                >
+                                  Unlock Preview
+                                </button>
+                              </form>
+
+                              <button
+                                onClick={() => {
+                                  setIsMercedesUnlocked(true);
+                                  sessionStorage.setItem("mercedes_unlocked", "true");
+                                }}
+                                className="mt-3 text-[8px] text-zinc-500 hover:text-zinc-300 font-bold uppercase tracking-wider transition-colors underline underline-offset-2"
+                              >
+                                Rapid Bypass
+                              </button>
+                            </div>
+                          ) : (
+                            project.component
+                          )}
                         </div>
                       </div>
                     </div>
@@ -163,7 +244,10 @@ export default function Work() {
                     to={project.link}
                     className="group w-full md:w-auto inline-flex items-center justify-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-brand-primary transition-all shadow-xl"
                   >
-                    View Case Study
+                    {project.id === "mercedes" && (
+                      <Lock className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors" />
+                    )}
+                    <span>{project.id === "mercedes" ? "Unlock Case Study" : "View Case Study"}</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </Link>
                 </div>
