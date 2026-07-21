@@ -42,16 +42,11 @@
   html, body {
     @apply bg-white text-zinc-900 selection:bg-brand-primary/20;
     font-family: "Momo Trust Display", "Inter", sans-serif !important;
-    cursor: none;
   }
   
   /* Keep the font in blue as it is (Trispace), while updating black and grey text */
   .text-brand-primary:not(.font-accent) {
     font-family: "Trispace", sans-serif !important;
-  }
-  
-  a, button, [role="button"], input, textarea {
-    cursor: none;
   }
 }
 

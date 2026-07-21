@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { MousePointer2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { IoHomeOutline, IoPersonOutline, IoBriefcaseOutline, IoGameControllerOutline, IoChatbubbleOutline } from 'react-icons/io5';
@@ -16,18 +15,8 @@ const NAV_ITEMS = [
 export default function PlaygroundLayer() {
   const location = useLocation();
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState("home");
   const constraintsRef = useRef(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   // Track active section
   useEffect(() => {
@@ -83,25 +72,11 @@ export default function PlaygroundLayer() {
   }, [location.pathname, location.hash]);
 
   return (
-    <>
-      {/* Custom Cursor */}
-      <motion.div
-        className="fixed top-0 left-0 z-[110] pointer-events-none flex items-center gap-2"
-        animate={{ 
-          x: mousePos.x, 
-          y: mousePos.y
-        }}
-        transition={{ type: "spring", damping: 20, stiffness: 250, mass: 0.5 }}
-      >
-        <MousePointer2 className="w-6 h-6 text-brand-primary fill-brand-primary" />
-      </motion.div>
-
-      <div className="fixed inset-0 pointer-events-none z-[60]" ref={constraintsRef}>
-        {/* Top Navigation Bar */}
-        <div className="nav-top-bar absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto">
-          <GradientMenu items={NAV_ITEMS} activeSection={activeSection} />
-        </div>
+    <div className="fixed inset-0 pointer-events-none z-[60]" ref={constraintsRef}>
+      {/* Top Navigation Bar */}
+      <div className="nav-top-bar absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto">
+        <GradientMenu items={NAV_ITEMS} activeSection={activeSection} />
       </div>
-    </>
+    </div>
   );
 }
